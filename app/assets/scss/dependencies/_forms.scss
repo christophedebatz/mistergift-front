@@ -1,0 +1,84 @@
+//
+//
+// Forms
+//
+//
+
+@mixin form-input-container {
+    background-color: $color-background-input;
+    border: $border-width-thin solid $color-border-input {
+        radius: $border-radius-medium;
+    };
+    color: $color-text-default;
+    width: 100%;
+}
+
+@mixin form-input-focus {
+    background-color: $color-background-input-active;
+    border-color: $color-border-input-active;
+    box-shadow: $shadow-button-focus;
+    outline: 0;
+}
+
+@mixin form-input-disabled {
+    background-color: $color-background-input-disabled;
+    border-color: $color-border-input-disabled;
+    cursor: not-allowed;
+    user-select: none;
+
+    &:focus,
+    &:active {
+        box-shadow: none;
+    }
+}
+
+@mixin form-element-vertical-spacing {
+    margin-top: $spacing-small;
+
+    @include mq-small-min {
+        margin-top: $spacing-x-small;
+    }
+}
+
+@mixin form-element-required($element: null) {
+    @if $element != null {
+        > #{$element}:before {
+            color: $color-text-error;
+            content: '*';
+            position: absolute;
+            left: ($spacing-x-small * -1);
+        }
+    }
+}
+
+@mixin form-input-error($element: null) {
+    @if $element != null {
+        #{$element} {
+            background-color: $color-background-input;
+            background-clip: padding-box;
+            border-color: $color-border-error;
+            box-shadow: $color-border-error 0 0 0 $border-width-thin inset;
+
+            &:focus,
+            &:active {
+                box-shadow: $color-border-error 0 0 0 $border-width-thin inset, $shadow-button-focus;
+            }
+        }
+    }
+}
+
+@mixin form-states {
+    @include form-input-container;
+
+    transition: border $duration-quickly linear, background-color $duration-quickly linear;
+
+    &:focus,
+    &:active {
+        @include form-input-focus;
+    }
+
+    &[disabled],
+    &.#{$css-prefix}is-disabled {
+        @include form-input-disabled;
+    }
+}

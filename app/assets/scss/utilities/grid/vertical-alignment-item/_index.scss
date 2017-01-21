@@ -1,0 +1,28 @@
+//
+//
+// Grid - Vertical alignment item
+//
+//
+
+.#{$css-prefix}align-top {
+    align-self: flex-start;
+    vertical-align: top;
+}
+
+.#{$css-prefix}align-middle {
+    align-self: center;
+    vertical-align: middle;
+}
+
+.#{$css-prefix}align-bottom {
+    align-self: flex-end;
+    vertical-align: bottom;
+}
+
+.#{$css-prefix}align-content-center {
+    @include deprecate('4.0.0') {
+        align-self: center;
+        flex: 1;
+        justify-content: center;
+    }
+}

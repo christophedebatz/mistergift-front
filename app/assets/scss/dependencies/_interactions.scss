@@ -1,0 +1,84 @@
+//
+//
+// Interactions
+//
+//
+
+@mixin focus-button {
+    box-shadow: $shadow-button-focus;
+    outline: 0;
+}
+
+@mixin focus-inverse {
+    box-shadow: $shadow-button-focus-inverse;
+    outline: none;
+}
+
+@mixin placeholder($color: $color-text-placeholder, $weight: $font-weight-regular, $size: $font-size-medium) {
+    @include deprecate('4.0.0', 'Use ::placeholder instead, and prefix the output using autoprefixer') {
+        &::-webkit-input-placeholder {
+            color: $color;
+            font-size: $size;
+            font-weight: $weight;
+        }
+
+        &::-moz-placeholder {
+            color: $color;
+            font-size: $size;
+            font-weight: $weight;
+        }
+
+        &:-ms-input-placeholder {
+            color: $color;
+            font-size: $size;
+            font-weight: $weight;
+        }
+    }
+}
+
+@mixin calendar-selection-fill {
+    background: $color-background-button-brand-hover;
+    content: '';
+    height: 100%;
+    left: -50%;
+    position: absolute;
+    top: 0;
+    transform: translateX($spacing-x-small * -1);
+    width: ($square-icon-medium-boundary + $spacing-x-small);
+    z-index: -1;
+}
+
+@mixin tree-item-hover {
+    background: $color-background-row-hover;
+    cursor: pointer;
+}
+
+@mixin tree-item-selected {
+    background: $color-background-row-selected;
+    box-shadow: $color-background-button-brand 4px 0 0 inset;
+}
+
+@mixin scrollbar($size: 10px, $thumb: $color-background-scrollbar, $track: $color-background-scrollbar-track) {
+    &::-webkit-scrollbar {
+        height: $size;
+        width: $size;
+
+        &:window-inactive {
+            opacity: 0;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb;
+        border-radius: $border-radius-large;
+        box-shadow: $track 0 0 0 $border-width-thin inset;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $track;
+    }
+}
+
+@mixin enable-ios-momentum-scrolling {
+    -webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,44 @@
+//
+//
+// Button groups - Base
+//
+//
+
+.#{$css-prefix}button-group {
+  display: flex;
+
+    .#{$css-prefix}button {
+        border-radius: 0;
+
+        + .#{$css-prefix}button,
+        + .#{$css-prefix}button--last .#{$css-prefix}button {
+            margin-left: (-1 * $border-width-thin);
+        }
+
+        &:first-child {
+            border-radius: $border-radius-medium 0 0 $border-radius-medium;
+        }
+
+        &:last-child {
+            border-radius: 0 $border-radius-medium $border-radius-medium 0;
+        }
+
+        &:focus {
+            z-index: $z-index-default;
+        }
+
+        &:only-child {
+            border-radius: 0.25rem;
+        }
+    }
+
+    & + .#{$css-prefix}button-group,
+    & + .#{$css-prefix}button {
+        margin-left: $spacing-xx-small;
+    }
+
+    .#{$css-prefix}button--last .#{$css-prefix}button,
+    .#{$css-prefix}button.#{$css-prefix}button--last {
+        border-radius: 0 $border-radius-medium $border-radius-medium 0;
+    }
+}

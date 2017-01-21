@@ -1,0 +1,12 @@
+//
+//
+// Text - Section title dividers
+//
+//
+
+.#{$css-prefix}section-title--divider {
+    @include text-heading--label;
+
+    background: $color-background;
+    padding: $spacing-small $spacing-medium;
+}

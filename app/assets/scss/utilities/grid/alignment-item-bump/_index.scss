@@ -1,0 +1,23 @@
+//
+//
+// Grid - Alignment item bump
+//
+//
+
+.#{$css-prefix}col--bump {
+    &-top {
+        margin-top: auto;
+    }
+
+    &-right {
+        margin-right: auto;
+    }
+
+    &-bottom {
+        margin-right: auto;
+    }
+
+    &-left {
+        margin-left: auto;
+    }
+}

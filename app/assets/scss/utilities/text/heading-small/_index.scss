@@ -1,0 +1,11 @@
+//
+//
+// Text - Heading small
+//
+//
+
+.#{$css-prefix}text-heading--small {
+    font-size: $font-size-large;
+    font-weight: $font-weight-light;
+    line-height: $line-height-heading;
+}

@@ -1,0 +1,200 @@
+//
+//
+// Buttons - Icon
+//
+//
+
+.#{$css-prefix}button--icon,
+.#{$css-prefix}button--icon-inverse,
+.#{$css-prefix}button--icon-container,
+.#{$css-prefix}button--icon-border,
+.#{$css-prefix}button--icon-border-filled,
+.#{$css-prefix}button--icon-more {
+    color: $color-text-icon-default;
+    line-height: $line-height-reset;
+    vertical-align: middle;
+}
+
+@include deprecate('4.0.0', 'Use .mg-button--icon instead') {
+    .#{$css-prefix}button--icon-bare {
+        color: $color-text-icon-default;
+        line-height: $line-height-reset;
+        vertical-align: middle;
+    }
+}
+
+.#{$css-prefix}button--icon-border[disabled] {
+    &:hover,
+    &:focus {
+        background-color: transparent;
+    }
+}
+
+.#{$css-prefix}button--icon-border-filled,
+.#{$css-prefix}button--icon-border {
+    @include button-base;
+}
+
+.#{$css-prefix}button--icon-border-inverse {
+    border: $border-width-thin solid $color-border-button-default;
+}
+
+.#{$css-prefix}button--icon-container,
+.#{$css-prefix}button--icon-border,
+.#{$css-prefix}button--icon-border-filled,
+.#{$css-prefix}button--icon-border-inverse {
+    @include square($square-icon-medium-boundary);
+}
+
+.#{$css-prefix}button--icon-border-filled {
+    background-color: $color-background-button-default;
+
+    &[disabled] {
+        border: $border-width-thin solid $color-border-button-default;
+        background-color: $color-background-button-default-disabled;
+    }
+}
+
+.#{$css-prefix}button--icon-more {
+    border: $border-width-thin solid $color-border-button-default;
+    line-height: $line-height-button;
+    padding: 0 $spacing-x-small;
+    vertical-align: middle;
+
+    &:hover,
+    &:focus {
+        @include button-base;
+
+        .#{$css-prefix}button__icon {
+            fill: $color-text-icon-default-hover;
+        }
+    }
+
+    &:active .#{$css-prefix}button__icon {
+        fill: $color-text-icon-default-active;
+    }
+
+    &[disabled] {
+        cursor: default;
+
+        .#{$css-prefix}button__icon {
+            fill: $color-text-icon-default-disabled;
+        }
+    }
+}
+
+.#{$css-prefix}button--icon-inverse,
+.#{$css-prefix}button--icon-border-inverse {
+    color: $color-text-link-inverse;
+
+    &:hover,
+    &:focus {
+        color: $color-text-link-inverse-hover;
+    }
+
+    &:active {
+        color: $color-text-link-inverse-active;
+    }
+
+    &[disabled] {
+        color: $color-text-link-inverse-disabled;
+    }
+}
+
+.#{$css-prefix}button--icon-border-inverse[disabled] {
+    border-color: $color-border-button-inverse-disabled;
+}
+
+.#{$css-prefix}button--icon-border.#{$css-prefix}is-selected {
+    @include button-brand;
+
+    .#{$css-prefix}button__icon {
+        fill: $color-text-button-brand;
+    }
+
+    &:hover,
+    &:focus {
+        .#{$css-prefix}button__icon {
+            fill: $color-text-button-brand;
+        }
+    }
+}
+
+.#{$css-prefix}button--icon-small {
+    @include square($square-icon-small-boundary);
+
+    border-radius: $border-radius-small;
+}
+
+.#{$css-prefix}button--icon-x-small {
+    @include square($square-icon-x-small-boundary);
+
+    border-radius: $border-radius-small;
+    line-height: $line-height-reset;
+
+    .#{$css-prefix}button__icon {
+        @include square($square-icon-small-content);
+    }
+}
+
+.#{$css-prefix}button--icon-xx-small {
+    @include square($square-icon-xx-small-boundary);
+
+    border-radius: $border-radius-small;
+    line-height: $line-height-reset;
+
+    .#{$css-prefix}button__icon {
+        @include square($square-icon-x-small-content);
+    }
+}
+
+.#{$css-prefix}button__icon {
+    @include square($square-icon-medium-content-alt);
+
+    fill: currentColor;
+
+    &--large {
+        @include square($square-icon-utility-large);
+    }
+
+    &--small {
+        @include square($square-icon-small-content);
+    }
+
+    &--x-small {
+        @include square($square-icon-x-small-content);
+    }
+}
+
+.#{$css-prefix}button__icon--hint {
+    fill: $color-text-icon-default-hint;
+}
+
+.#{$css-prefix}button__icon--inverse-hint {
+    fill: $color-text-icon-inverse-hint;
+}
+
+.#{$css-prefix}hint-parent {
+    .#{$css-prefix}button--icon-border-inverse {
+        border-color: $color-border-icon-inverse-hint;
+
+        &:focus {
+            border-color: $color-border-icon-inverse-hint-hover;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        .#{$css-prefix}button--icon-border-inverse {
+            border-color: $color-border-icon-inverse-hint-hover;
+        }
+
+        .#{$css-prefix}button__icon--hint {
+            fill: $color-text-icon-default;
+        }
+
+        .#{$css-prefix}button__icon--inverse-hint {
+            fill: $color-text-icon-inverse-hint-hover;
+        }
+    }
+}

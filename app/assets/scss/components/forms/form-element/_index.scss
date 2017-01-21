@@ -1,0 +1,75 @@
+//
+//
+// Forms - Form element
+//
+//
+
+.#{$css-prefix}form-element {
+    position: relative;
+
+    &__helper {
+        @include deprecate('4.0.0') {
+            font-size: $font-size-small;
+        }
+    }
+
+    &__label {
+        color: $color-text-label;
+        display: inline-block;
+        font-size: $font-size-small;
+        line-height: $line-height-text;
+        margin-right: $spacing-small;
+        margin-bottom: $spacing-xx-small;
+
+        &:empty {
+            margin: 0;
+        }
+    }
+
+    &__control {
+        .#{$css-prefix}radio,
+        .#{$css-prefix}checkbox {
+            display: block;
+        }
+    }
+
+    &__icon {
+        display: inline-block;
+        position: relative;
+    }
+
+    &__help {
+        display: block;
+        font-size: $font-size-small;
+        margin-top: $spacing-x-small;
+    }
+
+    &__static {
+        display: inline-block;
+        line-height: $line-height-button;
+        min-height: calc(#{$line-height-button} + 2px); // For IE
+
+        &.#{$css-prefix}text-longform {
+            line-height: $line-height-text;
+        }
+    }
+}
+
+.#{$css-prefix}required {
+    color: $color-text-error;
+    margin: 0 $spacing-xxx-small;
+}
+
+.#{$css-prefix}has-error {
+    @include form-input-error('.#{$css-prefix}input');
+    @include form-input-error('.#{$css-prefix}textarea');
+    @include form-input-error('.#{$css-prefix}select');
+
+    .#{$css-prefix}form-element__help {
+        color: $color-text-error;
+    }
+
+    .#{$css-prefix}input__icon {
+        fill: $color-text-error;
+    }
+}

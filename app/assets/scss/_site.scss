@@ -1,0 +1,148 @@
+//
+//
+// Site
+//
+//
+
+html,
+body {
+    height: 100vh;
+}
+
+body {
+    background: #edf0f5;
+}
+
+//
+// Home
+//
+
+.site-home {
+    @include gradient-vertical(#4b6cb7, #203661);
+
+    .site-banner {
+        background: none;
+        box-shadow: none;
+
+        > .mg-grid {
+            border-bottom: 1px solid #fff;
+        }
+    }
+
+    .site-logo {
+        color: #fff;
+    }    
+
+    .mg-button--neutral {
+        border-color: #fff;
+    }
+}
+
+.site-head--masthead {
+    padding-bottom: 215px;
+    padding-top: 150px;
+
+    h1 {
+        color: #fff;
+        font-family: 'Lato';
+        font-size: 34px;
+        font-weight: 300;
+    }
+
+    h2 {
+        color: #fff;
+        display: block;
+        font-family: 'Open Sans';
+        font-size: 16px;
+    }
+}
+
+//
+// Banner
+//
+
+.site-banner {
+    background: #fff;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, .1);
+
+    // @TODO SPACING HELPERS
+    .mg-list--horizontal {
+        padding-top: 15px;
+
+        > li {
+            margin-left: 10px;
+        }
+
+        .mg-button {
+            text-transform: uppercase;
+        }
+    }
+}
+
+.site-logo {
+    color: #000;
+    font-size: 16px;
+    line-height: 60px;
+    text-transform: uppercase;
+}
+
+// 
+// Landing
+// 
+
+.site-landing {
+    animation: GradientAnimation 60s ease infinite;
+    background: linear-gradient(230deg,#a24bcf,#4b79cf,#4bc5cf);
+
+    h1 {
+        color: #fff;
+        display: block;
+        font-family: 'Lato', 'Helvetica', Arial, sans-serif;
+        font-size: 34px;
+        font-weight: 100;
+        margin-bottom: 40px;
+
+        span {
+            display: block;
+            font-weight: 700;
+        }
+    }
+
+    .mg-button {
+        text-transform: uppercase;
+    }
+
+    .mg-text-body--small {
+        color: #fff;
+        padding-top: 5px;
+    }
+}
+
+.site-landing--error {
+    color: #c0392b;
+    margin-bottom: 5px;
+}
+
+.site-landing--success {
+    color: #27ae60;
+    display: block;
+    font-family: 'Lato', 'Helvetica', Arial, sans-serif;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+@keyframes GradientAnimation { 
+    0% { background-position: 0% 84% }
+    50% { background-position: 100% 16% }
+    100% { background-position: 0% 84% }
+}
+
+// 
+// Gifts List
+// 
+
+.site-gifts-list {
+    background: #edf0f5;
+    padding-bottom: 70px;
+    padding-top: 60px;
+}

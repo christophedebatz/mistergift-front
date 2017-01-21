@@ -1,0 +1,14 @@
+//
+//
+// Grid - Horizontal alignment space
+//
+//
+
+.#{$css-prefix}grid--align-space {
+    justify-content: space-around;
+
+    .#{$css-prefix}col,
+    [class*="#{$css-prefix}col--padded"] {
+        flex-grow: 0;
+    }
+}

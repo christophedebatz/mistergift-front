@@ -1,0 +1,17 @@
+//
+//
+// Tooltip - Base
+//
+//
+
+.#{$css-prefix}tooltip {
+    @include deprecate('4.0.0') {
+        @include popover($color: $color-background-inverse);
+
+        &__body {
+            padding: $spacing-x-small $spacing-small;
+            font-size: $font-size-small;
+            color: $color-text-inverse;
+        }
+    }
+}

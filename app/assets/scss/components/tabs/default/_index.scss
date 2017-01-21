@@ -1,0 +1,104 @@
+//
+//
+// Tabs - Default
+//
+//
+
+.#{$css-prefix}tabs--default {
+    @include tabs;
+
+    &__nav {
+        @include tabs-nav;
+
+        border-bottom: $border-width-thin solid $color-border;
+    }
+
+    @include deprecate('4.0.0') {
+        .#{$css-prefix}tabs__item {
+            + .#{$css-prefix}tabs__item {
+                @include mq-medium-min {
+                    margin-left: $spacing-large;
+                }
+            }
+
+            > a {
+                @include tabs-link;
+
+                border-bottom: $border-width-thick solid transparent;
+                color: $color-text-action-label;
+                height: $line-height-tab;
+                line-height: $line-height-tab;
+                padding: 0 $spacing-x-small;
+
+                @include mq-medium-min {
+                    padding: 0 $spacing-medium;
+                }
+
+                &:hover,
+                &:focus {
+                    border-color: $color-text-tab-label-selected;
+                    color: $color-text-action-label-active;
+                    text-decoration: none;
+                }
+            }
+
+            &.#{$css-prefix}active a {
+                border-color: $color-text-tab-label-selected;
+                color: $color-text-action-label-active;
+
+                &:focus {
+                    color: $color-text-tab-label-selected;
+                }
+            }
+        }
+
+        > .#{$css-prefix}tabs__content {
+            @include tabs-content;
+        }
+    }
+
+    .#{$css-prefix}tabs__item--overflow {
+        overflow: visible;
+    }
+}
+
+.#{$css-prefix}tabs--default__item {
+    &.#{$css-prefix}active .#{$css-prefix}tabs--default__link {
+        border-color: $color-text-tab-label-selected;
+        color: $color-text-action-label-active;
+
+        &:focus {
+            border-bottom-width: ($border-width-thick + 1px);
+            color: $color-text-tab-label-selected;
+        }
+    }
+}
+
+.#{$css-prefix}tabs--default__content {
+    @include tabs-content;
+}
+
+.#{$css-prefix}tabs--default__link {
+    @include tabs-link;
+
+    color: $color-text-action-label;
+    border-bottom: $border-width-thick solid transparent;
+    height: $line-height-tab;
+    line-height: $line-height-tab;
+    padding: 0 $spacing-x-small;
+
+    @include mq-medium-min {
+        padding: 0 $spacing-medium;
+    }
+
+    &:hover,
+    &:focus {
+        color: $color-text-tab-label-selected;
+        text-decoration: none;
+    }
+
+    &:focus {
+        border-bottom-width: ($border-width-thick + 1px);
+        border-color: $color-text-tab-label-selected;
+    }
+}

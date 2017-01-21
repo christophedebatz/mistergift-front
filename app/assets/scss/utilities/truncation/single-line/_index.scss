@@ -1,0 +1,11 @@
+//
+//
+// Truncation - Single line
+//
+//
+
+// The truncation class can be used on an element, or the truncation
+// include can be added to an existing class.
+.#{$css-prefix}truncate {
+    @include truncate;
+}

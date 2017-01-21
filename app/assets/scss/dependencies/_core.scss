@@ -1,0 +1,151 @@
+//
+//
+// Core
+//
+//
+
+@mixin core($scoped: false, $globals: false) {
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+
+    ::placeholder {
+        color: $color-text-placeholder;
+        font-weight: $font-weight-regular;
+        font-size: $font-size-medium;
+    }
+
+    ::selection {
+        background: $color-background-highlight;
+        text-shadow: none;
+        color: $color-text-default;
+    }
+
+    @if $globals {
+        @if $scoped {
+            @include root($root: '&', $body: '&:not(html), body');
+        } @else {
+            @include root();
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ol,
+    ul,
+    dl,
+    fieldset {
+        margin: 0;
+        padding: 0;
+    }
+
+    dd,
+    figure {
+        margin: 0;
+    }
+
+    abbr[title],
+    fieldset,
+    hr {
+        border: 0;
+    }
+
+    hr {
+        padding: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font: {
+            size: 1em;
+            weight: inherit;
+        }
+    }
+
+    ol,
+    ul {
+        list-style: none;
+    }
+
+    a {
+        color: $color-text-link;
+        text-decoration: none;
+        transition: color 0.1s linear;
+
+        &:hover,
+        &:focus {
+            color: $color-text-link-hover;
+            text-decoration: underline;
+        }
+
+        &:active {
+            color: $color-text-link-active;
+        }
+    }
+
+    a,
+    button {
+        cursor: pointer;
+    }
+
+    b,
+    strong,
+    dfn {
+        font-weight: $font-weight-bold;
+    }
+
+    mark {
+        background-color: $color-background-highlight;
+    }
+
+    abbr[title] {
+        cursor: help;
+    }
+
+    input[type=search] {
+        box-sizing: border-box;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    caption,
+    th,
+    td {
+        text-align: left;
+    }
+
+    hr {
+        border-top: 1px solid $color-border;
+        clear: both;
+        display: block;
+        height: 1px;
+        margin: $spacing-x-large 0;
+    }
+
+    audio,
+    canvas,
+    iframe,
+    img,
+    svg,
+    video {
+        vertical-align: middle;
+    }
+
+    img {
+        height: auto;
+        max-width: 100%;
+    }
+}

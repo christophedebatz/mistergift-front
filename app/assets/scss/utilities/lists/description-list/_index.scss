@@ -1,0 +1,38 @@
+//
+//
+// Lists - Description list
+//
+//
+
+.#{$css-prefix}dl--inline {
+    @include clearfix;
+
+    @include mq-medium-min {
+        &__label {
+            clear: left;
+            float: left;
+        }
+
+        &__detail {
+            float: left;
+            padding-left: $spacing-xx-small;
+        }
+    }
+}
+
+.#{$css-prefix}dl--horizontal {
+    @include mq-medium-min {
+        @include flex-wrap(true);
+
+        display: flex;
+
+        &__label {
+            padding-right: $spacing-small;
+            width: 30%;
+        }
+
+        &__detail {
+            width: 70%;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+//
+//
+// Themes - Box
+//
+//
+
+.#{$css-prefix}box {
+    @include box($borders: around);
+
+    &--x-small {
+        padding: $spacing-x-small;
+    }
+
+    &--small {
+        padding: $spacing-small;
+    }
+
+    &--border {
+        @include box($padding: 0, $borders: around);
+    }
+}

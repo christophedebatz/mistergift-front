@@ -1,0 +1,29 @@
+//
+//
+// Visibility - Collapsed/Expanded
+//
+//
+
+.#{$css-prefix}is-collapsed {
+    height: 0;
+    overflow: hidden;
+}
+
+.#{$css-prefix}collapsed {
+    @include deprecate('4.0.0') {
+        height: 0;
+        overflow: hidden;
+    }
+}
+
+.#{$css-prefix}is-expanded {
+    height: auto;
+    overflow: visible;
+}
+
+.#{$css-prefix}expanded {
+    @include deprecate('4.0.0') {
+        height: auto;
+        overflow: visible;
+    }
+}

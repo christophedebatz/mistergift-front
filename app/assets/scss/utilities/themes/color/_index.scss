@@ -1,0 +1,84 @@
+//
+//
+// Themes - Color
+//
+//
+
+.#{$css-prefix}theme {
+    &--default {
+        @include theme(default);
+    }
+
+    &--shade {
+        @include theme(shade);
+    }
+
+    &--inverse {
+        @include theme(inverse);
+
+        border-color: $color-background-inverse;
+    }
+
+    &--alt-inverse {
+        @include theme(alt-inverse);
+
+        border-color: $color-background-alt-inverse;
+    }
+
+    &--success {
+        @include inverse-links;
+
+        background-color: $color-background-toast-success;
+    }
+
+    &--info {
+        @include inverse-links;
+
+        background-color: $color-background-toast;
+    }
+
+    &--warning {
+        background-color: $color-background-warning;
+        color: $color-text-default;
+
+        .#{$css-prefix}button__icon {
+            fill: $color-text-icon-default;
+        }
+    }
+
+    &--error {
+        @include inverse-links;
+
+        background-color: $color-background-toast-error;
+    }
+
+    &--offline {
+        @include inverse-links;
+
+        background-color: #444;
+    }
+
+    &--alert-texture {
+        @include gradient-striped;
+    }
+
+    &--inverse-text {
+        @include inverse-links;
+    }
+
+    &--default,
+    &--shade,
+    &--inverse,
+    &--alt-inverse,
+    &--success,
+    &--info,
+    &--warning,
+    &--error,
+    &--offline,
+    &--alert-texture,
+    &--inverse-text {
+        .#{$css-prefix}text-body--small {
+            color: inherit;
+        }
+    }
+}

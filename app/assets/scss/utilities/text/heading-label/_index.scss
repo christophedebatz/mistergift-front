@@ -1,0 +1,9 @@
+//
+//
+// Text - Heading label
+//
+//
+
+.#{$css-prefix}text-heading--label {
+    @include text-heading--label;
+}

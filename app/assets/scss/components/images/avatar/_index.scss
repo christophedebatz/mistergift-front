@@ -1,0 +1,43 @@
+//
+//
+// Images - Avatar
+//
+//
+
+.#{$css-prefix}avatar {
+    border-radius: $border-radius-medium;
+    display: inline-block;
+    line-height: $line-height-reset;
+    overflow: hidden;
+    vertical-align: middle;
+
+    &:hover,
+    &:focus:hover {
+        color: currentColor;
+    }
+
+    &--x-small {
+        @include square($square-icon-small-boundary);
+    }
+
+    &--small {
+        @include square($square-icon-medium-boundary-alt);
+    }
+
+    &--medium {
+        @include square($square-icon-large-boundary);
+    }
+
+    &--large {
+        @include square($square-icon-large-boundary-alt);
+    }
+
+    &--circle {
+        border-radius: $border-radius-circle;
+    }
+
+    // New in 2.0.0
+    &--empty {
+        border: $border-width-thin dashed $color-border;
+    }
+}

@@ -1,0 +1,17 @@
+@mixin root($root: html, $body: body) {
+    #{$root} {
+        -webkit: {
+            tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        background: $color-background-alt;
+        color: $color-text-default;
+        font-family: $font-family;
+        font-size: 100%;
+        line-height: $line-height-text;
+    }
+
+    #{$body} {
+        background: transparent;
+        font-size: $font-size-medium;
+    }
+}

@@ -1,0 +1,13 @@
+//
+//
+// Text - Heading large
+//
+//
+
+.#{$css-prefix}text-heading--large {
+    font: {
+        size: $font-size-xx-large;
+        weight: $font-weight-light;
+    }
+    line-height: $line-height-heading;
+}

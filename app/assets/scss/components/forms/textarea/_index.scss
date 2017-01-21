@@ -1,0 +1,13 @@
+//
+//
+// Forms - Textarea
+//
+//
+
+
+.#{$css-prefix}textarea {
+    @include form-states;
+
+    padding: $spacing-x-small $spacing-small;
+    resize: vertical;
+}

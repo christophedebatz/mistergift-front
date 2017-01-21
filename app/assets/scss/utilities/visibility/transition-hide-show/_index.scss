@@ -1,0 +1,13 @@
+//
+//
+// Visibility - Transition hide/show
+//
+//
+
+.#{$css-prefix}transition-hide {
+    opacity: 0;
+}
+
+.#{$css-prefix}transition-show {
+    opacity: 1;
+}

@@ -1,0 +1,77 @@
+//
+//
+// Text - Section title
+//
+//
+
+.#{$css-prefix}section {
+    margin: {
+        bottom: $spacing-x-small;
+        top: $spacing-x-small;
+    }
+
+    &__title {
+        display: flex;
+        font-size: $font-size-large;
+    }
+
+    &__title-action {
+        cursor: pointer;
+    }
+
+    &__content {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .#{$css-prefix}button__icon {
+        transform: rotate(-90deg);
+    }
+
+    &.#{$css-prefix}is-open {
+        .#{$css-prefix}button__icon {
+            transform: rotate(0deg);
+            transform-origin: 45%;
+        }
+
+        .#{$css-prefix}section__content {
+            opacity: 1;
+            padding-top: $spacing-small;
+            visibility: visible;
+        }
+    }
+}
+
+@include deprecate('4.0.0', 'Use .#{$css-prefix}section__title instead') {
+    .#{$css-prefix}section-title {
+        font-size: $font-size-large;
+
+        > a {
+            color: $color-text-default;
+            display: inline-block;
+
+            &:hover,
+            &:focus {
+                color: $color-text-link-hover;
+            }
+
+            &:focus {
+                box-shadow: $shadow-button-focus;
+            }
+
+            &:active {
+                color: $color-text-default;
+            }
+        }
+
+        .#{$css-prefix}icon {
+            @include square($square-icon-medium-content);
+
+            fill: currentColor;
+        }
+
+        .#{$css-prefix}section-group--is-closed .#{$css-prefix}icon {
+            transform: rotate(-90deg);
+        }
+    }
+}

@@ -1,0 +1,43 @@
+//
+//
+// Lists - Single divider
+//
+//
+
+.#{$css-prefix}has-divider {
+    @include deprecate('4.0.0') {
+        border-top: $border-width-thin solid $color-border;
+        margin-top: $spacing-x-small;
+        padding-top: $spacing-x-small;
+    }
+
+    &--top {
+        @include border(top);
+
+        &-space {
+            @include border(top);
+
+            margin-top: $spacing-x-small;
+            padding-top: $spacing-x-small;
+        }
+    }
+
+    &--right {
+        @include dot-separator(right);
+    }
+
+    &--bottom {
+        @include border(bottom);
+
+        &-space {
+            @include border(bottom);
+
+            margin-bottom: $spacing-x-small;
+            padding-bottom: $spacing-x-small;
+        }
+    }
+
+    &--left {
+        @include dot-separator(left);
+    }
+}

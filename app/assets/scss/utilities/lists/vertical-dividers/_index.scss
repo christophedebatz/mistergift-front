@@ -1,0 +1,116 @@
+//
+//
+// Lists - Vertical dividers
+//
+//
+
+// Top dividers
+.#{$css-prefix}has-dividers--top {
+    > .#{$css-prefix}list__item,
+    > .#{$css-prefix}item {
+        @include border(top);
+    }
+
+    &-space > .#{$css-prefix}list__item,
+    &-space > .#{$css-prefix}item {
+        @include border(top);
+
+        padding: $spacing-small;
+
+        @include mq-small-min {
+            padding: $spacing-x-small;
+        }
+    }
+}
+
+// Bottom dividers
+.#{$css-prefix}has-dividers--bottom {
+    > .#{$css-prefix}list__item,
+    > .#{$css-prefix}item {
+        @include border(bottom);
+    }
+
+    &-space > .#{$css-prefix}list__item,
+    &-space > .#{$css-prefix}item {
+        @include border(bottom);
+
+        padding: $spacing-small;
+
+        @include mq-small-min {
+            padding: $spacing-x-small;
+        }
+    }
+}
+
+// Dividers around items
+.#{$css-prefix}has-dividers--around {
+    > .#{$css-prefix}item {
+        @include border(around, $border-radius-medium);
+
+        + .#{$css-prefix}item {
+            margin-top: $spacing-x-small;
+        }
+    }
+
+    &-space {
+        > .#{$css-prefix}item {
+            @include border(around, $border-radius-medium);
+
+            padding: $spacing-small;
+
+            @include mq-small-min {
+                padding: $spacing-x-small;
+            }
+
+            + .#{$css-prefix}item {
+                margin-top: $spacing-x-small;
+            }
+        }
+    }
+}
+
+// Interactions on items
+.#{$css-prefix}has-list-interactions {
+    > .#{$css-prefix}list__item,
+    > .#{$css-prefix}item {
+        @include list-has-hovers;
+        @include list-has-selections;
+    }
+}
+
+// Deprecate for directional dividers
+@include deprecate('4.0.0', 'Use has-dividers--{position} helpers instead') {
+    .#{$css-prefix}list--vertical.#{$css-prefix}has-dividers > .#{$css-prefix}list__item {
+        @include box($padding: $spacing-x-small, $border-radius: null, $borders: bottom);
+        @include list-has-hovers;
+        @include list-has-selections;
+    }
+}
+
+// Deprecate for has-dividers--around instead
+@include deprecate('4.0.0', 'Use has-dividers--around instead') {
+    .#{$css-prefix}has-cards {
+        > .#{$css-prefix}list__item {
+            @include border(around, $border-radius-medium);
+
+            + .#{$css-prefix}list__item {
+                margin-top: $spacing-x-small;
+            }
+        }
+
+        &--space {
+            > .#{$css-prefix}list__item {
+                @include border(around, $border-radius-medium);
+                padding: $spacing-small;
+
+                @include mq-small-min {
+                    padding: $spacing-x-small;
+                }
+
+                + .#{$css-prefix}list__item {
+                    margin-top: $spacing-x-small;
+                }
+            }
+        }
+    }
+}

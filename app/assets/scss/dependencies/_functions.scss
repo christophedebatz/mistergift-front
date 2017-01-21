@@ -1,0 +1,31 @@
+//
+//
+// Functions
+//
+//
+
+// Calculate PX into EM
+// Use - width: pem(600px);
+// Output - width: 37.5em;
+@function pem($pixels) {
+    @return ($pixels / 16px * 1em);
+}
+
+// Calculate PX into REM
+// Use - width: rem(600px);
+// Output - width: 37.5rem;
+@function rem($pixels) {
+    @return ($pixels / 16px * 1rem);
+}
+
+// Replace `$search` with `$replace` in `$string`
+// Use - str-replace($string, ' ', '-')
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}

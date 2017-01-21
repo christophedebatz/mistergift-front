@@ -1,0 +1,15 @@
+//
+//
+// Lists - Horizontal
+//
+//
+
+.#{$css-prefix}list--horizontal {
+    @include align-horizontal('.#{$css-prefix}list__item', true);
+}
+
+.#{$css-prefix}list--horizontal-large {
+    > .#{$css-prefix}list__item > a {
+        padding: $spacing-small $spacing-medium;
+    }
+}

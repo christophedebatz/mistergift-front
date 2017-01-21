@@ -1,0 +1,22 @@
+//
+//
+// Interactions - Link reset
+//
+//
+
+.#{$css-prefix}text-link--reset {
+    cursor: pointer;
+    line-height: inherit;
+
+    &:active {
+        outline: none;
+    }
+
+    &,
+    &:active,
+    &:focus,
+    &:hover {
+        color: inherit;
+        text-decoration: inherit;
+    }
+}

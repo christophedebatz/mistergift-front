@@ -1,0 +1,12 @@
+//
+//
+// Alignment - Absolute center
+//
+//
+
+.#{$css-prefix}align--absolute-center {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,197 @@
+//
+//
+// Grid - Automatic sizing
+//
+//
+
+.#{$css-prefix}grid {
+    display: flex;
+
+    &--frame {
+        min-height: 100vh;
+        min-width: 100vw;
+        overflow: hidden;
+    }
+
+    &--vertical {
+        flex-direction: column;
+    }
+
+    &--vertical-reverse {
+        flex-direction: column-reverse;
+    }
+
+    &--reverse {
+        flex-direction: row-reverse;
+    }
+}
+
+.#{$css-prefix}col,
+[class*="#{$css-prefix}col--padded"] {
+    @include flex-item(expand);
+}
+
+.#{$css-prefix}col--padded {
+    padding: {
+        left: $spacing-small;
+        right: $spacing-small;
+    }
+
+    &-medium {
+        padding: {
+            left: $spacing-medium;
+            right: $spacing-medium;
+        }
+    }
+
+    &-large {
+        padding: {
+            left: $spacing-large;
+            right: $spacing-large;
+        }
+    }
+}
+
+.#{$css-prefix}grid--pull-padded {
+    margin: {
+        left: ($spacing-small * -1);
+        right: ($spacing-small * -1);
+    }
+
+    &-medium {
+        margin: {
+            left: ($spacing-medium * -1);
+            right: ($spacing-medium * -1);
+        }
+    }
+
+    &-large {
+        margin: {
+            left: ($spacing-large * -1);
+            right: ($spacing-large * -1);
+        }
+    }
+}
+
+.#{$css-prefix}col-rule {
+    @include deprecate('4.0.0', 'Use .#{$css-prefix}-col--rule-{position} instead') {
+        @include mq-large-min {
+            &--top {
+                border-top: 1px solid $color-border-separator;
+            }
+
+            &--right {
+                border-right: 1px solid $color-border-separator;
+            }
+
+            &--bottom {
+                border-bottom: 1px solid $color-border-separator;
+            }
+
+            &--left {
+                border-left: 1px solid $color-border-separator;
+            }
+        }
+    }
+}
+
+.#{$css-prefix}col--rule {
+    @include mq-large-min {
+        &-top {
+            border-top: 1px solid $color-border-separator;
+        }
+
+        &-right {
+            border-right: 1px solid $color-border-separator;
+        }
+
+        &-bottom {
+            border-bottom: 1px solid $color-border-separator;
+        }
+
+        &-left {
+            border-left: 1px solid $color-border-separator;
+        }
+    }
+}
+
+.#{$css-prefix}wrap {
+    @include flex-wrap(true);
+}
+
+.#{$css-prefix}nowrap {
+    @include flex-item(expand);
+    @include flex-wrap(false);
+
+    @include deprecate('4.0.0') {
+        &--small {
+            @include mq-small-min {
+                @include flex-item(expand);
+                @include flex-wrap(false);
+            }
+        }
+
+        &--medium {
+            @include mq-medium-min {
+                @include flex-item(expand);
+                @include flex-wrap(false);
+            }
+        }
+
+        &--large {
+            @include mq-large-min {
+                @include flex-item(expand);
+                @include flex-wrap(false);
+            }
+        }
+    }
+}
+
+// .{$css-prefix}{size}-nowrap used for responsive design
+@each $size in map-keys($grid) {
+    $breakpoint: map-get(map-get($grid, $size), 'breakpoint');
+
+    @each $key in $size {
+        @media (min-width: #{pem($breakpoint)}) {
+            .#{$css-prefix}#{$size}-nowrap {
+                @include flex-item(expand);
+                @include flex-wrap(false);
+            }
+        }
+    }
+}
+
+.#{$css-prefix}has-flexi-truncate {
+    flex: 1 1 0%;
+    min-width: 0; // For FFOX and newer browsers
+}
+
+.#{$css-prefix}no-flex {
+    flex: none;
+}
+
+.#{$css-prefix}no-space {
+    min-width: 0;
+}
+
+.#{$css-prefix}grow {
+    flex-grow: 1;
+}
+
+.#{$css-prefix}grow-none {
+    flex-grow: 0;
+}
+
+.#{$css-prefix}shrink {
+    flex-shrink: 1;
+}
+
+.#{$css-prefix}shrink-none {
+    flex-shrink: 0;
+}
+
+// Resets spacing/bullets for when grids are used on unordered lists
+.#{$css-prefix}text-longform ul.#{$css-prefix}grid {
+    list-style: none;
+    margin-left: 0;
+}

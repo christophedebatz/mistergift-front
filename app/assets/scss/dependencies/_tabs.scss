@@ -1,0 +1,32 @@
+//
+//
+// Tabs
+//
+//
+
+@mixin tabs {
+    display: block;
+    width: 100%;
+}
+
+@mixin tabs-nav {
+    align-items: flex-start;
+    display: flex;
+}
+
+@mixin tabs-content {
+    padding: $spacing-medium 0;
+    position: relative;
+}
+
+@mixin tabs-link {
+    @include truncate;
+
+    cursor: pointer; // needed in case links have no href & use JS
+    display: block;
+    text-decoration: none;
+
+    &:focus {
+        outline: 0;
+    }
+}

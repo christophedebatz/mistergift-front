@@ -1,0 +1,21 @@
+//
+//
+// Visibility - Hide/show
+//
+//
+
+.#{$css-prefix}hide {
+    display: none;
+}
+
+.#{$css-prefix}show {
+    display: block;
+}
+
+.#{$css-prefix}show--inline-block {
+    display: inline-block;
+}
+
+.#{$css-prefix}show--inline {
+    display: inline;
+}

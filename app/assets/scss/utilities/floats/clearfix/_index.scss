@@ -1,0 +1,13 @@
+//
+//
+// Floats - Clearfix
+//
+//
+
+.#{$css-prefix}clearfix {
+    @include clearfix;
+}
+
+.#{$css-prefix}clear {
+    clear: both;
+}

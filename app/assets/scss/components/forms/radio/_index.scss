@@ -1,0 +1,93 @@
+//
+//
+// Forms - Radio
+//
+//
+
+.#{$css-prefix}radio {
+  display: inline-block;
+
+  .#{$css-prefix}radio--faux {
+    @include square($square-icon-medium-content);
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    border: $border-width-thin solid $color-border-input;
+    border-radius: $border-radius-circle;
+    background: $color-background-input;
+    transition: border $duration-quickly linear, background-color $duration-quickly linear;
+  }
+
+  .#{$css-prefix}form-element__label {
+    display: inline;
+    vertical-align: middle;
+    font-size: $font-size-medium;
+  }
+
+  [type="radio"] {
+    @include square(1px);
+    border: 0;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+
+    &:checked + .#{$css-prefix}radio--faux,
+    &:checked ~ .#{$css-prefix}radio--faux {
+      background: $color-background-input;
+
+      &:after {
+        @include square(0.5rem);
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        border-radius: $border-radius-circle;
+        background: $color-brand;
+      }
+    }
+
+    &:focus + .#{$css-prefix}radio--faux,
+    &:focus ~ .#{$css-prefix}radio--faux {
+      border-color: $color-border-input-active;
+      box-shadow: $shadow-button-focus;
+    }
+
+    &[disabled] {
+      // scss-lint:disable NestingDepth
+      cursor: not-allowed;
+      user-select: none;
+
+      ~ .#{$css-prefix}radio--faux {
+        background-color: $color-background-input-disabled;
+        border-color: $color-border-input-disabled;
+      }
+    }
+  }
+}
+
+.#{$css-prefix}has-error .#{$css-prefix}radio [type="radio"] {
+
+  + .#{$css-prefix}radio--faux,
+  ~ .#{$css-prefix}radio--faux {
+    border-color: $color-border-error;
+    border-width: $border-width-thick;
+  }
+
+  &:checked + .#{$css-prefix}radio--faux,
+  &:checked ~ .#{$css-prefix}radio--faux {
+    background: $color-background-input;
+  }
+
+  &:checked + .#{$css-prefix}radio--faux:after,
+  &:checked ~ .#{$css-prefix}radio--faux:after {
+    background: $color-background-error;
+  }
+}
+
+.#{$css-prefix}form-element .#{$css-prefix}radio [type="radio"] + .#{$css-prefix}radio--faux,
+.#{$css-prefix}form-element .#{$css-prefix}radio [type="radio"] ~ .#{$css-prefix}radio--faux {
+  margin-right: $spacing-x-small;
+}

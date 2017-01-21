@@ -1,0 +1,14 @@
+//
+//
+// Grid - Horizontal alignment center
+//
+//
+
+.#{$css-prefix}grid--align-center {
+    justify-content: center;
+
+    .#{$css-prefix}col,
+    [class*="#{$css-prefix}col--padded"] {
+        flex-grow: 0;
+    }
+}

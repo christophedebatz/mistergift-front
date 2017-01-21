@@ -1,0 +1,51 @@
+//
+//
+// Sizing - Widths
+//
+//
+
+// Initialize Basic Sizing Helpers
+@include width(12);
+@include order(12);
+
+// Generate responsive Sizing Helpers
+//
+// Loop through grid map checking for width name
+// Map is stored in layout dependencies
+//
+@each $size in map-keys($grid) {
+    // Store nested value from map
+    $breakpoint: map-get(map-get($grid, $size), 'breakpoint');
+    $columns: map-get(map-get($grid, $size), 'columns');
+
+    // Loop through nested map and do some bizness */
+    @each $key in $size {
+        @media (min-width: #{pem($breakpoint)}) {
+            // Generate responsive width names,
+            // e.g. <div class="medium-size--3-of-6">
+            @include width($columns, #{$size});
+
+            // Loop through column spread and generate
+            // ordering helpers, e.g. <div class="medium-order--2">
+            @for $i from 1 through $columns {
+                .#{$css-prefix}#{$size}-order--#{$i} {
+                    order: $i;
+                }
+            }
+        }
+
+        @media (max-width: #{pem($breakpoint)}) {
+            // Generate responsive width names (up to size),
+            // e.g. <div class="max-medium-size--3-of-6">
+            @include width($columns, #{$size}, true);
+
+            // Loop through column spread and generate
+            // ordering helpers, e.g. <div class="medium-order--2">
+            @for $i from 1 through $columns {
+                .#{$css-prefix}max-#{$size}-order--#{$i} {
+                    order: $i;
+                }
+            }
+        }
+    }
+}

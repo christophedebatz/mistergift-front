@@ -1,0 +1,14 @@
+//
+//
+// Grid - Overflow
+//
+//
+
+.#{$css-prefix}grid--overflow {
+    flex-flow: row nowrap;
+
+    .#{$css-prefix}col {
+        min-width: 11.25em; //equals 180px
+        max-width: 22.5em;
+    }
+}

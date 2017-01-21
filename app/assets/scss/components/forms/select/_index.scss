@@ -1,0 +1,60 @@
+//
+//
+// Forms - Select
+//
+//
+
+.#{$css-prefix}select {
+    @include form-states;
+
+    height: calc(#{$height-input} + (#{$border-width-thin} * 2));
+
+    &[size],
+    &[multiple] {
+        min-height: calc(#{$height-input} + (#{$border-width-thin} * 2));
+        height: inherit;
+
+        option {
+            padding: $spacing-x-small;
+        }
+    }
+
+    &_container {
+        position: relative;
+
+        .#{$css-prefix}select {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            padding: {
+                left: $spacing-x-small;
+                right: $spacing-large;
+            }
+
+            &::-ms-expand {
+                display: none;
+            }
+        }
+
+        &:before,
+        &:after {
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            content: '';
+            display: block;
+            height: 0;
+            position: absolute;
+            right: $spacing-x-small;
+            width: 0;
+        }
+
+        &:before {
+            border-bottom: 5px solid $color-background-inverse;
+            top: calc((#{$line-height-button-small} / 2) - 6px);
+        }
+
+        &:after {
+            border-top: 5px solid $color-background-inverse;
+            bottom: calc((#{$line-height-button-small} / 2) - 6px);
+        }
+    }
+}

@@ -1,0 +1,42 @@
+//
+//
+// Grid - Containers
+//
+//
+
+.#{$css-prefix}container {
+    &--small {
+        max-width: rem($mq-small);
+    }
+
+    &--medium {
+        max-width: rem($mq-medium);
+    }
+
+    &--large {
+        max-width: rem($mq-large);
+    }
+
+    &--x-large {
+        max-width: rem($mq-x-large);
+    }
+
+    &--fluid {
+        width: 100%;
+    }
+
+    &--center {
+        margin: {
+            left: auto;
+            right: auto;
+        }
+    }
+
+    &--left {
+        margin-right: auto;
+    }
+
+    &--right {
+        margin-left: auto;
+    }
+}

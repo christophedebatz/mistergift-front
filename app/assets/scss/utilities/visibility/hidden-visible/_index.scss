@@ -1,0 +1,13 @@
+//
+//
+// Visibility - Hidden/Visible
+//
+//
+
+.#{$css-prefix}hidden {
+    visibility: hidden;
+}
+
+.#{$css-prefix}visible {
+    visibility: visible;
+}

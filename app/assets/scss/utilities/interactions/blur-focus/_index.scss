@@ -1,0 +1,21 @@
+//
+//
+// Interactions - Blur focus
+//
+//
+
+.#{$css-prefix}has-blur-focus {
+    border-radius: $border-radius-small;
+    color: currentColor;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: currentColor;
+        text-decoration: none;
+    }
+
+    &:focus {
+        @include focus-button;
+    }
+}

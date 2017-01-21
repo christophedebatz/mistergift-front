@@ -1,0 +1,106 @@
+//
+//
+// Forms - Checkbox
+//
+//
+
+.#{$css-prefix}checkbox {
+    display: inline-block;
+
+    .#{$css-prefix}checkbox--faux {
+        @include square($square-icon-medium-content);
+
+        background: $color-background-input;
+        border: $border-width-thin solid $color-border-input;
+        border-radius: $border-radius-small;
+        display: inline-block;
+        position: relative;
+        transition: border $duration-quickly linear, background-color $duration-quickly linear;
+        vertical-align: middle;
+    }
+
+    .#{$css-prefix}form-element__label {
+        display: inline;
+        font-size: $font-size-medium;
+        vertical-align: middle;
+    }
+
+    [type="checkbox"] {
+        @include square(1px);
+
+        border: 0;
+        clip: rect(0 0 0 0);
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+
+        &:checked + .#{$css-prefix}checkbox--faux,
+        &:checked ~ .#{$css-prefix}checkbox--faux {
+            &:after {
+                border-bottom: $border-width-thick solid $color-brand;
+                border-left: $border-width-thick solid $color-brand;
+                content: '';
+                display: block;
+                height: ($square-icon-x-small-content / 2);
+                left: 50%;
+                position: absolute;
+                top: 50%;
+                transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+                width: $square-icon-x-small-content;
+            }
+        }
+
+        &:focus {
+            + .#{$css-prefix}checkbox--faux,
+            ~ .#{$css-prefix}checkbox--faux {
+                border-color: $color-border-input-active;
+                box-shadow: $shadow-button-focus;
+                content: '';
+            }
+
+            &:checked > .#{$css-prefix}checkbox--faux,
+            &:checked ~ .#{$css-prefix}checkbox--faux {
+                background-color: $color-background-input;
+                border-color: $color-border-input-active;
+            }
+        }
+
+        &[disabled] {
+            + .#{$css-prefix}checkbox--faux,
+            ~ .#{$css-prefix}checkbox--faux {
+                background-color: $color-background-input-disabled;
+                border-color: $color-border-input-disabled;
+            }
+
+            + .#{$css-prefix}checkbox--faux:after,
+            ~ .#{$css-prefix}checkbox--faux:after {
+                border-color: $color-background-input;
+            }
+        }
+    }
+}
+
+.#{$css-prefix}has-error .#{$css-prefix}checkbox [type="checkbox"] {
+    + .#{$css-prefix}checkbox--faux,
+    ~ .#{$css-prefix}checkbox--faux {
+        border-color: $color-border-error;
+        border-width: $border-width-thick;
+    }
+
+    &:checked + .#{$css-prefix}checkbox--faux,
+    &:checked ~ .#{$css-prefix}checkbox--faux {
+        background-color: $color-background-input;
+        border-color: $color-border-error;
+    }
+
+    &:checked + .#{$css-prefix}checkbox--faux:after,
+    &:checked ~ .#{$css-prefix}checkbox--faux:after {
+        border-color: $color-background-error;
+    }
+}
+
+.#{$css-prefix}form-element .#{$css-prefix}checkbox [type="checkbox"] + .#{$css-prefix}checkbox--faux,
+.#{$css-prefix}form-element .#{$css-prefix}checkbox [type="checkbox"] ~ .#{$css-prefix}checkbox--faux {
+    margin-right: $spacing-x-small;
+}

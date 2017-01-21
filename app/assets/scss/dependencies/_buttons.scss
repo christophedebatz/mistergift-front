@@ -1,0 +1,50 @@
+//
+//
+// Buttons
+//
+//
+
+@mixin button {
+    padding: {
+        left: $spacing-medium;
+        right: $spacing-medium;
+    }
+    text-align: center;
+    vertical-align: middle;
+}
+
+@mixin button-base {
+    border: $border-width-thin solid $color-border-button-default;
+
+    &:hover,
+    &:focus {
+        background-color: $color-background-button-default-hover;
+    }
+
+    &:active {
+        background-color: $color-background-button-default-active;
+    }
+}
+
+@mixin button-brand {
+    @include gradient-vertical(#55b3ea, #0a90e0);
+    // background-color: $color-background-button-brand;
+    // border: $border-width-thin solid $color-border-button-brand;
+    color: $color-text-button-brand;
+
+    &:link,
+    &:visited,
+    &:active {
+        color: $color-text-button-brand;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: #55b3ea;
+        color: $color-text-button-brand-hover;
+    }
+
+    &:active {
+        background-color: #55b3ea;
+    }
+}

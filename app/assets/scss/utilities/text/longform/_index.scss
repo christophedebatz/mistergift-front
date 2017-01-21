@@ -1,0 +1,26 @@
+//
+//
+// Text - Longform
+//
+//
+
+.#{$css-prefix}text-longform {
+    h1,
+    h2,
+    h3,
+    p,
+    ul,
+    ol,
+    dl,
+    img {
+        margin-bottom: $spacing-small;
+    }
+
+    ul {
+        @include list-has-bullets;
+    }
+
+    ol {
+        @include list-has-numbers;
+    }
+}

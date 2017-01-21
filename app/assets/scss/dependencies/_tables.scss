@@ -1,0 +1,77 @@
+//
+//
+// Tables
+//
+//
+
+@mixin table-stacked {
+    @include mq-medium-max {
+        border: 0;
+
+        thead {
+            border: 0 !important;
+            clip: rect(0 0 0 0) !important;
+            height: 1px !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            padding: 0 !important;
+            position: absolute !important;
+            width: 1px !important;
+        }
+
+        th {
+            border-top: 0;
+        }
+
+        tr {
+            border-top: $border-width-thick solid $color-border;
+            display: block;
+        }
+
+        th,
+        td {
+            clear: both;
+            display: block;
+            max-width: 100%;
+            overflow: hidden;
+            padding: $spacing-small;
+            text-align: left;
+            white-space: normal;
+            width: 100%;
+
+            // Remove max width from truncate definition
+            &.#{$css-prefix}truncate {
+                max-width: 100%;
+            }
+
+            &:before {
+                @include text-heading--label;
+
+                content: attr(data-label);
+                display: block;
+                padding-bottom: $spacing-xx-small;
+            }
+        }
+
+        tr > td:first-child,
+        tr > td:last-child {
+            padding: $spacing-small;
+        }
+
+        &:not(.#{$css-prefix}no-row-hover) tbody tr:hover {
+            td,
+            th {
+                background-color: inherit !important;
+                box-shadow: none !important;
+            }
+        }
+
+        .#{$css-prefix}is-interactive .#{$css-prefix}button {
+            visibility: visible;
+        }
+
+        .#{$css-prefix}cell-shrink {
+            width: auto;
+        }
+    }
+}
