@@ -30,6 +30,14 @@ export default function createRoutes(store) {
                     .catch(errorLoading);
             }
         }, {
+            path: '/events',
+            name: 'user',
+            getComponent(nextState, cb) {
+                System.import('containers/EventsListContainer')
+                    .then(loadModule(cb))
+                    .catch(errorLoading);
+            }
+        }, {
             path: '/:identifier',
             name: 'user',
             getComponent(nextState, cb) {

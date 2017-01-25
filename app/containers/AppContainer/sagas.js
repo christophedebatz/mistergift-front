@@ -8,6 +8,7 @@ import {
 import {
     entitiesLoaded,
     entityLoaded,
+    eventsLoaded,
 } from './actions';
 
 import {get, getNormalized} from '../../utils/contentProvider';
@@ -44,6 +45,20 @@ function* watchFetchEntity() {
         yield put(entityLoaded(entityType, identifier, data));
     }
 };
+
+function* watchFetchEventsList() {
+    const requestChan = yield actionChannel(LOAD_EVENTS);
+
+    while (true) {
+        yield take(requestChan);
+        let url = '/events';
+        const data = yield call(get, url);
+        const events = new Immutable.Map(data.data);
+
+        yield put(eventsLoaded(events));
+    }
+};
+
 
 export default [
     watchFetchEntities,

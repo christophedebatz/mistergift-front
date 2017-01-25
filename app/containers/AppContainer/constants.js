@@ -5,3 +5,6 @@ export const LOAD_ENTITIES_ERROR = 'mg/App/LOAD_ENTITIES_ERROR';
 export const LOAD_ENTITY = 'mg/App/LOAD_ENTITY';
 export const LOAD_ENTITY_SUCCESS = 'mg/App/LOAD_ENTITY_SUCCESS';
 export const LOAD_ENTITY_ERROR = 'mg/App/LOAD_ENTITY_ERROR';
+
+export const LOAD_EVENTS = 'mg/App/LOAD_EVENTS';
+export const LOAD_EVENTS_SUCCESS = 'mg/App/LOAD_EVENTS_SUCCESS';

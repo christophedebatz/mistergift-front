@@ -54,6 +54,7 @@
     "react-dom": "^15.3.1",
     "react-helmet": "^3.1.0",
     "react-intl": "^2.1.5",
+    "react-modal": "^1.6.5",
     "react-pure-render": "^1.0.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",

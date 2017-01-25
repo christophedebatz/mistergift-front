@@ -3,6 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
+import { denormalize } from 'denormalizr-immutable';
 
 const selectGlobal = () => (state) => {
     return state.get('global');
@@ -16,6 +17,11 @@ const selectEntities = () => createSelector(
 const selectIndexes = () => createSelector(
     selectGlobal(),
     (globalState) => globalState.get('indexes')
+);
+
+const selectEvents = () => createSelector(
+    selectGlobal(),
+    (globalState) => globalState.get('events')
 );
 
 const selectAllUsers = () => createSelector(
@@ -44,6 +50,7 @@ export {
     selectLoading,
     selectError,
     selectIndexes,
+    selectVotes,
     selectAllUsers,
     selectLocationState,
 };
