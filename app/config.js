@@ -11,12 +11,13 @@ const config = {
     "preregister": {
         "path": "/landing"
     },
-    "lists": {
-        "path": "/lists"
+    "events": {
+        "path": "/events"
     },
-    "groups": {
-        "path": "/groups"
+    "users": {
+        "path": "/"
     }
+
 }
 
 config.url = function (service) {

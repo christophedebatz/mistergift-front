@@ -1,73 +1,70 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+/**
+ * app.js
+ *
+ * This is the entry file for the application, only setup and boilerplate
+ * code.
+ */
 
-import Landing from './containers/landing'
-import Home from './containers/home'
-import Register from './containers/register'
-import Login from './containers/login'
-import Logout from './containers/logout'
-import Lists from './containers/lists'
-import About from './containers/about'
-import NotFound from './containers/errors'
-import Header from './containers/header'
-import { Auth } from './services'
+// Needed for redux-saga es6 generator support
+import 'babel-polyfill';
 
-import './assets/scss/index'
+// Load the favicon, the manifest.json file and the .htaccess file
+import 'file?name=[name].[ext]!../robots.txt';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { isLoggedIn: false, currentPathname: props.location.pathname }
-    }
+// Import all the third party stuff
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import fr from 'react-intl/locale-data/fr';
+import { Provider } from 'react-redux';
+import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import FontFaceObserver from 'fontfaceobserver';
+import useScroll from 'react-router-scroll';
+import configureStore from './store';
 
-    updateAuth = (isLoggedIn) => {
-        this.setState({ ...this.state, isLoggedIn: isLoggedIn })
-    }
+addLocaleData(fr);
 
-    componentWillMount = () => {
-        Auth.onChange = this.updateAuth
-        if (Auth.hasToken()) Auth.login()
-    }
+// Observe loading of brandon
+import styles from 'styles/index.scss';
 
-    componentWillReceiveProps = () => {
-        this.setState({ ...this.state, currentPathname: this.props.location.pathname })
-    }
+// Create redux store with history
+// this uses the singleton browserHistory provided by react-router
+// Optionally, this could be changed to leverage a created history
+// e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
+const initialState = {};
+const store = configureStore(initialState, browserHistory);
 
-    render() {
-        let className = (this.state.currentPathname === '/home' ? 'site-home' : '')
-        let isHeaderVisible = (this.state.currentPathname !== '/')
+// Sync history and store, as the react-router-redux reducer
+// is under the non-default key ("routing"), selectLocationState
+// must be provided for resolving how to retrieve the "route" in the state
+import { selectLocationState } from 'containers/AppContainer/selectors';
+const history = syncHistoryWithStore(browserHistory, store, {
+    selectLocationState: selectLocationState(),
+});
 
-        return (
-            <div className={ className }>
-                { isHeaderVisible ? <Header isLoggedIn={ this.state.isLoggedIn } /> : '' }
+// Set up the router, wrapping all Routes in the App component
+import App from 'containers/AppContainer';
+import createRoutes from './routes';
+const rootRoute = {
+    component: App,
+    childRoutes: createRoutes(store),
+};
 
-                { this.props.children }
-            </div>
-        )
-    }
-}
+ReactDOM.render(
+    <IntlProvider locale="fr">
+        <Provider store={store}>
+            <Router
+                history={history}
+                routes={rootRoute}
+                render={
+                    // Scroll to top when going to a new page, imitating default browser
+                    // behaviour
+                    applyRouterMiddleware(useScroll())
+                }
+            />
+        </Provider>
+    </IntlProvider>,
+    document.getElementById('app')
+);
 
-// function requireAuth(nextState, replace) {
-//     if (!auth.loggedIn()) {
-//         replace({
-//             pathname: '/login',
-//             state: { nextPathname: nextState.location.pathname }
-//         })
-//     }
-// }
-
-ReactDOM.render((
-    <Router history={ browserHistory }>
-        <Route path="/" component={ App }>
-            <IndexRoute component={ Landing }/>
-            <Route path="home" component={ Home }/>
-            <Route path="register" component={ Register }/>
-            <Route path="login" component={ Login }/>
-            <Route path="logout" component={ Logout }/>
-            <Route path="lists" component={ Lists }/>
-            <Route path="about" component={ About }/>
-            <Route path="*" component={ NotFound }/>
-        </Route>
-    </Router>
-), document.getElementById('app'))

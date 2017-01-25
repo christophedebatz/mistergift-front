@@ -1,0 +1,26 @@
+{
+    "default": {
+        "title" : "MisterGift",
+        "titleTemplate" : "MisterGift | %s",
+        "defaultTitle" : "MisterGift",
+        "metas": {
+            "description" : "MisterGift",
+            "og:description" : "MisterGift",
+            "og:title" : "MisterGift",
+            "og:image": "",
+            "twitter:card": "",
+            "twitter:image": ""
+        }
+    },
+    "user" : {
+        "title" : "{userName}",
+        "metas": {
+            "og:title" : "Discover {Username} wishlist",
+            "description": "{description}",
+            "og:description": "{description}",
+            "og:image": "",
+            "twitter:image": ""
+        }
+    }
+}
+

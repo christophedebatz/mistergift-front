@@ -1,7 +1,9 @@
 import React from 'react'
+
+import { connect } from 'react-redux';
 import { Auth } from '../../actions'
 
-class LoginForm extends React.Component {
+class LoginContainer extends React.Component {
     constructor(props, context) {
         super(props)
 
@@ -63,8 +65,20 @@ class LoginForm extends React.Component {
     }
 }
 
-LoginForm.contextTypes = {
-    router: React.PropTypes.object.isRequired
+LoginContainer.contextTypes = {
+	router: React.PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state, props) => {
+    return {
+    }
 }
 
-export default LoginForm
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onLoad: () => {
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

@@ -1,0 +1,78 @@
+//
+//
+// Media Objects - Base
+//
+//
+
+.#{$css-prefix}media {
+    align-items: flex-start;
+    display: flex;
+
+    &__figure {
+        flex-shrink: 0;
+        margin-right: $spacing-small;
+    }
+
+    &__body {
+        flex: 1;
+        min-width: 0; // This fixes an issue with truncation inside flexbox due to the changes in flex basis (already in FFOX, coming to Chrome)
+    }
+
+    &__body,
+    &__body > :last-child {
+        margin-bottom: 0;
+    }
+
+    &__content {}
+}
+
+.#{$css-prefix}media--small .#{$css-prefix}media__figure {
+    margin-right: $spacing-xx-small;
+}
+
+.#{$css-prefix}media--large .#{$css-prefix}media__figure {
+    margin-right: $spacing-large;
+}
+
+.#{$css-prefix}media--small .#{$css-prefix}media__figure--reverse {
+    margin-left: $spacing-xx-small;
+}
+
+.#{$css-prefix}media--large .#{$css-prefix}media__figure--reverse {
+    margin-left: $spacing-large;
+}
+
+.#{$css-prefix}media--center {
+    align-items: center;
+}
+
+.#{$css-prefix}media__figure--reverse {
+    margin: 0 0 0 $spacing-small;
+}
+
+@include deprecate('4.0.0') {
+    .#{$css-prefix}media--reverse {
+        > .#{$css-prefix}media__figure {
+            order: 1;
+        }
+
+        &.#{$css-prefix}media--small .#{$css-prefix}media__figure {
+            margin-left: $spacing-xx-small;
+        }
+    }
+
+    .#{$css-prefix}media--double {
+        > .#{$css-prefix}media__figure {
+            order: 1;
+        }
+
+        .#{$css-prefix}media__figure--reverse {
+            margin: 0 0 0 $spacing-medium;
+            order: 3;
+        }
+
+        .#{$css-prefix}media__body {
+            order: 2;
+        }
+    }
+}

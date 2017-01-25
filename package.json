@@ -3,60 +3,119 @@
   "version": "0.0.1",
   "description": "MisterGift Front",
   "main": "index.js",
-  "scripts": {
-    "build": "webpack",
-    "build:prod": "NODE_ENV=production webpack --config ./webpack.prod.js -p",
-    "watch": "webpack --watch",
-    "start": "webpack-dev-server --port 3000 --history-api-fallback",
-    "start:prod": "webpack-dev-server --port 3000 --history-api-fallback --config ./webpack.prod.js -p",
-    "deploy:prod": "npm run build:prod && rsync --progress --update --compress --recursive build/* mgadmin@mistergift.io:/home/mgadmin/www/mistergift.io",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://bitbucket.org/gvstave/mg-front.git"
-  },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "react-router": "^2.4.1",
-    "whatwg-fetch": "^1.0.0"
+  "scripts": {
+    "build:clean": "rm -rf ./build/*",
+    "build": "NODE_ENV=production webpack --config ./webpack/webpack.prod.babel.js --color -p",
+    "start": "NODE_ENV=development node server",
+    "start:prod": "NODE_ENV=production node server"
   },
   "babel": {
     "presets": [
-      "es2015",
+      [
+        "es2015",
+        {
+          "modules": false
+        }
+      ],
       "react",
       "stage-0"
-    ]
+    ],
+    "env": {
+      "production": {
+        "only": [
+          "app"
+        ],
+        "plugins": [
+          "transform-react-remove-prop-types"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "autoprefixer": "^6.4.1",
+    "babel-polyfill": "^6.13.0",
+    "chalk": "^1.1.3",
+    "compression": "^1.6.2",
+    "denormalizr-immutable": "0.0.2",
+    "express": "^4.14.0",
+    "fontfaceobserver": "^2.0.4",
+    "halogen": "^0.2.0",
+    "immutable": "^3.8.1",
+    "node.normalize.scss": "^3.0.3",
+    "normalizr": "^2.2.1",
+    "postcss-scss": "^0.3.0",
+    "prerender-node": "^2.4.0",
+    "query-string": "^4.2.3",
+    "react": "^15.3.1",
+    "react-addons-css-transition-group": "^15.3.1",
+    "react-dailymotion": "^0.2.1",
+    "react-dom": "^15.3.1",
+    "react-helmet": "^3.1.0",
+    "react-intl": "^2.1.5",
+    "react-pure-render": "^1.0.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "react-router-redux": "^4.0.5",
+    "react-router-scroll": "^0.2.1",
+    "react-scroll": "^1.4.0",
+    "react-select": "^1.0.0-rc.1",
+    "react-share": "^1.9.3",
+    "react-slick": "^0.14.4",
+    "react-sticky": "^5.0.5",
+    "react-tweet-embed": "^1.0.1",
+    "redux": "^3.6.0",
+    "redux-immutable": "^3.0.8",
+    "redux-saga": "^0.11.1",
+    "reselect": "^2.5.3",
+    "sanitize.css": "^4.1.0",
+    "slick-carousel": "^1.6.0",
+    "string-format": "^0.5.0",
+    "susy": "^2.2.12",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.6",
-    "babel-core": "^6.7.7",
-    "babel-eslint": "^6.0.4",
-    "babel-loader": "^6.2.4",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
     "babel-plugin-react-transform": "^2.0.2",
-    "babel-plugin-transform-react-constant-elements": "^6.8.0",
+    "babel-plugin-transform-react-constant-elements": "^6.9.1",
     "babel-plugin-transform-react-inline-elements": "^6.8.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.2.7",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react": "^6.5.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.2.9",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
-    "css-loader": "^0.23.1",
+    "cross-env": "^2.0.1",
+    "css-loader": "^0.25.0",
+    "eventsource-polyfill": "^0.9.6",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^2.0.0-beta",
-    "html-loader": "^0.4.3",
-    "html-webpack-plugin": "^2.19.0",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.22.0",
+    "image-webpack-loader": "^2.0.0",
+    "imports-loader": "^0.6.5",
+    "ip": "^1.1.3",
     "json-loader": "^0.5.4",
-    "node-sass": "^3.8.0",
-    "postcss-loader": "^0.9.1",
-    "sass-loader": "^3.2.1",
+    "lint-staged": "^3.0.2",
+    "ngrok": "2.2.2",
+    "node-sass": "^3.10.0",
+    "null-loader": "^0.1.1",
+    "offline-plugin": "^3.4.2",
+    "plop": "^1.5.0",
+    "postcss-focus": "^1.0.0",
+    "postcss-loader": "^0.13.0",
+    "postcss-reporter": "^1.4.1",
+    "psi": "^2.0.4",
+    "rimraf": "^2.5.4",
+    "sass-loader": "^4.0.2",
+    "shelljs": "^0.7.4",
     "style-loader": "^0.13.1",
+    "svg-sprite-loader": "0.0.27",
+    "url-loader": "^0.5.7",
     "webpack": "2.1.0-beta.22",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack-dev-middleware": "^1.7.0",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }

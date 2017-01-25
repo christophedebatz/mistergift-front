@@ -1,16 +1,19 @@
 import React from 'react'
-import { Register } from '../../services'
+import { Register } from '../../actions'
+
+const HTTP_ERR_CONFLICT = 409
 
 class RegisterForm extends React.Component {
     constructor(props, context) {
         super(props)
 
         this.state = {
-            form: { email: '', password: '', firstName: '', lastName: '' },
+            form: { email: '', password: '', name: '' },
             submitInProgress: false,
             saved: false,
             alreadyExists: false
         }
+
         this.router = context.router
     }
 
@@ -18,12 +21,8 @@ class RegisterForm extends React.Component {
         this.setState({ ...this.state, ...data })
     }
 
-    handleFirstNameChange = (event) => {
-        this.updateState({ firstName: event.target.value })
-    }
-
-    handleLastNameChange = (event) => {
-        this.updateState({ lastName: event.target.value })
+    handleNameChange = (event) => {
+        this.updateState({ name: event.target.value })
     }
 
     handleEmailChange = (event) => {
@@ -46,7 +45,9 @@ class RegisterForm extends React.Component {
                 alert('Successfully saved!')
             })
             .catch((res) => {
-                if (res.status === HTTP_ERR_CONFLICT) this.updateState({ alreadyExists: true })
+                if (res.status === HTTP_ERR_CONFLICT) {
+                    this.updateState({ alreadyExists: true })
+                }
             })
             .then(() => this.updateState({ submitInProgress: false }))
     }
@@ -56,18 +57,16 @@ class RegisterForm extends React.Component {
             <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
                 <form className="mg-form--stacked" onSubmit={ this.submit }>
                     <div className="mg-form-element">
-                        <label className="mg-form-element__label">First Name</label>
+                        <label className="mg-form-element__label">Name</label>
 
                         <div className="mg-form-element__control">
-                            <input className="mg-input" type="text" name="firstName" value={ this.state.firstName } onChange={ this.handleFirstNameChange }/>
-                        </div>
-                    </div>
-
-                    <div className="mg-form-element">
-                        <label className="mg-form-element__label">Last Name</label>
-
-                        <div className="mg-form-element__control">
-                            <input className="mg-input" type="text" name="lastName" value={ this.state.lastName } onChange={ this.handleLastNameChange }/>
+                            <input
+                                className="mg-input"
+                                type="text"
+                                name="name"
+                                value={ this.state.name }
+                                onChange={ this.handleNameChange }
+                            />
                         </div>
                     </div>
 
@@ -75,7 +74,13 @@ class RegisterForm extends React.Component {
                         <label className="mg-form-element__label">E-mail</label>
 
                         <div className="mg-form-element__control">
-                            <input className="mg-input" type="email" name="email" value={ this.state.email } onChange={ this.handleEmailChange }/>
+                            <input
+                                className="mg-input"
+                                type="email"
+                                name="email"
+                                value={ this.state.email }
+                                onChange={ this.handleEmailChange }
+                            />
                         </div>
                     </div>
 
@@ -83,7 +88,13 @@ class RegisterForm extends React.Component {
                         <label className="mg-form-element__label">Password</label>
 
                         <div className="mg-form-element__control">
-                            <input className="mg-input" type="password" name="password" value={ this.state.password } onChange={ this.handlePasswordChange }/>
+                            <input
+                                className="mg-input"
+                                type="password"
+                                name="password"
+                                value={ this.state.password }
+                                onChange={ this.handlePasswordChange }
+                            />
                         </div>
                     </div>
 

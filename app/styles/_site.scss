@@ -1,0 +1,280 @@
+//
+//
+// Site
+//
+//
+
+body {
+    background: #edf0f5;
+    font-weight: 300;
+}
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+//
+// Home
+//
+
+.site-home {
+    @include gradient-vertical(#4b6cb7, #203661);
+
+    .site-banner {
+        background: none;
+        box-shadow: none;
+
+        > .mg-grid {
+            border-bottom: 1px solid #fff;
+        }
+    }
+
+    .site-logo {
+        color: #fff;
+    }
+
+    .mg-button--neutral {
+        border-color: #fff;
+    }
+}
+
+.site-head--masthead {
+    padding-bottom: 215px;
+    padding-top: 150px;
+
+    h1 {
+        color: #fff;
+        font-family: 'Lato';
+        font-size: 34px;
+        font-weight: 300;
+    }
+
+    h2 {
+        color: #fff;
+        display: block;
+        font-family: 'Open Sans';
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+}
+
+.site-head--hint {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 30px 0;
+    text-align: center;
+
+    .mg-media__title {
+        color: #292e31;
+        font-family: 'Lato', Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+    }
+}
+
+//
+// Banner
+//
+
+.site-banner {
+    background: #fff;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, .1);
+
+    // @TODO SPACING HELPERS
+    .mg-list--horizontal {
+        padding-top: 15px;
+
+        > li {
+            margin-left: 10px;
+        }
+
+        .mg-button {
+            text-transform: uppercase;
+        }
+    }
+}
+
+.site-logo {
+    color: #000;
+    font-size: 16px;
+    line-height: 60px;
+    text-transform: uppercase;
+}
+
+//
+// Landing
+//
+
+.site-landing {
+    animation: GradientAnimation 60s ease infinite;
+    background: linear-gradient(230deg,#a24bcf,#4b79cf,#4bc5cf);
+
+    h1 {
+        color: #fff;
+        display: block;
+        font-family: 'Lato', 'Helvetica', Arial, sans-serif;
+        font-size: 34px;
+        font-weight: 100;
+        margin-bottom: 40px;
+
+        span {
+            display: block;
+            font-weight: 700;
+        }
+    }
+
+    .mg-button {
+        text-transform: uppercase;
+    }
+
+    .mg-text-body--small {
+        color: #fff;
+        padding-top: 5px;
+    }
+
+    .mg-progress {
+        display: inline-block;
+        background-image: url('images/ajax-progress.gif');
+    }
+}
+
+.site-landing--error {
+    color: #c0392b;
+    margin-bottom: 5px;
+}
+
+.site-landing--success {
+    color: #27ae60;
+    display: block;
+    font-family: 'Lato', 'Helvetica', Arial, sans-serif;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+@keyframes GradientAnimation {
+    0% { background-position: 0% 84% }
+    50% { background-position: 100% 16% }
+    100% { background-position: 0% 84% }
+}
+
+//
+// Site content
+//
+
+.site-content {
+    padding-top: 60px;
+}
+
+//
+// Gifts List
+//
+
+.site-gifts-list {
+    background: #edf0f5;
+    padding-bottom: 70px;
+    padding-top: 60px;
+}
+
+// Spacing
+
+.mg-p-horizontal--small {
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+
+.mg-p-bottom--large {
+    padding-bottom: 1.5rem;
+}
+
+// Event Card
+
+.event-card__date {
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 13px;
+    left: 10px;
+    line-height: 1.7em;
+    padding: 4px 5px 1px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase; 
+    top: 10px;
+
+    span {
+        display: block;
+        font-size: 28.5px;
+    }
+}
+
+.event-card__header {
+    background-color: #000;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    display: block;
+    min-height: 270px;
+    overflow: hidden;
+    position: relative; 
+}
+
+.event-card__title {
+    color: #212529;
+    display: block;
+    font-size: 25px;
+    line-height: 1.2em;
+    min-height: 44px;
+}
+
+.event-card__content {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    color: #212529;
+    display: block; 
+    font-size: 20px;
+    padding: 15px;
+    width: 100%;
+}
+
+// Events Description
+
+.events-description {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    color: #212529;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    width: 100%;
+}
+
+.events-description__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+// Events Create
+
+.events-create {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    margin-bottom: 20px;
+    padding: 30px;
+    text-align: center;
+
+    .mg-button {
+        display: block;
+        text-transform: uppercase;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    }
+}

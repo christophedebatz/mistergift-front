@@ -1,0 +1,7 @@
+export const LOAD_ENTITIES = 'mg/App/LOAD_ENTITIES';
+export const LOAD_ENTITIES_SUCCESS = 'mg/App/LOAD_ENTITIES_SUCCESS';
+export const LOAD_ENTITIES_ERROR = 'mg/App/LOAD_ENTITIES_ERROR';
+
+export const LOAD_ENTITY = 'mg/App/LOAD_ENTITY';
+export const LOAD_ENTITY_SUCCESS = 'mg/App/LOAD_ENTITY_SUCCESS';
+export const LOAD_ENTITY_ERROR = 'mg/App/LOAD_ENTITY_ERROR';

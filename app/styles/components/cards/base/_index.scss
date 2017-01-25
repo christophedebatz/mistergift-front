@@ -1,0 +1,33 @@
+//
+//
+// Cards - Base
+//
+//
+
+.#{$css-prefix}card {
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+    padding: 30px;
+}
+
+.#{$css-prefix}card__title {
+    color: #19303e;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.#{$css-prefix}card__brand {
+    color: #9db2c2;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.#{$css-prefix}card__time {
+    color: #9db2c2;
+    display: block;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 12px;
+    padding-top: 5px;
+    text-align: right;
+}
+

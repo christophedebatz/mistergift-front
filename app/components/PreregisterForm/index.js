@@ -1,5 +1,5 @@
 import React from 'react'
-import { Preregister } from '../../services'
+import { Preregister } from '../../actions'
 
 const HTTP_ERR_CONFLICT = 409
 
@@ -66,6 +66,10 @@ class PreregisterForm extends React.Component {
                 </div>
             )
 
+        if (this.state.submitInProgress)
+          isSaved = (
+              <div className"mg-progress"></div>
+          )
 
         return (
             <form className="mg-form--stacked" onSubmit={ this.submit }>
