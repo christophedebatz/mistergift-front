@@ -4,6 +4,10 @@
 //
 //
 
+html, body {
+    height: 100%;
+}
+
 body {
     background: #edf0f5;
     font-weight: 300;
@@ -202,7 +206,7 @@ a {
     padding: 4px 5px 1px;
     position: absolute;
     text-align: center;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     top: 10px;
 
     span {
@@ -220,7 +224,7 @@ a {
     display: block;
     min-height: 270px;
     overflow: hidden;
-    position: relative; 
+    position: relative;
 }
 
 .event-card__title {
@@ -235,7 +239,7 @@ a {
     background-color: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
     color: #212529;
-    display: block; 
+    display: block;
     font-size: 20px;
     padding: 15px;
     width: 100%;
