@@ -5,17 +5,20 @@ import { Register } from '../../actions'
 
 const HTTP_ERR_CONFLICT = 409
 
-class RegisterForm extends React.Component {
+class RegisterContainer extends React.Component {
     constructor(props, context) {
         super(props)
 
         this.state = {
-            form: { email: '', password: '', name: '' },
+            name: '',
+            email: '',
+            password: '',
             submitInProgress: false,
             saved: false,
             alreadyExists: false
         }
 
+        this.handleInputChange = this.handleInputChange.bind(this)
         this.router = context.router
     }
 
@@ -23,19 +26,17 @@ class RegisterForm extends React.Component {
         this.setState({ ...this.state, ...data })
     }
 
-    handleNameChange = (event) => {
-        this.updateState({ name: event.target.value })
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
-    handleEmailChange = (event) => {
-        this.updateState({ email: event.target.value })
-    }
-
-    handlePasswordChange = (event) => {
-        this.updateState({ password: event.target.value })
-    }
-
-    submit = (event) => {
+    handleSubmit = (event) => {
         event.preventDefault()
 
         this.updateState({ submitInProgress: true })
@@ -44,6 +45,7 @@ class RegisterForm extends React.Component {
             .then((user) => {
                 this.updateState({ saved: true })
                 alert('Successfully saved!')
+            })
             .catch((res) => {
                 if (res.status === HTTP_ERR_CONFLICT) {
                     this.updateState({ alreadyExists: true })
@@ -56,7 +58,7 @@ class RegisterForm extends React.Component {
         return (
             <div className="site-content">
                 <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
-                    <form className="mg-form--stacked" onSubmit={ this.submit }>
+                    <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
                         <div className="mg-form-element">
                             <label className="mg-form-element__label">Name</label>
 
@@ -66,7 +68,7 @@ class RegisterForm extends React.Component {
                                     type="text"
                                     name="name"
                                     value={ this.state.name }
-                                    onChange={ this.handleNameChange }
+                                    onChange={ this.handleInputChange }
                                 />
                             </div>
                         </div>
@@ -80,7 +82,7 @@ class RegisterForm extends React.Component {
                                     type="email"
                                     name="email"
                                     value={ this.state.email }
-                                    onChange={ this.handleEmailChange }
+                                    onChange={ this.handleInputChange }
                                 />
                             </div>
                         </div>
@@ -94,7 +96,7 @@ class RegisterForm extends React.Component {
                                     type="password"
                                     name="password"
                                     value={ this.state.password }
-                                    onChange={ this.handlePasswordChange }
+                                    onChange={ this.handleInputChange }
                                 />
                             </div>
                         </div>
