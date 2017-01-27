@@ -16,7 +16,7 @@ import { Auth } from '../../actions'
 class App extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { isLoggedIn: false, isHome: this.props.isHome }
+        this.state = { isLoggedIn: Auth.loggedIn(), isHome: this.props.isHome }
     }
 
     updateAuth = (isLoggedIn) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux';
-import { Register } from '../../actions'
+import { Register } from '../../actions';
 
 const HTTP_ERR_CONFLICT = 409
 

@@ -10,7 +10,7 @@ const Auth = {
         return promise
             .then((auth) => {
                 this.onChange(true)
-                return auth.token
+                return localStorage.token = auth.token
             }, (err) => {
                 this.onChange(false)
                 return Promise.reject(err)

@@ -1,13 +1,17 @@
 import React from 'react'
 
 import { connect } from 'react-redux';
-import { Auth } from '../../actions'
+import { Auth } from '../../actions';
 
 class LoginContainer extends React.Component {
     constructor(props, context) {
         super(props)
 
-        this.state = { login: '', password: '' }
+        this.state = {
+            login: '',
+            password: ''
+        }
+
         this.router = context.router
     }
 
@@ -15,15 +19,17 @@ class LoginContainer extends React.Component {
         this.setState({ ...this.state, ...data })
     }
 
-    handleLoginChange = (event) => {
-        this.updateState({ login: event.target.value })
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
-    handlePasswordChange = (event) => {
-        this.updateState({ password: event.target.value })
-    }
-
-    submit = (event) => {
+    handleSubmit = (event) => {
         event.preventDefault()
 
         Auth.login(this.state.login, this.state.password)
@@ -40,12 +46,12 @@ class LoginContainer extends React.Component {
         return (
             <div className="site-content">
                 <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
-                    <form className="mg-form--stacked" onSubmit={ this.submit }>
+                    <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
                         <div className="mg-form-element">
                             <label className="mg-form-element__label" htmlFor="email">Login</label>
 
                             <div className="mg-form-element__control">
-                                <input className="mg-input" id="email" type="email" name="login" value={ this.state.login } onChange={ this.handleLoginChange }/>
+                                <input className="mg-input" id="email" type="email" name="login" value={ this.state.login } onChange={ this.handleInputChange }/>
                             </div>
                         </div>
 
@@ -53,7 +59,7 @@ class LoginContainer extends React.Component {
                             <label className="mg-form-element__label" htmlFor="password">Password</label>
 
                             <div className="mg-form-element__control">
-                                <input className="mg-input" id="password" type="password" name="password" value={ this.state.password } onChange={ this.handlePasswordChange }/>
+                                <input className="mg-input" id="password" type="password" name="password" value={ this.state.password } onChange={ this.handleInputChange }/>
                             </div>
                         </div>
 
