@@ -30,6 +30,14 @@ export default function createRoutes(store) {
                     .catch(errorLoading);
             }
         }, {
+            path: '/register',
+            name: 'register',
+            getComponent(nextState, cb) {
+                System.import('containers/RegisterContainer')
+                    .then(loadModule(cb))
+                    .catch(errorLoading);
+            }
+        }, {
             path: '/events',
             name: 'user',
             getComponent(nextState, cb) {
