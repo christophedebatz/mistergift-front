@@ -4,7 +4,7 @@ const Auth = {
     login(email, password) {
         let promise
 
-        if (this.hasToken()) promise = new Promise.resolve({ token: this.getToken() })
+        if (this.hasToken()) promise = Promise.resolve({ token: this.getToken() })
         else promise = doLogin(email, password)
 
         return promise
