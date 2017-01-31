@@ -3,30 +3,19 @@
  */
 
 import { createSelector } from 'reselect';
-import { denormalize } from 'denormalizr-immutable';
 
 const selectGlobal = () => (state) => {
     return state.get('global');
 };
 
-const selectEntities = () => createSelector(
+const selectRegister = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('entities')
+    (globalState) => globalState.get('register')
 );
 
-const selectIndexes = () => createSelector(
+const selectLogin = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('indexes')
-);
-
-const selectEvents = () => createSelector(
-    selectGlobal(),
-    (globalState) => globalState.get('events')
-);
-
-const selectAllUsers = () => createSelector(
-    selectEntities(),
-    (entities) => denormalize(entities.get('users'), entities, schemas.users)
+    (globalState) => globalState.get('login')
 );
 
 const selectLocationState = () => {
@@ -47,10 +36,7 @@ const selectLocationState = () => {
 
 export {
     selectGlobal,
-    selectLoading,
-    selectError,
-    selectIndexes,
-    selectVotes,
-    selectAllUsers,
-    selectLocationState,
+    selectRegister,
+    selectLogin,
+    selectLocationState
 };

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { selectIndexes, selectAllUsers } from '../AppContainer/selectors';
+// import { selectIndexes, selectAllUsers } from '../AppContainer/selectors';
 
 const getCurrentUserIdentifier = (state, props) => props.params.identifier
 
@@ -19,8 +19,6 @@ const findUser = (indexes, users, identifier) => {
 
 const selectCurrentUser = createSelector(
     [
-        selectIndexes(),
-        selectAllUsers(),
         getCurrentUserIdentifier
     ],
 

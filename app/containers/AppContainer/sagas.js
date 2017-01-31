@@ -1,17 +1,23 @@
+import { browserHistory } from 'react-router';
 import { take, actionChannel, call, put, select } from 'redux-saga/effects';
 
 import {
     LOAD_ENTITIES,
     LOAD_ENTITY,
+    REGISTER,
+    LOGIN
 } from './constants';
 
 import {
     entitiesLoaded,
     entityLoaded,
-    eventsLoaded,
+    registerSuccess,
+    registerError,
+    loginSuccess,
+    loginError
 } from './actions';
 
-import {get, getNormalized} from '../../utils/contentProvider';
+import {get, getNormalized, post} from '../../utils/contentProvider';
 
 function* watchFetchEntities() {
     const requestChan = yield actionChannel(LOAD_ENTITIES);
@@ -43,24 +49,55 @@ function* watchFetchEntity() {
         }
 
         yield put(entityLoaded(entityType, identifier, data));
-    }
+     }
 };
 
-function* watchFetchEventsList() {
-    const requestChan = yield actionChannel(LOAD_EVENTS);
+function* loginFlow() {
+    const requestChan = yield actionChannel(LOGIN);
 
     while (true) {
-        yield take(requestChan);
-        let url = '/events';
-        const data = yield call(get, url);
-        const events = new Immutable.Map(data.data);
+        const { email, password } = yield take(requestChan);
 
-        yield put(eventsLoaded(events));
+        const payload = yield call(post, '/authenticate', {
+            email: email,
+            password: password
+        });
+
+        if (payload.err) {
+            yield put(loginError('error'));
+        } else {
+            yield put(loginSuccess(payload.session.token));
+        }
     }
 };
 
+function* registerFlow() {
+    const requestChan = yield actionChannel(REGISTER);
+
+    while (true) {
+        const { name, email, password } = yield take(requestChan);
+
+        const payload = yield call(post, '/users', {
+            name: name,
+            email: email,
+            password: password
+        });
+
+        if (payload.err) {
+            yield put(registerError('error'));
+        } else {
+            console.log('youyou');
+        }
+    }
+}
 
 export default [
     watchFetchEntities,
-    watchFetchEntity
+    watchFetchEntity,
+    loginFlow,
+    registerFlow
 ];
+
+function forwardTo(location) {
+    browserHistory.push(location)
+}

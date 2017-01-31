@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { connect } from 'react-redux';
-import { Register } from '../../actions';
+import { register } from '../AppContainer/actions';
+import { selectRegister } from '../AppContainer/selectors'
 
 const HTTP_ERR_CONFLICT = 409
 
@@ -12,46 +13,11 @@ class RegisterContainer extends React.Component {
         this.state = {
             name: '',
             email: '',
-            password: '',
-            submitInProgress: false,
-            saved: false,
-            alreadyExists: false
+            password: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this)
-        this.router = context.router
-    }
-
-    updateState = (data) => {
-        this.setState({ ...this.state, ...data })
-    }
-
-    handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault()
-
-        this.updateState({ submitInProgress: true })
-
-        Register.register(this.state)
-            .then((user) => {
-                this.updateState({ saved: true })
-                alert('Successfully saved!')
-            })
-            .catch((res) => {
-                if (res.status === HTTP_ERR_CONFLICT) {
-                    this.updateState({ alreadyExists: true })
-                }
-            })
-            .then(() => this.updateState({ submitInProgress: false }))
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     render() {
@@ -102,12 +68,27 @@ class RegisterContainer extends React.Component {
                         </div>
 
                         <div className="mg-form-element">
-                            <button className="mg-button mg-button--brand" disabled={ this.state.submitInProgress }>Register</button>
+                            <button className="mg-button mg-button--brand" disabled={ this.state.currentlySending }>Register</button>
                         </div>
                     </form>
                 </div>
             </div>
         )
+    }
+
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.register(this.state.name, this.state.email, this.state.password)
     }
 }
 
@@ -117,14 +98,15 @@ RegisterContainer.contextTypes = {
 
 const mapStateToProps = (state, props) => {
     return {
+        data: selectRegister()(state)
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onLoad: () => {
-        },
+        register: (name, email, password) => {
+            dispatch(register(name, email, password));
+        }
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);

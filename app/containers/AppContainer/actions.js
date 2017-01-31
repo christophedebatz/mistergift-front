@@ -4,11 +4,15 @@ import {
     LOAD_ENTITIES_ERROR,
     LOAD_ENTITY,
     LOAD_ENTITY_SUCCESS,
-    LOAD_EVENTS,
-    LOAD_EVENTS_SUCCESS,
+    REGISTER,
+    REGISTER_SUCCESS,
+    REGISTER_ERROR,
+    LOGIN,
+    LOGIN_SUCCESS,
+    LOGIN_ERROR
 } from './constants';
 
-function loadEntities(entityType, query, ids) {
+export function loadEntities(entityType, query, ids) {
     return {
         type: LOAD_ENTITIES,
         entityType,
@@ -30,7 +34,7 @@ export function entitiesLoaded(entityType, query, data) {
         type: LOAD_ENTITIES_SUCCESS,
         entityType,
         query,
-        data,
+        data
     }
 }
 
@@ -39,19 +43,51 @@ export function entityLoaded(entityType, identifier, data) {
         type: LOAD_ENTITIES_SUCCESS,
         entityType,
         identifier,
-        data,
+        data
     }
 }
 
-export function loadEvents() {
+export function register(name, email, password) {
     return {
-        type: LOAD_EVENTS
-    };
+        type: REGISTER,
+        name,
+        email,
+        password
+    }
 }
 
-export function eventsLoaded(events) {
+export function registerSuccess() {
     return {
-        type: LOAD_EVENTS_SUCCESS,
-        events: events
+        type: REGISTER_SUCCESS,
+        data
+    }
+}
+
+export function registerError(message) {
+    return {
+        type: REGISTER_ERROR,
+        message
+    }
+}
+
+export function login(email, password) {
+    return {
+        type: LOGIN,
+        email,
+        password
+    }
+}
+
+export function loginSuccess(token) {
+    return {
+        type: LOGIN_SUCCESS,
+        token
+    }
+}
+
+export function loginError(message) {
+    return {
+        type: LOGIN_ERROR,
+        message
     }
 }

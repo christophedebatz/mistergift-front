@@ -34,6 +34,18 @@ export function get(url, query = {}) {
     return request(fullUrl);
 }
 
+export function post(url, params = {}) {
+    let fullUrl = apiBaseUrl + url;
+
+    return request(fullUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+    });
+}
+
 export function getNormalized(url, schemaName, query = {}) {
     return get(url, query).then((response) => {
         return normalize(response.data.data, schemas[schemaName], options)

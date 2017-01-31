@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { connect } from 'react-redux';
-import { Auth } from '../../actions';
+import { login } from '../AppContainer/actions';
+import { selectLogin } from '../AppContainer/selectors'
 
 class LoginContainer extends React.Component {
     constructor(props, context) {
@@ -32,14 +33,7 @@ class LoginContainer extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault()
 
-        Auth.login(this.state.login, this.state.password)
-            .then((auth) => {
-                let path = '/'
-                this.router.push(path)
-            })
-            .catch((err) => {
-                console.error(err)
-            })
+        this.props.login(this.state.login, this.state.password);
     }
 
     render() {
@@ -47,6 +41,8 @@ class LoginContainer extends React.Component {
             <div className="site-content">
                 <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
                     <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
+                        { error ? 'error' : null }
+
                         <div className="mg-form-element">
                             <label className="mg-form-element__label" htmlFor="email">Login</label>
 
@@ -71,21 +67,44 @@ class LoginContainer extends React.Component {
             </div>
         )
     }
+
+    handleChangeName (event) {
+        this.handleEmitChange({ ...this.props.data, name: event.target.value })
+    }
+
+    handleChangeEmail (event) {
+        this.handleEmitChange({ ...this.props.data, email: event.target.value })
+    }
+
+    handleChangePassword (event) {
+        this.handleEmitChange({ ...this.props.data, password: event.target.value })
+    }
+
+    handleEmitChange (newFormState) {
+        this.props.dispatch(changeForm(newFormState))
+    }
+
+    handleSubmit (event) {
+        event.preventDefault()
+        this.props.login(this.props.data.name, this.props.data.email, this.props.data.password)
+    }
 }
 
 LoginContainer.contextTypes = {
-	router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, props) => {
     return {
+        session: selectLogin()(state)
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onLoad: () => {
-        },
+        login: (email, password) => {
+            dispatch(login(email, password));
+        }
     };
 };
 
