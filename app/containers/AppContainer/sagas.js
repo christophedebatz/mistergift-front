@@ -1,5 +1,6 @@
 import { browserHistory } from 'react-router';
 import { take, actionChannel, call, put, select } from 'redux-saga/effects';
+import Auth from '../auth';
 
 import {
     LOAD_ENTITIES,
