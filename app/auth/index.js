@@ -4,13 +4,12 @@ let Auth = {
     login(email, password) {
         let promise
 
-        if (this.getToken()) promise = new Promise.resolve({ token: this.getToken() })
-        else promise = doLogin(email, password)
+        if (Auth.loggedIn()) return Promise.resolve({ token: this.getToken() })
 
         return promise
             .then((auth) => {
                 this.onChange(true)
-                return auth.token
+                return localStorage.token = auth.token
             }, (err) => {
                 this.onChange(false)
                 return Promise.reject(err)

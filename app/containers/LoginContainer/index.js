@@ -36,6 +36,33 @@ class LoginContainer extends React.Component {
         this.props.login(this.state.login, this.state.password);
     }
 
+    componentWillMount() {
+        const { changeRoute, redirect } = this.props;
+        let { isAuthenticated } = this.props;
+
+        isAuthenticated = isAuthenticated.loggedIn;
+
+        if (Object.keys(isAuthenticated).length === 0 && isAuthenticated.constructor === Object) {
+            isAuthenticated = null;
+        }
+
+        if (isAuthenticated) changeRoute(redirect);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { isAuthenticated, changeRoute, redirect } = nextProps;
+        let { isAuthenticated: wasAuthenticated } = this.props;
+
+        const one = wasAuthenticated.loggedIn;
+        const two = isAuthenticated.loggedIn;
+
+        if (Object.keys(wasAuthenticated).length === 0 && wasAuthenticated.constructor === Object) {
+            wasAuthenticated = null;
+        }
+
+        if (!one && two) changeRoute(redirect);
+    }
+
     render() {
         return (
             <div className="site-content">
@@ -104,7 +131,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         login: (email, password) => {
             dispatch(login(email, password));
-        }
+        },
+
+        changeRoute: (url) => dispatch(push(url)),
     };
 };
 

@@ -16,18 +16,18 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            //isLoggedIn: Auth.loggedIn(),
+            isLoggedIn: Auth.loggedIn(),
             isHome: this.props.isHome
         }
     }
 
     updateAuth = (isLoggedIn) => {
-        //this.setState({ ...this.state, isLoggedIn: isLoggedIn })
+        this.setState({ ...this.state, isLoggedIn: isLoggedIn })
     }
 
     componentWillMount = () => {
-        //Auth.onChange = this.updateAuth
-        //if (Auth.hasToken()) Auth.login()
+        Auth.onChange = this.updateAuth
+        if (Auth.hasToken()) Auth.login()
     }
 
     componentWillReceiveProps = () => {
