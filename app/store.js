@@ -8,7 +8,7 @@ import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 
-import appSagas from './containers/AppContainer/sagas.js';
+import appSagas from './containers/App/sagas.js';
 
 const sagaMiddleware = createSagaMiddleware();
 const devtools = window.devToolsExtension || (() => noop => noop);

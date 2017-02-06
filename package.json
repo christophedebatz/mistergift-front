@@ -75,6 +75,7 @@
     "slick-carousel": "^1.6.0",
     "string-format": "^0.5.0",
     "susy": "^2.2.12",
+    "webpack": "^2.2.1",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
@@ -116,7 +117,6 @@
     "style-loader": "^0.13.1",
     "svg-sprite-loader": "0.0.27",
     "url-loader": "^0.5.7",
-    "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.7.0",
     "webpack-hot-middleware": "^2.12.2"
   }

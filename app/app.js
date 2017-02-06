@@ -20,7 +20,6 @@ import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
-import useScroll from 'react-router-scroll';
 import configureStore from './store';
 
 addLocaleData(fr);
@@ -38,14 +37,16 @@ const store = configureStore(initialState, browserHistory);
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState
 // must be provided for resolving how to retrieve the "route" in the state
-import { selectLocationState } from 'containers/AppContainer/selectors';
+import { selectLocationState } from 'containers/App/selectors';
+
 const history = syncHistoryWithStore(browserHistory, store, {
     selectLocationState: selectLocationState(),
 });
 
 // Set up the router, wrapping all Routes in the App component
-import App from 'containers/AppContainer';
+import App from 'containers/App';
 import createRoutes from './routes';
+
 const rootRoute = {
     component: App,
     childRoutes: createRoutes(store),

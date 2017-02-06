@@ -28,7 +28,7 @@ export default function createRoutes(store) {
             name: 'home',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/HomePageContainer'),
+                    System.import('containers/HomePage'),
                 ]);
 
                 const renderRoute = loadModule(cb, null);
@@ -44,7 +44,7 @@ export default function createRoutes(store) {
             name: 'login',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/LoginContainer'),
+                    System.import('containers/LoginPage'),
                 ]);
 
                 const renderRoute = loadModule(cb, Auth);
@@ -60,7 +60,7 @@ export default function createRoutes(store) {
             name: 'register',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/RegisterContainer'),
+                    System.import('containers/RegisterPage'),
                 ]);
 
                 const renderRoute = loadModule(cb, Auth);
@@ -76,7 +76,7 @@ export default function createRoutes(store) {
             name: 'user',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/EventsListContainer'),
+                    System.import('containers/EventsListPage'),
                 ]);
 
                 const renderRoute = loadModule(cb, Auth);
@@ -92,7 +92,7 @@ export default function createRoutes(store) {
             name: 'user',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/UserViewContainer'),
+                    System.import('containers/UserViewPage'),
                 ]);
 
                 const renderRoute = loadModule(cb, Auth);
@@ -108,7 +108,7 @@ export default function createRoutes(store) {
             name: 'notfound',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/NotFoundPageContainer'),
+                    System.import('containers/NotFoundPagePage'),
                 ]);
 
                 const renderRoute = loadModule(cb, Auth);

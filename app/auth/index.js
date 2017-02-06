@@ -1,5 +1,3 @@
-import config from '..config';
-
 let Auth = {
     login(email, password) {
         let promise

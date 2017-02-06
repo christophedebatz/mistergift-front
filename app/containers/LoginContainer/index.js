@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { connect } from 'react-redux';
-import { login } from '../AppContainer/actions';
-import { selectLogin } from '../AppContainer/selectors'
+import { login } from '../App/actions';
+import { selectLogin } from '../App/selectors'
 
 class LoginContainer extends React.Component {
     constructor(props, context) {
