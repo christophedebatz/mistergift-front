@@ -37,7 +37,7 @@ module.exports = require('./webpack.base.babel')({
     // Add hot reloading
     plugins: [
         new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
-        new webpack.NoErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin()
     ],
 
     // Tell babel that we want to hot-reload

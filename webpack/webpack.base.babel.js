@@ -16,7 +16,7 @@ module.exports = (options) => ({
     module: {
         loaders: [{
             test: /\.js$/, // Transform all .js files required somewhere with Babel
-            loader: 'babel',
+            loader: 'babel-loader',
             exclude: /node_modules/,
             query: options.babelQuery,
         }, {
@@ -36,19 +36,19 @@ module.exports = (options) => ({
         }, {
             test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
             exclude: /icons/,
-            loader: 'file?name=img/[name].[ext]',
+            loader: 'file-loader?name=img/[name].[ext]',
         }, {
             test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff',
+            loader: 'file-loader?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff',
         }, {
             test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff',
+            loader: 'file-loader?name=fonts/[name].[hash].[ext]&mimetype=application/font-woff',
         }, {
             test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'file?name=fonts/[name].[hash].[ext]&mimetype=application/octet-stream',
+            loader: 'file-loader?name=fonts/[name].[hash].[ext]&mimetype=application/octet-stream',
         }, {
             test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'file?name=fonts/[name].[hash].[ext]',
+            loader: 'file-loader?name=fonts/[name].[hash].[ext]',
         }, {
             test: /\.html$/,
             loader: 'html-loader',
@@ -68,7 +68,7 @@ module.exports = (options) => ({
     plugins: options.plugins.concat([
         new webpack.ProvidePlugin({
             // make fetch available
-            fetch: 'exports?self.fetch!whatwg-fetch',
+            fetch: 'exports-loader?self.fetch!whatwg-fetch',
         }),
 
         // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
@@ -81,18 +81,16 @@ module.exports = (options) => ({
         }),
     ]),
 
-    postcss: () => options.postcssPlugins,
-
     resolve: {
         modules: ['app', 'node_modules'],
         extensions: [
-            '*',
-            '.js',
-            '.jsx',
-            '.react.js',
+          '.js',
+          '.jsx',
+          '.react.js',
         ],
 
-        packageMains: [
+        mainFields: [
+            'browser',
             'jsnext:main',
             'main',
         ],
@@ -100,6 +98,5 @@ module.exports = (options) => ({
 
     devtool: options.devtool,
     target: 'web', // Make web variables accessible to webpack, e.g. window
-    stats: false, // Don't show stats in the console
-    progress: true,
+    performance: options.performance || {},
 });

@@ -9,7 +9,7 @@
 import 'babel-polyfill';
 
 // Load the favicon, the manifest.json file and the .htaccess file
-import 'file?name=[name].[ext]!../robots.txt';
+import 'file-loader?name=[name].[ext]!../robots.txt';
 
 // Import all the third party stuff
 import React from 'react';

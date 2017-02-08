@@ -1,5 +1,4 @@
 import React from 'react'
-import { Register } from '../../actions'
 
 const HTTP_ERR_CONFLICT = 409
 
@@ -37,19 +36,6 @@ class RegisterForm extends React.Component {
         event.preventDefault()
 
         this.updateState({ submitInProgress: true })
-
-        Register
-            .register(this.state)
-            .then((user) => {
-                this.updateState({ saved: true })
-                alert('Successfully saved!')
-            })
-            .catch((res) => {
-                if (res.status === HTTP_ERR_CONFLICT) {
-                    this.updateState({ alreadyExists: true })
-                }
-            })
-            .then(() => this.updateState({ submitInProgress: false }))
     }
 
     render() {

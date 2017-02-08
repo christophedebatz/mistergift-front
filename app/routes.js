@@ -14,12 +14,12 @@ const loadModule = (cb, hoc = null) => (componentModule) => {
     else cb(null, componentModule.default);
 };
 
-const Auth = UserAuthWrapper({
-    authSelector: state => state.get('login'),
-    predicate: user => user.loggedIn,
-    redirectAction: routerActions.replace,
-    wrapperDisplayName: 'UserIsAuthenticated',
-});
+// const Auth = UserAuthWrapper({
+//     authSelector: state => state.get('login'),
+//     predicate: user => user.loggedIn,
+//     redirectAction: routerActions.replace,
+//     wrapperDisplayName: 'UserIsAuthenticated',
+// });
 
 export default function createRoutes(store) {
     return [
@@ -47,7 +47,7 @@ export default function createRoutes(store) {
                     System.import('containers/LoginPage'),
                 ]);
 
-                const renderRoute = loadModule(cb, Auth);
+                const renderRoute = loadModule(cb, null);
 
                 importModules.then(([component]) => {
                     renderRoute(component);
@@ -63,7 +63,7 @@ export default function createRoutes(store) {
                     System.import('containers/RegisterPage'),
                 ]);
 
-                const renderRoute = loadModule(cb, Auth);
+                const renderRoute = loadModule(cb, null);
 
                 importModules.then(([component]) => {
                     renderRoute(component);
@@ -79,7 +79,7 @@ export default function createRoutes(store) {
                     System.import('containers/EventsListPage'),
                 ]);
 
-                const renderRoute = loadModule(cb, Auth);
+                const renderRoute = loadModule(cb, null);
 
                 importModules.then(([component]) => {
                     renderRoute(component);
@@ -95,7 +95,7 @@ export default function createRoutes(store) {
                     System.import('containers/UserViewPage'),
                 ]);
 
-                const renderRoute = loadModule(cb, Auth);
+                const renderRoute = loadModule(cb, null);
 
                 importModules.then(([component]) => {
                     renderRoute(component);
@@ -108,10 +108,10 @@ export default function createRoutes(store) {
             name: 'notfound',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/NotFoundPagePage'),
+                    System.import('containers/NotFoundPage'),
                 ]);
 
-                const renderRoute = loadModule(cb, Auth);
+                const renderRoute = loadModule(cb, null);
 
                 importModules.then(([component]) => {
                     renderRoute(component);
