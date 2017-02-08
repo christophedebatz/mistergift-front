@@ -16,10 +16,6 @@ class LoginContainer extends React.Component {
         this.router = context.router
     }
 
-    updateState = (data) => {
-        this.setState({ ...this.state, ...data })
-    }
-
     handleInputChange = (event) => {
         const target = event.target;
         const value = target.value;
