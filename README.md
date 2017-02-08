@@ -8,12 +8,12 @@
 ## Setup
 
 ```javascript
-npm install
+yarn
 ```
 
 ## Developing
 
-- `npm start`
+- `yarn start`
 - Open browser to http://localhost:3000
 
 ## Deploying to prod
