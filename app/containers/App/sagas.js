@@ -1,6 +1,6 @@
 import { browserHistory } from 'react-router';
 import { take, actionChannel, call, put, select } from 'redux-saga/effects';
-import Auth from '../../auth';
+// import Auth from '../../auth';
 
 import {
     LOAD_ENTITIES,
@@ -67,6 +67,7 @@ function* loginFlow() {
         if (payload.err) {
             yield put(loginError('error'));
         } else {
+            localStorage.setItem('token', payload.session.token);
             yield put(loginSuccess(payload.session.token));
         }
     }
@@ -87,7 +88,7 @@ function* registerFlow() {
         if (payload.err) {
             yield put(registerError('error'));
         } else {
-            console.log('youyou');
+            forwardTo('/');
         }
     }
 }

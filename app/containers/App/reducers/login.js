@@ -7,9 +7,11 @@ import {
 
 import Immutable from 'immutable';
 
+const localStorageToken = localStorage.getItem('token');
+
 const initialState = Immutable.fromJS({
-    isLogged: false,
-    token: null,
+    isLogged: localStorageToken !== null,
+    token: localStorageToken,
     errorMessage: null
 });
 
