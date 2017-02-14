@@ -1,14 +1,14 @@
 import { createSelector } from 'reselect';
-// import { selectIndexes, selectAllUsers } from '../App/selectors';
+import { selectIndexes, selectAllUsers } from '../App/selectors';
 
-const getCurrentUserIdentifier = (state, props) => props.params.identifier
+const getCurrentUserId = (state, props) => props.params.userId
 
-const findUser = (indexes, users, identifier) => {
-    if (!users || !indexes.get('users').get('identifier')) {
+const findUser = (indexes, users, userId) => {
+    if (!users || !indexes.get('users').get('userId')) {
         return null;
     }
 
-    const id = indexes.get('users').get('identifier').get(identifier);
+    const id = indexes.get('users').get('userId').get(userId);
 
     if (!id) {
         return null;
@@ -19,7 +19,9 @@ const findUser = (indexes, users, identifier) => {
 
 const selectCurrentUser = createSelector(
     [
-        getCurrentUserIdentifier
+        selectIndexes(),
+        selectAllUsers(),
+        getCurrentUserId
     ],
 
     findUser

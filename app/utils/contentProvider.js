@@ -11,7 +11,7 @@ const apiBaseUrl = getConfig('apiBaseUrl');
 
 const options = {
     assignEntity: function(obj, key, val) {
-        if (['id', 'user', 'event', 'wishlist'].includes(key)) {
+        if (['id', 'user'].includes(key)) {
             val = parseInt(val);
         }
 
@@ -27,11 +27,11 @@ export function get(url, query = {}) {
 
     let fullUrl = apiBaseUrl + url;
 
-    if (search) {
-        fullUrl = fullUrl + '?' + search;
-    }
-
-    return request(fullUrl);
+    return request(fullUrl, {
+        headers: {
+            'X-MG-AUTH': localStorage.getItem('token')
+        }
+    });
 }
 
 export function post(url, params = {}) {

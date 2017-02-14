@@ -4,6 +4,7 @@ import { take, actionChannel, call, put, select } from 'redux-saga/effects';
 import {
     LOAD_ENTITIES,
     LOAD_ENTITY,
+    LOAD_USER,
     REGISTER,
     LOGIN
 } from './constants';
@@ -42,13 +43,35 @@ function* watchFetchEntity() {
     while (true) {
         const { entityType, identifier } = yield take(requestChan);
 
-        const data = yield call(getNormalized, '/' + entityType + '/' + identifier + '?loadByFieldName=identifier', entityType);
+        const data = yield call(getNormalized, '/' + entityType + '/' + identifier, entityType);
+
+        console.log('data', data);
 
         if (!data) {
             return;
         }
 
         yield put(entityLoaded(entityType, identifier, data));
+     }
+};
+
+function* watchFetchUser() {
+    const requestChan = yield actionChannel(LOAD_USER);
+
+    while (true) {
+        const { userId } = yield take(requestChan);
+
+        console.log(userId)
+
+        const data = yield call(get, '/users/' + userId);
+
+        console.log(data);
+
+        if (!data) {
+            return;
+        }
+
+        yield put(userLoaded('users', userId, data));
      }
 };
 
@@ -71,7 +94,7 @@ function* loginFlow() {
             localStorage.setItem('token', payload.session.token);
             localStorage.setItem('expireAt', payload.session.expireAt);
 
-            forwardTo('/' + payload.name.toLowerCase());
+            forwardTo('/' + payload.id);
 
             yield put(loginSuccess(payload.session.token));
         }
@@ -85,7 +108,8 @@ function* registerFlow() {
         const { name, email, password } = yield take(requestChan);
 
         const response = yield call(post, '/users', {
-            name: name,
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             password: password
         });
@@ -98,7 +122,7 @@ function* registerFlow() {
             localStorage.setItem('token', payload.session.token);
             localStorage.setItem('expireAt', payload.session.expireAt);
 
-            forwardTo('/' + payload.name.toLowerCase());
+            forwardTo('/' + payload.id);
 
             yield put(registerSuccess(payload.session.token));
         }
@@ -108,6 +132,7 @@ function* registerFlow() {
 export default [
     watchFetchEntities,
     watchFetchEntity,
+    watchFetchUser,
     loginFlow,
     registerFlow
 ];

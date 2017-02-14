@@ -13,3 +13,7 @@ export const LOGIN_ERROR = 'mg/LOGIN_ERROR';
 export const REGISTER = 'mg/REGISTER';
 export const REGISTER_SUCCESS = 'mg/REGISTER_SUCCESS';
 export const REGISTER_ERROR = 'mg/REGISTER_ERROR';
+
+export const LOAD_USER = 'mg/LOAD_USER';
+export const LOAD_USER_SUCCESS = 'mg/LOAD_USER_SUCCESS';
+export const LOAD_USER_ERROR = 'mg/LOAD_USER_ERROR';

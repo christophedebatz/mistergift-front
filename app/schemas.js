@@ -7,7 +7,6 @@ user.define({
 });
 
 export default {
-  	user: user,
-  	users: arrayOf(user),
+    users: user,
 }
 

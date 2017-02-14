@@ -9,7 +9,7 @@ class LoginContainer extends React.Component {
         super(props)
 
         this.state = {
-            login: '',
+            email: '',
             password: ''
         }
 
@@ -29,7 +29,7 @@ class LoginContainer extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault()
 
-        this.props.login(this.state.login, this.state.password);
+        this.props.login(this.state.email, this.state.password);
     }
 
     render() {
@@ -38,10 +38,10 @@ class LoginContainer extends React.Component {
                 <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
                     <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
                         <div className="mg-form-element">
-                            <label className="mg-form-element__label" htmlFor="email">Login</label>
+                            <label className="mg-form-element__label" htmlFor="email">Email</label>
 
                             <div className="mg-form-element__control">
-                                <input className="mg-input" id="email" type="email" name="login" value={ this.state.login } onChange={ this.handleInputChange }/>
+                                <input className="mg-input" id="email" type="email" name="email" value={ this.state.email } onChange={ this.handleInputChange }/>
                             </div>
                         </div>
 

@@ -6,17 +6,14 @@ import {
 
 import Immutable from 'immutable';
 
-const createEntitiesReducerForEntityType = (entityType) => (state = Immutable.Map(), action) => {
+const createListReducerForEntityType = (entityType) => (state = Immutable.Map(), action) => {
     switch (action.type) {
         case LOAD_ENTITIES_SUCCESS:
-
-            console.log(action.data);
-
-            if (!action.data.entities.hasOwnProperty(entityType)) {
+            if (!action.query || action.entityType != entityType || typeof action.query.name === 'undefined') {
                 return state;
             }
 
-            return state.merge(action.data.entities[entityType]);
+            return state.set(action.query.name, Immutable.List(action.data.result));
 
         default:
             return state;
@@ -24,6 +21,5 @@ const createEntitiesReducerForEntityType = (entityType) => (state = Immutable.Ma
 }
 
 export default combineReducers({
-    users: createEntitiesReducerForEntityType('users'),
+    users: createListReducerForEntityType('users'),
 });
-

@@ -4,12 +4,16 @@ import {
     LOAD_ENTITIES_ERROR,
     LOAD_ENTITY,
     LOAD_ENTITY_SUCCESS,
+    LOAD_ENTITY_ERROR,
     REGISTER,
     REGISTER_SUCCESS,
     REGISTER_ERROR,
     LOGIN,
     LOGIN_SUCCESS,
-    LOGIN_ERROR
+    LOGIN_ERROR,
+    LOAD_USER,
+    LOAD_USER_SUCCESS,
+    LOAD_USER_ERROR
 } from './constants';
 
 export function loadEntities(entityType, query, ids) {
@@ -89,5 +93,21 @@ export function loginError(message) {
     return {
         type: LOGIN_ERROR,
         message
+    }
+}
+
+export function loadUser(userId) {
+    return {
+        type: LOAD_USER,
+        userId
+    }
+}
+
+export function userLoaded(entityType, userId, data) {
+    return {
+        type: LOAD_ENTITIES_SUCCESS,
+        entityType,
+        userId,
+        data
     }
 }

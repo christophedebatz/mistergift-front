@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import UserCard from '../../components/UserCard'
 
 import { selectCurrentUser } from './selectors';
-import { loadUser } from './actions';
+import { loadUser } from '../App/actions';
 
 class UserViewPage extends React.Component {
     componentDidMount() {
@@ -52,8 +52,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onLoad: () => {
-            const identifier = props.params.identifier;
-            dispatch(loadUser(identifier))
+            const userId = props.params.userId;
+            dispatch(loadUser(userId))
         },
     };
 };
