@@ -17,7 +17,7 @@ import {
     loginError
 } from './actions';
 
-import {get, getNormalized, post} from '../../utils/contentProvider';
+import { get, getNormalized, post, postLogin } from '../../utils/contentProvider';
 
 function* watchFetchEntities() {
     const requestChan = yield actionChannel(LOAD_ENTITIES);
@@ -58,15 +58,21 @@ function* loginFlow() {
     while (true) {
         const { email, password } = yield take(requestChan);
 
-        const payload = yield call(post, '/authenticate', {
+        const response = yield call(postLogin, '/authenticate', {
             email: email,
             password: password
         });
 
-        if (payload.err) {
+        const payload = response.data.payload
+
+        if (response.err) {
             yield put(loginError('error'));
         } else {
             localStorage.setItem('token', payload.session.token);
+            localStorage.setItem('expireAt', payload.session.expireAt);
+
+            forwardTo('/' + payload.name.toLowerCase());
+
             yield put(loginSuccess(payload.session.token));
         }
     }
@@ -78,16 +84,23 @@ function* registerFlow() {
     while (true) {
         const { name, email, password } = yield take(requestChan);
 
-        const payload = yield call(post, '/users', {
+        const response = yield call(post, '/users', {
             name: name,
             email: email,
             password: password
         });
 
-        if (payload.err) {
+        const payload = response.data.payload
+
+        if (response.err) {
             yield put(registerError('error'));
         } else {
-            forwardTo('/');
+            localStorage.setItem('token', payload.session.token);
+            localStorage.setItem('expireAt', payload.session.expireAt);
+
+            forwardTo('/' + payload.name.toLowerCase());
+
+            yield put(registerSuccess(payload.session.token));
         }
     }
 }

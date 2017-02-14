@@ -5,7 +5,7 @@ import { take, call, put, select } from 'redux-saga/effects';
 import schemas from '../schemas';
 import queryString from 'query-string';
 
-import {getConfig} from './config';
+import { getConfig } from './config';
 
 const apiBaseUrl = getConfig('apiBaseUrl');
 
@@ -43,6 +43,22 @@ export function post(url, params = {}) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(params)
+    });
+}
+
+export function postLogin(url, params = {}) {
+    let fullUrl = apiBaseUrl + url;
+    let data = new URLSearchParams()
+
+    data.set('email', params.email)
+    data.set('password', params.password)
+
+    return request(fullUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
     });
 }
 
