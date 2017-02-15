@@ -4,9 +4,11 @@ import { take, actionChannel, call, put, select } from 'redux-saga/effects';
 import {
     LOAD_ENTITIES,
     LOAD_ENTITY,
-    LOAD_USER,
     REGISTER,
-    LOGIN
+    LOGIN,
+    LOAD_USER,
+    LOAD_USER_SETTINGS,
+    UPDATE_USER
 } from './constants';
 
 import {
@@ -16,10 +18,13 @@ import {
     registerError,
     loginSuccess,
     loginError,
-    userLoaded
+    userLoaded,
+    userSettingsLoaded,
+    updateUserSuccess,
+    updateUserError
 } from './actions';
 
-import { get, getNormalized, post, postLogin } from '../../utils/contentProvider';
+import { get, getNormalized, post, update, postLogin } from '../../utils/contentProvider';
 
 function* watchFetchEntities() {
     const requestChan = yield actionChannel(LOAD_ENTITIES);
@@ -54,38 +59,22 @@ function* watchFetchEntity() {
      }
 };
 
-function* watchFetchUser() {
-    const requestChan = yield actionChannel(LOAD_USER);
-
-    while (true) {
-        const { userId } = yield take(requestChan);
-
-        const data = yield call(get, '/users/' + userId);
-
-        if (!data) {
-            return;
-        }
-
-        yield put(userLoaded('users', userId, data));
-     }
-};
-
-function* loginFlow() {
+function* watchFetchLogin() {
     const requestChan = yield actionChannel(LOGIN);
 
     while (true) {
         const { email, password } = yield take(requestChan);
 
-        const response = yield call(postLogin, '/authenticate', {
+        const data = yield call(postLogin, '/authenticate', {
             email: email,
             password: password
         });
 
-        const payload = response.data.payload
-
-        if (response.err) {
+        if (data.err) {
             yield put(loginError('error'));
         } else {
+            const payload = data.data.payload;
+
             localStorage.setItem('token', payload.session.token);
             localStorage.setItem('expireAt', payload.session.expireAt);
 
@@ -96,11 +85,11 @@ function* loginFlow() {
     }
 };
 
-function* registerFlow() {
+function* watchFetchRegister() {
     const requestChan = yield actionChannel(REGISTER);
 
     while (true) {
-        const { name, email, password } = yield take(requestChan);
+        const { firstName, lastName, email, password } = yield take(requestChan);
 
         const response = yield call(post, '/users', {
             firstName: firstName,
@@ -124,12 +113,75 @@ function* registerFlow() {
     }
 }
 
+function* watchFetchUser() {
+    const requestChan = yield actionChannel(LOAD_USER);
+
+    while (true) {
+        const { userId } = yield take(requestChan);
+
+        const data = yield call(get, '/users/' + userId);
+
+        if (!data) {
+            return;
+        }
+
+        yield put(userLoaded('users', userId, data));
+     }
+};
+
+function* watchFetchUserSettings() {
+    const requestChan = yield actionChannel(LOAD_USER_SETTINGS);
+
+    while (true) {
+        const action = yield take(requestChan);
+        const data = yield call(get, '/me');
+
+        if (!data) {
+            return;
+        }
+
+        yield put(userSettingsLoaded('users', data));
+     }
+};
+
+
+function* watchUpdateUser() {
+    const requestChan = yield actionChannel(UPDATE_USER);
+
+    while (true) {
+        const { firstName, lastName, email, password } = yield take(requestChan);
+
+        const data = yield call(update, '/me', {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        });
+
+        if (data.err) {
+            yield put(updateUserError('error'));
+        } else {
+            const payload = data.data.payload;
+
+            localStorage.setItem('token', payload.session.token);
+            localStorage.setItem('expireAt', payload.session.expireAt);
+
+            forwardTo('/' + payload.id);
+
+            yield put(updateUserSuccess());
+        }
+     }
+};
+
+
 export default [
     watchFetchEntities,
     watchFetchEntity,
+    watchFetchLogin,
+    watchFetchRegister,
     watchFetchUser,
-    loginFlow,
-    registerFlow
+    watchFetchUserSettings,
+    watchUpdateUser
 ];
 
 function forwardTo(location) {

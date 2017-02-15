@@ -20,11 +20,6 @@ const options = {
 };
 
 export function get(url, query = {}) {
-    let queryClone = Object.assign({}, query);
-    delete queryClone.name;
-
-    const search = queryString.stringify(queryClone);
-
     let fullUrl = apiBaseUrl + url;
 
     return request(fullUrl, {
@@ -61,6 +56,18 @@ export function postLogin(url, params = {}) {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: data
+    });
+}
+
+export function update(url, params = {}) {
+    let fullUrl = apiBaseUrl + url;
+
+    return request(fullUrl, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
     });
 }
 

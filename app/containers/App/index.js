@@ -32,20 +32,16 @@ class App extends React.Component {
     }
 
     componentWillReceiveProps = () => {
-        this.state.currentPathname = this.props.location.pathname;
         this.setState({ ...this.state })
-    }
-
-    componentDidMount() {
-        // this.props.onLoad();
     }
 
     render () {
         const className = this.props.isHome ? 'site-home' : '';
+        this.state.isHome = (this.props.location.pathname === '/')
 
         return (
             <div className={ className }>
-                <Header isLoggedIn={ this.state.isLoggedIn } currentPathname={ this.state.isHome } />
+                <Header isLoggedIn={ this.state.isLoggedIn } isHome={ this.state.isHome } />
 
                 { this.props.children }
             </div>

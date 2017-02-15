@@ -46,6 +46,11 @@ const selectUser = () => createSelector(
         .filter((user) => user.get('userId'))
 );
 
+const selectUserSettings = () => createSelector(
+    selectGlobal(),
+    (globalState) => globalState.get('settings')
+);
+
 const selectLocationState = () => {
     let prevRoutingState;
     let prevRoutingStateJS;
@@ -69,5 +74,6 @@ export {
     selectIndexes,
     selectAllUsers,
     selectUser,
+    selectUserSettings,
     selectLocationState,
 };

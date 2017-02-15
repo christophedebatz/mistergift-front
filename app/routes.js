@@ -72,8 +72,24 @@ export default function createRoutes(store) {
                 importModules.catch(errorLoading);
             }
         }, {
+            path: '/settings',
+            name: 'settings',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    System.import('containers/UserSettingsPage'),
+                ]);
+
+                const renderRoute = loadModule(cb, null);
+
+                importModules.then(([component]) => {
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            }
+        }, {
             path: '/events',
-            name: 'user',
+            name: 'events',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     System.import('containers/EventsListPage'),

@@ -13,7 +13,12 @@ import {
     LOGIN_ERROR,
     LOAD_USER,
     LOAD_USER_SUCCESS,
-    LOAD_USER_ERROR
+    LOAD_USER_ERROR,
+    LOAD_USER_SETTINGS,
+    LOAD_USER_SETTINGS_SUCCESS,
+    UPDATE_USER,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_ERROR,
 } from './constants';
 
 export function loadEntities(entityType, query, ids) {
@@ -51,10 +56,11 @@ export function entityLoaded(entityType, identifier, data) {
     }
 }
 
-export function register(name, email, password) {
+export function register(firstName, lastName, email, password) {
     return {
         type: REGISTER,
-        name,
+        firstName,
+        lastName,
         email,
         password
     }
@@ -104,13 +110,47 @@ export function loadUser(userId) {
 }
 
 export function userLoaded(entityType, userId, data) {
-    console.log(entityType);
-    console.log(userId);
-    console.log('data', data);
     return {
         type: LOAD_USER_SUCCESS,
         entityType,
         userId,
         data
+    }
+}
+
+export function loadUserSettings() {
+    return {
+        type: LOAD_USER_SETTINGS
+    }
+}
+
+export function userSettingsLoaded(data) {
+    return {
+        type: LOAD_USER_SETTINGS_SUCCESS,
+        data
+    }
+}
+
+export function updateUser(firstName, lastName, email, password) {
+    return {
+        type: UPDATE_USER,
+        firstName,
+        lastName,
+        email,
+        password
+    }
+}
+
+export function updateUserSuccess() {
+    return {
+        type: UPDATE_USER_SUCCESS,
+        data
+    }
+}
+
+export function updateUserError(message) {
+    return {
+        type: UPDATE_USER_ERROR,
+        message
     }
 }
