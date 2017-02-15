@@ -11,7 +11,7 @@ const apiBaseUrl = getConfig('apiBaseUrl');
 
 const options = {
     assignEntity: function(obj, key, val) {
-        if (['id', 'user'].includes(key)) {
+        if (['id'].includes(key)) {
             val = parseInt(val);
         }
 
@@ -28,7 +28,9 @@ export function get(url, query = {}) {
     let fullUrl = apiBaseUrl + url;
 
     return request(fullUrl, {
+        method: 'GET',
         headers: {
+            'Content-Type': 'application/json',
             'X-MG-AUTH': localStorage.getItem('token')
         }
     });

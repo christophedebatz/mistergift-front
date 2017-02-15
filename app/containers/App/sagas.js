@@ -15,7 +15,8 @@ import {
     registerSuccess,
     registerError,
     loginSuccess,
-    loginError
+    loginError,
+    userLoaded
 } from './actions';
 
 import { get, getNormalized, post, postLogin } from '../../utils/contentProvider';
@@ -45,8 +46,6 @@ function* watchFetchEntity() {
 
         const data = yield call(getNormalized, '/' + entityType + '/' + identifier, entityType);
 
-        console.log('data', data);
-
         if (!data) {
             return;
         }
@@ -61,11 +60,7 @@ function* watchFetchUser() {
     while (true) {
         const { userId } = yield take(requestChan);
 
-        console.log(userId)
-
         const data = yield call(get, '/users/' + userId);
-
-        console.log(data);
 
         if (!data) {
             return;

@@ -104,8 +104,11 @@ export function loadUser(userId) {
 }
 
 export function userLoaded(entityType, userId, data) {
+    console.log(entityType);
+    console.log(userId);
+    console.log('data', data);
     return {
-        type: LOAD_ENTITIES_SUCCESS,
+        type: LOAD_USER_SUCCESS,
         entityType,
         userId,
         data
