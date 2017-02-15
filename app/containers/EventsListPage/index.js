@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { loadUserEvents } from '../App/actions';
 import EventCreation from '../EventCreationPage'
 import EventCard from '../../components/EventCard'
 
@@ -10,6 +12,10 @@ class EventsListPage extends React.Component {
         this.state = {
             eventCreationModalVisible: false
         };
+    }
+
+    componentDidMount() {
+        this.props.onLoad();
     }
 
     showEventCreationModal(e) {
@@ -79,4 +85,22 @@ class EventsListPage extends React.Component {
     }
 }
 
-export default EventsListPage
+EventsListPage.propTypes = {
+};
+
+const mapStateToProps = (state, props) => {
+    return {
+        // user: selectCurrentUser(state, props),
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onLoad: () => {
+            dispatch(loadUserEvents())
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventsListPage);
+

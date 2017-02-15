@@ -16,6 +16,8 @@ import {
     LOAD_USER_ERROR,
     LOAD_USER_SETTINGS,
     LOAD_USER_SETTINGS_SUCCESS,
+    LOAD_USER_EVENTS,
+    LOAD_USER_EVENTS_SUCCESS,
     UPDATE_USER,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
@@ -114,6 +116,19 @@ export function userLoaded(entityType, userId, data) {
         type: LOAD_USER_SUCCESS,
         entityType,
         userId,
+        data
+    }
+}
+
+export function loadUserEvents() {
+    return {
+        type: LOAD_USER_EVENTS
+    }
+}
+
+export function userEventsLoaded(data) {
+    return {
+        type: LOAD_USER_EVENTS_SUCCESS,
         data
     }
 }

@@ -30,11 +30,6 @@ const selectLogin = () => createSelector(
     (globalState) => globalState.get('login')
 );
 
-const selectLists = () => createSelector(
-    selectGlobal(),
-    (globalState) => globalState.get('lists')
-);
-
 const selectAllUsers = () => createSelector(
     selectGlobal(),
     (globalState) => globalState.get('users')
@@ -44,6 +39,11 @@ const selectUser = () => createSelector(
     selectAllUsers(),
     (users) => users
         .filter((user) => user.get('userId'))
+);
+
+const selectUserEvents = () => createSelector(
+    selectGlobal(),
+    (globalState) => globalState.get('settings')
 );
 
 const selectUserSettings = () => createSelector(
@@ -74,6 +74,7 @@ export {
     selectIndexes,
     selectAllUsers,
     selectUser,
+    selectUserEvents,
     selectUserSettings,
     selectLocationState,
 };

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-
 import { connect } from 'react-redux';
-
 import { loadUserSettings } from '../App/actions';
 
 class UserSettingsPage extends React.Component {

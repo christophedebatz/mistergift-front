@@ -7,6 +7,7 @@ import {
     REGISTER,
     LOGIN,
     LOAD_USER,
+    LOAD_USER_EVENTS,
     LOAD_USER_SETTINGS,
     UPDATE_USER
 } from './constants';
@@ -19,6 +20,7 @@ import {
     loginSuccess,
     loginError,
     userLoaded,
+    userEventsLoaded,
     userSettingsLoaded,
     updateUserSuccess,
     updateUserError
@@ -129,6 +131,21 @@ function* watchFetchUser() {
      }
 };
 
+function* watchFetchUserEvents() {
+    const requestChan = yield actionChannel(LOAD_USER_EVENTS);
+
+    while (true) {
+        const action = yield take(requestChan);
+        const data = yield call(get, '/me/events');
+
+        if (!data) {
+            return;
+        }
+
+        yield put(userEventsLoaded('events', data));
+     }
+};
+
 function* watchFetchUserSettings() {
     const requestChan = yield actionChannel(LOAD_USER_SETTINGS);
 
@@ -144,7 +161,6 @@ function* watchFetchUserSettings() {
      }
 };
 
-
 function* watchUpdateUser() {
     const requestChan = yield actionChannel(UPDATE_USER);
 
@@ -159,7 +175,7 @@ function* watchUpdateUser() {
         });
 
         if (data.err) {
-            yield put(updateUserError('error'));
+            yield put(updateUserError(data.err.message));
         } else {
             const payload = data.data.payload;
 
@@ -173,13 +189,13 @@ function* watchUpdateUser() {
      }
 };
 
-
 export default [
     watchFetchEntities,
     watchFetchEntity,
     watchFetchLogin,
     watchFetchRegister,
     watchFetchUser,
+    watchFetchUserEvents,
     watchFetchUserSettings,
     watchUpdateUser
 ];
