@@ -77,19 +77,6 @@ export function userLoaded(data) {
     }
 }
 
-export function loadUserEvents() {
-    return {
-        type: LOAD_USER_EVENTS
-    }
-}
-
-export function userEventsLoaded(data) {
-    return {
-        type: LOAD_USER_EVENTS_SUCCESS,
-        data
-    }
-}
-
 export function loadUserSettings(data) {
     return {
         type: LOAD_USER_SETTINGS,
@@ -125,5 +112,19 @@ export function updateUserError(message) {
     return {
         type: UPDATE_USER_ERROR,
         message
+    }
+}
+
+export function loadUserEvents(data) {
+    return {
+        type: LOAD_USER_EVENTS,
+        data
+    }
+}
+
+export function userEventsLoaded(data) {
+    return {
+        type: LOAD_USER_EVENTS_SUCCESS,
+        data
     }
 }

@@ -94,21 +94,6 @@ function* watchFetchUser() {
      }
 };
 
-function* watchFetchUserEvents() {
-    const requestChan = yield actionChannel(LOAD_USER_EVENTS);
-
-    while (true) {
-        const action = yield take(requestChan);
-        const data = yield call(get, '/me/events?page=1');
-
-        if (!data) {
-            return;
-        }
-
-        yield put(userEventsLoaded('events', data));
-     }
-};
-
 function* watchFetchUserSettings() {
     const requestChan = yield actionChannel(LOAD_USER_SETTINGS);
 
@@ -149,13 +134,28 @@ function* watchUpdateUser() {
      }
 };
 
+function* watchFetchUserEvents() {
+    const requestChan = yield actionChannel(LOAD_USER_EVENTS);
+
+    while (true) {
+        const action = yield take(requestChan);
+        const events = yield call(get, '/me/events?filters=admin&page=1');
+
+        if (!events) {
+            return;
+        }
+
+        yield put(userEventsLoaded(events));
+     }
+};
+
 export default [
     watchFetchLogin,
     watchFetchRegister,
     watchFetchUser,
-    watchFetchUserEvents,
     watchFetchUserSettings,
-    watchUpdateUser
+    watchUpdateUser,
+    watchFetchUserEvents
 ];
 
 function forwardTo(location) {

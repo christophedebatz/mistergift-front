@@ -1,7 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { loadUserEvents } from '../App/actions';
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
+
+import { loadUserEvents } from '../App/actions'
+import { selectUserEvents } from '../App/selectors'
+
+import Loader from '../../components/Loader'
 import EventCreation from '../EventCreationPage'
 import EventCard from '../../components/EventCard'
 
@@ -27,36 +31,45 @@ class EventsListPage extends React.Component {
     }
 
     render() {
-        let date = new Date();
-        let day = date.getDay();
-        let month = date.getMonth();
+        console.log(this.props.events.toJS())
+        const events = this.props.events.get('data');
+        const isLoaded = this.props.events.get('isLoaded');
+        const errorMessage = this.props.events.get('errorMessage');
 
-        let events = [
-            {
-                id: 1,
-                name: 'Anniversaire Joulse',
-                startDate: day + month
-            },
-            {
-                id: 2,
-                name: 'Anniversaire Christophe',
-                startDate: day + month
-            },
-            {
-                id: 3,
-                name: 'Noël',
-                startDate: day + month
-            },
-            {
-                id: 4,
-                name: 'Pâques',
-                startDate: day + month
-            }
-        ]
+        console.log(this.props.events);
 
-        let eventCards = events.map((event) => {
-            return (<EventCard className="mg-p-horizontal--small mg-size--1-of-2 mg-p-bottom--large" event={ event } key={ event.id } />)
-        })
+        // let events = [
+        //     {
+        //         id: 1,
+        //         name: 'Anniversaire Joulse',
+        //         startDate: day + month
+        //     },
+        //     {
+        //         id: 2,
+        //         name: 'Anniversaire Christophe',
+        //         startDate: day + month
+        //     },
+        //     {
+        //         id: 3,
+        //         name: 'Noël',
+        //         startDate: day + month
+        //     },
+        //     {
+        //         id: 4,
+        //         name: 'Pâques',
+        //         startDate: day + month
+        //     }
+        // ]
+
+        // let eventCards = events.map((event) => {
+        //     return (<EventCard className="mg-p-horizontal--small mg-size--1-of-2 mg-p-bottom--large" event={ event } key={ event.id } />)
+        // })
+
+        if (!isLoaded) {
+            return <Loader />;
+        }
+
+        console.log(events)
 
         return (
             <div className="site-content">
@@ -68,7 +81,7 @@ class EventsListPage extends React.Component {
                         </div>
 
                         <div className="mg-grid mg-wrap mg-grid--pull-padded">
-                            { eventCards }
+                            { events && <EventCreation />}
                         </div>
                     </div>
 
@@ -90,7 +103,7 @@ EventsListPage.propTypes = {
 
 const mapStateToProps = (state, props) => {
     return {
-        // user: selectCurrentUser(state, props),
+        events: selectUserEvents()(state),
     }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
+
 import { updateUser } from '../App/actions'
 import { loadUserSettings } from '../App/actions'
 import { selectUserSettings } from '../App/selectors'
