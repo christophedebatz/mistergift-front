@@ -2,8 +2,6 @@ import { browserHistory } from 'react-router';
 import { take, actionChannel, call, put, select } from 'redux-saga/effects';
 
 import {
-    LOAD_ENTITIES,
-    LOAD_ENTITY,
     REGISTER,
     LOGIN,
     LOAD_USER,
@@ -13,8 +11,6 @@ import {
 } from './constants';
 
 import {
-    entitiesLoaded,
-    entityLoaded,
     registerSuccess,
     registerError,
     loginSuccess,
@@ -27,39 +23,6 @@ import {
 } from './actions';
 
 import { get, getNormalized, post, update, postLogin } from '../../utils/contentProvider';
-
-function* watchFetchEntities() {
-    const requestChan = yield actionChannel(LOAD_ENTITIES);
-
-    while (true) {
-        const {entityType, query, ids} = yield take(requestChan);
-        let url = '/' + entityType;
-
-        if (ids) {
-            url = url + '/' + ids.join(',');
-        }
-
-        const data = yield call(getNormalized, url, entityType, query);
-
-        yield put(entitiesLoaded(entityType, query, data));
-    }
-};
-
-function* watchFetchEntity() {
-    const requestChan = yield actionChannel(LOAD_ENTITY);
-
-    while (true) {
-        const { entityType, identifier } = yield take(requestChan);
-
-        const data = yield call(getNormalized, '/' + entityType + '/' + identifier, entityType);
-
-        if (!data) {
-            return;
-        }
-
-        yield put(entityLoaded(entityType, identifier, data));
-     }
-};
 
 function* watchFetchLogin() {
     const requestChan = yield actionChannel(LOGIN);
@@ -121,13 +84,13 @@ function* watchFetchUser() {
     while (true) {
         const { userId } = yield take(requestChan);
 
-        const data = yield call(get, '/users/' + userId);
+        const user = yield call(get, '/users/' + userId);
 
-        if (!data) {
+        if (!user) {
             return;
         }
 
-        yield put(userLoaded('users', userId, data));
+        yield put(userLoaded(user.data));
      }
 };
 
@@ -136,7 +99,7 @@ function* watchFetchUserEvents() {
 
     while (true) {
         const action = yield take(requestChan);
-        const data = yield call(get, '/me/events');
+        const data = yield call(get, '/me/events?page=1');
 
         if (!data) {
             return;
@@ -190,8 +153,6 @@ function* watchUpdateUser() {
 };
 
 export default [
-    watchFetchEntities,
-    watchFetchEntity,
     watchFetchLogin,
     watchFetchRegister,
     watchFetchUser,

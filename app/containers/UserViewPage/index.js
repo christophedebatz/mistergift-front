@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Metas from 'components/Metas';
 
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import UserCard from '../../components/UserCard'
+import Metas from 'components/Metas';
+import UserCard from '../../components/UserCard';
 
-import { selectCurrentUser } from './selectors';
+import { selectCurrentUser } from '../App/selectors';
 import { loadUser } from '../App/actions';
 
 class UserViewPage extends React.Component {
@@ -15,11 +16,13 @@ class UserViewPage extends React.Component {
     }
 
     render() {
-        if (!this.props.user) {
+        const user = this.props.user.get('data');
+        const isLoaded = this.props.user.get('isLoaded');
+        const errorMessage = this.props.user.get('errorMessage');
+
+        if (!isLoaded) {
             return null;
         }
-
-        const user = this.props.user;
 
         return (
             <div className="site-content">
@@ -32,7 +35,7 @@ class UserViewPage extends React.Component {
                     }}
                 />
 
-                <div className="mg-grid mg-container--center mg-container--x-large">
+                <div className="mg-grid mg-container--center mg-container--small">
                     <UserCard user={ user } key={ user.id } />
                 </div>
             </div>
@@ -43,17 +46,17 @@ class UserViewPage extends React.Component {
 UserViewPage.propTypes = {
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
-        user: selectCurrentUser(state, props),
+        user: selectCurrentUser()(state)
     }
-}
+};
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onLoad: () => {
             const userId = props.params.userId;
-            dispatch(loadUser(userId))
+            dispatch(loadUser(userId));
         },
     };
 };

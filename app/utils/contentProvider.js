@@ -2,7 +2,6 @@ import request from './request';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { take, call, put, select } from 'redux-saga/effects';
 
-import schemas from '../schemas';
 import queryString from 'query-string';
 
 import { getConfig } from './config';
@@ -70,10 +69,3 @@ export function update(url, params = {}) {
         body: JSON.stringify(params)
     });
 }
-
-export function getNormalized(url, schemaName, query = {}) {
-    return get(url, query).then((response) => {
-        return normalize(response.data.data, schemas[schemaName], options)
-    });
-}
-

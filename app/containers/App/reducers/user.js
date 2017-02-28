@@ -1,25 +1,27 @@
 import { fromJS } from 'immutable';
 
 import {
-    REGISTER_SUCCESS,
-    REGISTER_ERROR
+    LOAD_USER_SUCCESS,
+    LOAD_USER_ERROR
 } from '../constants';
 
 const initialState = fromJS({
-    isRegistering: false,
-    token: null,
+    data: null,
+    isLoaded: false,
     errorMessage: null
 });
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case REGISTER_SUCCESS:
+        case LOAD_USER_SUCCESS:
             return state
-                .set('isRegistering', true)
+                .set('data', action.data)
+                .set('isLoaded', true)
                 .set('errorMessage', null);
-        case REGISTER_ERROR:
+        case LOAD_USER_ERROR:
             return state
-                .set('isRegistering', false)
+                .set('data', null)
+                .set('isLoaded', false)
                 .set('errorMessage', action.message);
         default:
             return state;

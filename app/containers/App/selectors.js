@@ -3,22 +3,10 @@
  */
 
 import { createSelector } from 'reselect';
-import { denormalize } from 'denormalizr-immutable';
-import schemas from '../../schemas';
 
 const selectGlobal = () => (state) => {
     return state.get('global');
 };
-
-const selectEntities = () => createSelector(
-    selectGlobal(),
-    (globalState) => globalState.get('entities')
-);
-
-const selectIndexes = () => createSelector(
-    selectGlobal(),
-    (globalState) => globalState.get('indexes')
-);
 
 const selectRegister = () => createSelector(
     selectGlobal(),
@@ -39,6 +27,11 @@ const selectUser = () => createSelector(
     selectAllUsers(),
     (users) => users
         .filter((user) => user.get('userId'))
+);
+
+const selectCurrentUser = () => createSelector(
+    selectGlobal(),
+    (globalState) => globalState.get('user')
 );
 
 const selectUserEvents = () => createSelector(
@@ -71,9 +64,9 @@ export {
     selectGlobal,
     selectRegister,
     selectLogin,
-    selectIndexes,
     selectAllUsers,
     selectUser,
+    selectCurrentUser,
     selectUserEvents,
     selectUserSettings,
     selectLocationState,

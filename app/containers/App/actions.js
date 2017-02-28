@@ -1,10 +1,4 @@
 import {
-    LOAD_ENTITIES,
-    LOAD_ENTITIES_SUCCESS,
-    LOAD_ENTITIES_ERROR,
-    LOAD_ENTITY,
-    LOAD_ENTITY_SUCCESS,
-    LOAD_ENTITY_ERROR,
     REGISTER,
     REGISTER_SUCCESS,
     REGISTER_ERROR,
@@ -22,41 +16,6 @@ import {
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
 } from './constants';
-
-export function loadEntities(entityType, query, ids) {
-    return {
-        type: LOAD_ENTITIES,
-        entityType,
-        query,
-        ids,
-    };
-}
-
-export function loadEntity(entityType, identifier) {
-    return {
-        type: LOAD_ENTITY,
-        entityType,
-        identifier,
-    };
-}
-
-export function entitiesLoaded(entityType, query, data) {
-    return {
-        type: LOAD_ENTITIES_SUCCESS,
-        entityType,
-        query,
-        data
-    }
-}
-
-export function entityLoaded(entityType, identifier, data) {
-    return {
-        type: LOAD_ENTITIES_SUCCESS,
-        entityType,
-        identifier,
-        data
-    }
-}
 
 export function register(firstName, lastName, email, password) {
     return {
@@ -111,11 +70,9 @@ export function loadUser(userId) {
     }
 }
 
-export function userLoaded(entityType, userId, data) {
+export function userLoaded(data) {
     return {
         type: LOAD_USER_SUCCESS,
-        entityType,
-        userId,
         data
     }
 }

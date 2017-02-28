@@ -44,7 +44,6 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-    type: React.PropTypes.string
 }
 
 export default Header
