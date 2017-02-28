@@ -90,9 +90,10 @@ export function userEventsLoaded(data) {
     }
 }
 
-export function loadUserSettings() {
+export function loadUserSettings(data) {
     return {
-        type: LOAD_USER_SETTINGS
+        type: LOAD_USER_SETTINGS,
+        data
     }
 }
 

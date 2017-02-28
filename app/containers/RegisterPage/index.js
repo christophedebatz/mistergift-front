@@ -1,16 +1,15 @@
 import React from 'react'
 
-import { connect } from 'react-redux';
-import { register } from '../App/actions';
+import { connect } from 'react-redux'
+import { register } from '../App/actions'
 import { selectRegister } from '../App/selectors'
-
-const HTTP_ERR_CONFLICT = 409
 
 class RegisterPage extends React.Component {
     constructor(props, context) {
         super(props)
 
         this.state = {
+            currentlySending: false,
             firstName: '',
             lastName: '',
             email: '',

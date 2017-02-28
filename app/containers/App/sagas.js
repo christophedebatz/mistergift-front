@@ -114,13 +114,13 @@ function* watchFetchUserSettings() {
 
     while (true) {
         const action = yield take(requestChan);
-        const data = yield call(get, '/me');
+        const user = yield call(get, '/me');
 
-        if (!data) {
+        if (!user) {
             return;
         }
 
-        yield put(userSettingsLoaded('users', data));
+        yield put(userSettingsLoaded(user.data));
      }
 };
 
@@ -141,9 +141,6 @@ function* watchUpdateUser() {
             yield put(updateUserError(data.err.message));
         } else {
             const payload = data.data.payload;
-
-            localStorage.setItem('token', payload.session.token);
-            localStorage.setItem('expireAt', payload.session.expireAt);
 
             forwardTo('/' + payload.id);
 

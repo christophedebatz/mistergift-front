@@ -184,7 +184,7 @@ a {
     padding-top: 60px;
 }
 
-// Spacing
+// Spacing @todo
 
 .mg-p-horizontal--small {
     padding-left: .75rem;
@@ -195,8 +195,16 @@ a {
     padding-bottom: 1.5rem;
 }
 
-.mg-p-top--large {
-    padding-top: 1.5rem;
+.mg-m-bottom--small {
+    margin-bottom: .75rem;
+}
+
+.mg-m-bottom--large {
+    margin-bottom: 1.5rem;
+}
+
+.mg-m-bottom--x-large {
+    margin-bottom: 3rem;
 }
 
 // Event Card

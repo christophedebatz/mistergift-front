@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router'
 
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
 
 import Metas from 'components/Metas'
 import Loader from '../../components/Loader'
@@ -21,7 +20,7 @@ class UserViewPage extends React.Component {
         const isLoaded = this.props.user.get('isLoaded');
         const errorMessage = this.props.user.get('errorMessage');
 
-        if (!isLoaded) {
+        if (!isLoaded || typeof user == 'undefined') {
             return <Loader />;
         }
 
@@ -47,7 +46,7 @@ class UserViewPage extends React.Component {
 UserViewPage.propTypes = {
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
     return {
         user: selectCurrentUser()(state)
     }

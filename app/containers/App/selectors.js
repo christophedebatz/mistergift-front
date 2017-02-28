@@ -36,7 +36,7 @@ const selectCurrentUser = () => createSelector(
 
 const selectUserEvents = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('settings')
+    (globalState) => globalState.get('events')
 );
 
 const selectUserSettings = () => createSelector(

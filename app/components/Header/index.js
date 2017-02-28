@@ -16,10 +16,10 @@ class Header extends React.Component {
         const headerNavigation = this.props.isLoggedIn ? (
             <nav role="navigation">
                 <ul className="mg-list--horizontal mg-has-block-links--space">
-                    <li><IndexLink to="/">Home</IndexLink></li>
-                    <li><IndexLink to="/events">Events</IndexLink></li>
-                    <li><Link to="/wishlist">Wishlist</Link></li>
-                    <li><Link to="/settings">Settings</Link></li>
+                    <li><IndexLink to="/" activeClassName="is-active">Home</IndexLink></li>
+                    <li><IndexLink to="/events" activeClassName="is-active">Events</IndexLink></li>
+                    <li><Link to="/wishlist" activeClassName="is-active">Wishlist</Link></li>
+                    <li><Link to="/settings" activeClassName="is-active">Settings</Link></li>
                 </ul>
             </nav>
         ) : (
