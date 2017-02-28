@@ -17,9 +17,9 @@ class Header extends React.Component {
             <nav role="navigation">
                 <ul className="mg-list--horizontal mg-has-block-links--space">
                     <li><IndexLink to="/">Home</IndexLink></li>
-                    <li><IndexLink to="/lists">Listes</IndexLink></li>
-                    <li><Link to="/logout">Logout</Link></li>
-                    <li><Link to="/about">About</Link></li>
+                    <li><IndexLink to="/events">Events</IndexLink></li>
+                    <li><Link to="/wishlist">Wishlist</Link></li>
+                    <li><Link to="/settings">Settings</Link></li>
                 </ul>
             </nav>
         ) : (

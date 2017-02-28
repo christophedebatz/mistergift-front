@@ -34,30 +34,28 @@ class LoginContainer extends React.Component {
 
     render() {
         return (
-            <div className="site-content">
-                <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
-                    <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
-                        <div className="mg-form-element">
-                            <label className="mg-form-element__label" htmlFor="email">Email</label>
+            <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
+                <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
+                    <div className="mg-form-element">
+                        <label className="mg-form-element__label" htmlFor="email">Email</label>
 
-                            <div className="mg-form-element__control">
-                                <input className="mg-input" id="email" type="email" name="email" value={ this.state.email } onChange={ this.handleInputChange }/>
-                            </div>
+                        <div className="mg-form-element__control">
+                            <input className="mg-input" id="email" type="email" name="email" value={ this.state.email } onChange={ this.handleInputChange }/>
                         </div>
+                    </div>
 
-                        <div className="mg-form-element">
-                            <label className="mg-form-element__label" htmlFor="password">Password</label>
+                    <div className="mg-form-element">
+                        <label className="mg-form-element__label" htmlFor="password">Password</label>
 
-                            <div className="mg-form-element__control">
-                                <input className="mg-input" id="password" type="password" name="password" value={ this.state.password } onChange={ this.handleInputChange }/>
-                            </div>
+                        <div className="mg-form-element__control">
+                            <input className="mg-input" id="password" type="password" name="password" value={ this.state.password } onChange={ this.handleInputChange }/>
                         </div>
+                    </div>
 
-                        <div className="mg-form-element">
-                            <button className="mg-button mg-button--brand">Login</button>
-                        </div>
-                    </form>
-                </div>
+                    <div className="mg-form-element">
+                        <button className="mg-button mg-button--brand">Login</button>
+                    </div>
+                </form>
             </div>
         )
     }

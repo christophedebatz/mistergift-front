@@ -23,70 +23,68 @@ class RegisterPage extends React.Component {
 
     render() {
         return (
-            <div className="site-content">
-                <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
-                    <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
-                        <div className="mg-form-element">
-                            <label className="mg-form-element__label">First Name</label>
+            <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
+                <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
+                    <div className="mg-form-element">
+                        <label className="mg-form-element__label">First Name</label>
 
-                            <div className="mg-form-element__control">
-                                <input
-                                    className="mg-input"
-                                    type="text"
-                                    name="firstName"
-                                    value={ this.state.firstName }
-                                    onChange={ this.handleInputChange }
-                                />
-                            </div>
+                        <div className="mg-form-element__control">
+                            <input
+                                className="mg-input"
+                                type="text"
+                                name="firstName"
+                                value={ this.state.firstName }
+                                onChange={ this.handleInputChange }
+                            />
                         </div>
+                    </div>
 
-                        <div className="mg-form-element">
-                            <label className="mg-form-element__label">Last Name</label>
+                    <div className="mg-form-element">
+                        <label className="mg-form-element__label">Last Name</label>
 
-                            <div className="mg-form-element__control">
-                                <input
-                                    className="mg-input"
-                                    type="text"
-                                    name="lastName"
-                                    value={ this.state.lastName }
-                                    onChange={ this.handleInputChange }
-                                />
-                            </div>
+                        <div className="mg-form-element__control">
+                            <input
+                                className="mg-input"
+                                type="text"
+                                name="lastName"
+                                value={ this.state.lastName }
+                                onChange={ this.handleInputChange }
+                            />
                         </div>
+                    </div>
 
-                        <div className="mg-form-element">
-                            <label className="mg-form-element__label">E-mail</label>
+                    <div className="mg-form-element">
+                        <label className="mg-form-element__label">E-mail</label>
 
-                            <div className="mg-form-element__control">
-                                <input
-                                    className="mg-input"
-                                    type="email"
-                                    name="email"
-                                    value={ this.state.email }
-                                    onChange={ this.handleInputChange }
-                                />
-                            </div>
+                        <div className="mg-form-element__control">
+                            <input
+                                className="mg-input"
+                                type="email"
+                                name="email"
+                                value={ this.state.email }
+                                onChange={ this.handleInputChange }
+                            />
                         </div>
+                    </div>
 
-                        <div className="mg-form-element">
-                            <label className="mg-form-element__label">Password</label>
+                    <div className="mg-form-element">
+                        <label className="mg-form-element__label">Password</label>
 
-                            <div className="mg-form-element__control">
-                                <input
-                                    className="mg-input"
-                                    type="password"
-                                    name="password"
-                                    value={ this.state.password }
-                                    onChange={ this.handleInputChange }
-                                />
-                            </div>
+                        <div className="mg-form-element__control">
+                            <input
+                                className="mg-input"
+                                type="password"
+                                name="password"
+                                value={ this.state.password }
+                                onChange={ this.handleInputChange }
+                            />
                         </div>
+                    </div>
 
-                        <div className="mg-form-element">
-                            <button className="mg-button mg-button--brand" disabled={ this.state.currentlySending }>Register</button>
-                        </div>
-                    </form>
-                </div>
+                    <div className="mg-form-element">
+                        <button className="mg-button mg-button--brand" disabled={ this.state.currentlySending }>Register</button>
+                    </div>
+                </form>
             </div>
         )
     }

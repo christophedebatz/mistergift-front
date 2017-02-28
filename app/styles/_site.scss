@@ -170,6 +170,7 @@ a {
 //
 
 .site-content {
+    padding-bottom: 60px;
     padding-top: 60px;
 }
 
@@ -284,5 +285,63 @@ a {
         &:not(:last-child) {
             margin-bottom: 10px;
         }
+    }
+}
+
+// Loader
+
+.mg-loader {
+    margin: 0 auto;
+    position: relative;
+    width: 100px;
+
+    &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+    }
+
+    svg {
+        animation: rotate 2s linear infinite;
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform-origin: center center;
+        width: 100%;
+    }
+
+    circle {
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        stroke: #000;
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
     }
 }

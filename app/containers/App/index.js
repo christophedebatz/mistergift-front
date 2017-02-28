@@ -43,7 +43,9 @@ class App extends React.Component {
             <div className={ className }>
                 <Header isLoggedIn={ this.state.isLoggedIn } isHome={ this.state.isHome } />
 
-                { this.props.children }
+                <div className="site-content">
+                    { this.props.children }
+                </div>
             </div>
         );
     }

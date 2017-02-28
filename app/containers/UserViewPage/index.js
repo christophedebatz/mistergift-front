@@ -1,14 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react'
+import { Link } from 'react-router'
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
-import Metas from 'components/Metas';
-import UserCard from '../../components/UserCard';
+import Metas from 'components/Metas'
+import Loader from '../../components/Loader'
+import UserCard from '../../components/UserCard'
 
-import { selectCurrentUser } from '../App/selectors';
-import { loadUser } from '../App/actions';
+import { selectCurrentUser } from '../App/selectors'
+import { loadUser } from '../App/actions'
 
 class UserViewPage extends React.Component {
     componentDidMount() {
@@ -21,17 +22,17 @@ class UserViewPage extends React.Component {
         const errorMessage = this.props.user.get('errorMessage');
 
         if (!isLoaded) {
-            return null;
+            return <Loader />;
         }
 
         return (
-            <div className="site-content">
+            <div>
                 <Metas
                     type="user"
                     data={{
-                        description: 'lorem',
-                        userName: 'ipsum',
-                        userIdentifier: 'dolor'
+                        description: user.name,
+                        userName: user.name,
+                        userIdentifier: user.id
                     }}
                 />
 

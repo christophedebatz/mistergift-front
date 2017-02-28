@@ -1,5 +1,4 @@
 import request from './request';
-import { normalize, Schema, arrayOf } from 'normalizr';
 import { take, call, put, select } from 'redux-saga/effects';
 
 import queryString from 'query-string';
@@ -7,16 +6,6 @@ import queryString from 'query-string';
 import { getConfig } from './config';
 
 const apiBaseUrl = getConfig('apiBaseUrl');
-
-const options = {
-    assignEntity: function(obj, key, val) {
-        if (['id'].includes(key)) {
-            val = parseInt(val);
-        }
-
-        obj[key] = val;
-    }
-};
 
 export function get(url, query = {}) {
     let fullUrl = apiBaseUrl + url;

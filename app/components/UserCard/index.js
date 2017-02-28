@@ -1,13 +1,16 @@
 import React from 'react'
 
-function ProfileCard(props) {
-    let className = props.className ? props.className : '';
+class ProfileCard extends React.Component {
+    render() {
+        let className = this.props.className ? this.props.className : null;
+        let user = this.props.user;
 
-    return (
-        <div className={ className }>
-            { props.user.name }
-        </div>
-    )
+        return (
+            <div className={ className }>
+                { user.email }
+            </div>
+        )
+    }
 }
 
 export default ProfileCard
