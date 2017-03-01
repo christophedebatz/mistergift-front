@@ -33,6 +33,11 @@ const selectUserEvents = () => createSelector(
     (globalState) => globalState.get('events')
 );
 
+const selectEventCreation = () => createSelector(
+    selectGlobal(),
+    (globalState) => globalState.get('eventCreation')
+);
+
 const selectLocationState = () => {
     let prevRoutingState;
     let prevRoutingStateJS;
@@ -56,5 +61,6 @@ export {
     selectCurrentUser,
     selectUserEvents,
     selectUserSettings,
+    selectEventCreation,
     selectLocationState,
 };

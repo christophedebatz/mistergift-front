@@ -15,6 +15,9 @@ import {
     UPDATE_USER,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
+    EVENT_CREATION,
+    EVENT_CREATION_SUCCESS,
+    EVENT_CREATION_ERROR,
 } from './constants';
 
 export function register(firstName, lastName, email, password) {
@@ -27,7 +30,7 @@ export function register(firstName, lastName, email, password) {
     }
 }
 
-export function registerSuccess() {
+export function registerSuccess(data) {
     return {
         type: REGISTER_SUCCESS,
         data
@@ -126,5 +129,25 @@ export function userEventsLoaded(data) {
     return {
         type: LOAD_USER_EVENTS_SUCCESS,
         data
+    }
+}
+
+export function eventCreation(name) {
+    return {
+        type: EVENT_CREATION,
+        name
+    }
+}
+
+export function eventCreationSuccess() {
+    return {
+        type: EVENT_CREATION_SUCCESS
+    }
+}
+
+export function eventCreationError(message) {
+    return {
+        type: EVENT_CREATION_ERROR,
+        message
     }
 }

@@ -1,29 +1,35 @@
 import React from 'react'
-import { Link } from 'react-router';
+import { Link } from 'react-router'
 
-function EventCard(props) {
-    let className = props.className ? props.className : '';
-    let eventLink = '/events/' + props.event.id;
-
-    const eventCardStyle = {
-        backgroundImage: 'url(https://placeholdit.imgix.net/~text?txtsize=35&txt=375%C3%97270&w=375&h=270)',
+class EventCard extends React.Component {
+    constructor(props) {
+        super(props)
     }
 
-    return (
-        <div className={ className }>
-            <Link to={ eventLink } className="event-card__item">
-                <span className="event-card__header" style={eventCardStyle}>
-                    <time className="event-card__date" dateTime={ props.event.startDate }>{ props.event.startDate }</time>
-                </span>
+    render () {
+        let className = props.className ? props.className : null;
+        let event = this.props.event;
 
-                <span className="event-card__content">
-                    <span className="event-card__title">
-                        { props.event.name }
+        const eventCardStyle = {
+            backgroundImage: 'url(https://placeholdit.imgix.net/~text?txtsize=35&txt=375%C3%97270&w=375&h=270)',
+        }
+
+        return (
+            <div className={ className }>
+                <Link to={`/events/${event.id}`} className="event-card__item">
+                    <span className="event-card__header" style={ eventCardStyle }>
+                        <time className="event-card__date" dateTime={ event.startDate }>{ event.startDate }</time>
                     </span>
-                </span>
-            </Link>
-        </div>
-    )
+
+                    <span className="event-card__content">
+                        <span className="event-card__title">
+                            { event.name }
+                        </span>
+                    </span>
+                </Link>
+            </div>
+        )
+    }
 }
 
 export default EventCard

@@ -1,31 +1,38 @@
 import React from 'react'
 
-function GiftCard(props) {
-    let className = props.className ? props.className : '';
+class GiftCard extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
-    return (
-        <div className={ className }>
-            <div className="mg-card">
-                <div className="mg-media mg-media--center">
-                    <div className="mg-media__figure">
-                        <img src={ props.gift.product.img } width="90" />
-                    </div>
+    render {
+        let className = this.props.className ? this.props.className : null;
+        let gift = this.props.gift;
 
-                    <div className="mg-media__body">
-                        <div className="mg-card__title">
-                            { props.gift.product.title }
+        return (
+            <div className={ className }>
+                <div className="mg-card">
+                    <div className="mg-media mg-media--center">
+                        <div className="mg-media__figure">
+                            <img src={ gift.product.img } width="90" />
                         </div>
 
-                        <div className="mg-card__content mg-card__brand">
-                            { props.gift.product.brand }
-                        </div>
+                        <div className="mg-media__body">
+                            <div className="mg-card__title">
+                                { gift.product.title }
+                            </div>
 
-                        <time dateTime="" className="mg-card__time">12 minutes ago</time>
+                            <div className="mg-card__content mg-card__brand">
+                                { gift.product.brand }
+                            </div>
+
+                            <time dateTime="" className="mg-card__time">12 minutes ago</time>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default GiftCard

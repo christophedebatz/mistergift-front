@@ -4,19 +4,33 @@
 //
 //
 
+html {
+    -webkit-text-size-adjust: 100%;
+    font-family: sans-serif;
+}
+
 html, body {
-    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
+    -moz-osx-font-smoothing: grayscale;
     background: #edf0f5;
+    color: #000;
+    font-family: -apple-system, 'Source Sans Pro', sans-serif;
+    font-size: 16px;
     font-weight: 300;
+    line-height: 1.5;
+    min-height: 100vh;
 }
 
 a {
     text-decoration: none;
 
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
         text-decoration: none;
     }
 }
@@ -27,6 +41,10 @@ a {
 
 .site-home {
     @include gradient-vertical(#4b6cb7, #203661);
+
+    .site-content {
+        padding: 0;
+    }
 
     &:not(.is-logged) {
         .site-banner {
@@ -49,12 +67,11 @@ a {
 }
 
 .site-head--masthead {
-    padding-bottom: 215px;
-    padding-top: 150px;
+    padding-bottom: 20rem;
+    padding-top: 20rem;
 
     h1 {
         color: #fff;
-        font-family: 'Lato';
         font-size: 34px;
         font-weight: 300;
     }
@@ -62,7 +79,6 @@ a {
     h2 {
         color: #fff;
         display: block;
-        font-family: 'Open Sans';
         font-size: 16px;
         margin-bottom: 20px;
     }
@@ -92,7 +108,7 @@ a {
 
     // @TODO SPACING HELPERS
     .mg-list--horizontal {
-        padding-top: 15px;
+        padding-top: 10px;
 
         > li {
             margin-left: 10px;
@@ -109,6 +125,16 @@ a {
     font-size: 16px;
     line-height: 60px;
     text-transform: uppercase;
+}
+
+//
+// Footer
+//
+
+.site-foot {
+    background: #333;
+    color: #fff;
+    line-height: 60px;
 }
 
 //

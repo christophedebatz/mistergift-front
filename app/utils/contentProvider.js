@@ -25,7 +25,8 @@ export function post(url, params = {}) {
     return request(fullUrl, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-MG-AUTH': localStorage.getItem('token')
         },
         body: JSON.stringify(params)
     });

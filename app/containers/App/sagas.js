@@ -5,9 +5,10 @@ import {
     REGISTER,
     LOGIN,
     LOAD_USER,
-    LOAD_USER_EVENTS,
     LOAD_USER_SETTINGS,
-    UPDATE_USER
+    UPDATE_USER,
+    LOAD_USER_EVENTS,
+    EVENT_CREATION
 } from './constants';
 
 import {
@@ -16,10 +17,12 @@ import {
     loginSuccess,
     loginError,
     userLoaded,
-    userEventsLoaded,
     userSettingsLoaded,
     updateUserSuccess,
-    updateUserError
+    updateUserError,
+    userEventsLoaded,
+    eventCreationSuccess,
+    eventCreationError
 } from './actions';
 
 import { get, post, update, postLogin } from '../../utils/contentProvider';
@@ -149,13 +152,42 @@ function* watchFetchUserEvents() {
      }
 };
 
+function* watchFetchEventCreation() {
+    const requestChan = yield actionChannel(EVENT_CREATION);
+
+    while (true) {
+        const { name } = yield take(requestChan);
+
+        console.log('name', name)
+
+        const response = yield call(post, '/events', {
+            name: name
+        });
+
+
+        console.log(response);
+
+
+        const payload = response.data.payload
+
+        if (response.err) {
+            yield put(eventCreationError('error'));
+        } else {
+            forwardTo('/' + payload.id);
+
+            yield put(eventCreationSuccess());
+        }
+    }
+}
+
 export default [
     watchFetchLogin,
     watchFetchRegister,
     watchFetchUser,
     watchFetchUserSettings,
     watchUpdateUser,
-    watchFetchUserEvents
+    watchFetchUserEvents,
+    watchFetchEventCreation
 ];
 
 function forwardTo(location) {

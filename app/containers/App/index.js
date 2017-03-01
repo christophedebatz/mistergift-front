@@ -12,6 +12,7 @@ import Auth from '../../auth'
 
 import Metas from 'components/Metas'
 import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 
 class App extends React.Component {
     constructor(props) {
@@ -41,8 +42,10 @@ class App extends React.Component {
                 <Header isLoggedIn={ this.state.isLoggedIn } isHome={ this.state.isHome } />
 
                 <div className="site-content">
-                    { this.props.children }
+                     { React.cloneElement(this.props.children, { isLoggedIn: this.state.isLoggedIn }) }
                 </div>
+
+                <Footer />
             </div>
         );
     }

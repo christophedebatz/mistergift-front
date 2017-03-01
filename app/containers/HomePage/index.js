@@ -8,13 +8,18 @@ class HomePagePage extends React.Component {
     }
 
     render() {
+        const button = !this.props.isLoggedIn ? (
+            <Link to="/register" className="mg-button mg-button--brand">Create an account</Link>
+        ) : null;
+
         return (
             <div>
                 <div className="site-head--masthead">
                     <div className="mg-container--center mg-container--x-large">
                         <h1>Give a Gift easily</h1>
                         <h2>The only way to track and share your wishlist</h2>
-                        <Link to="/register" className="mg-button mg-button--brand">Create an account</Link>
+
+                        {button}
                     </div>
                 </div>
 

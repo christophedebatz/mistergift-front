@@ -1,5 +1,9 @@
 import React from 'react'
-import Modal from 'react-modal';
+import { push } from 'react-router-redux'
+import { connect } from 'react-redux'
+import { eventCreation } from '../App/actions'
+import { selectEventCreation } from '../App/selectors'
+import Modal from 'react-modal'
 
 class EventsCreationPage extends React.Component {
     constructor(props) {
@@ -28,20 +32,6 @@ class EventsCreationPage extends React.Component {
         this.setState({
             modalIsOpen: false
         });
-    }
-
-    handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault()
     }
 
     render() {
@@ -114,6 +104,42 @@ class EventsCreationPage extends React.Component {
             </div>
         )
     }
+
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.eventCreation(this.state.name)
+    }
+
 }
 
-export default EventsCreationPage
+EventsCreationPage.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state, props) => {
+    return {
+        data: selectEventCreation()(state),
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        eventCreation: (name) => {
+            dispatch(eventCreation(name));
+        },
+
+        changeRoute: (url) => dispatch(push(url))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventsCreationPage);

@@ -31,45 +31,23 @@ class EventsListPage extends React.Component {
     }
 
     render() {
-        console.log(this.props.events.toJS())
         const events = this.props.events.get('data');
         const isLoaded = this.props.events.get('isLoaded');
         const errorMessage = this.props.events.get('errorMessage');
-
-        console.log(this.props.events);
-
-        // let events = [
-        //     {
-        //         id: 1,
-        //         name: 'Anniversaire Joulse',
-        //         startDate: day + month
-        //     },
-        //     {
-        //         id: 2,
-        //         name: 'Anniversaire Christophe',
-        //         startDate: day + month
-        //     },
-        //     {
-        //         id: 3,
-        //         name: 'Noël',
-        //         startDate: day + month
-        //     },
-        //     {
-        //         id: 4,
-        //         name: 'Pâques',
-        //         startDate: day + month
-        //     }
-        // ]
-
-        // let eventCards = events.map((event) => {
-        //     return (<EventCard className="mg-p-horizontal--small mg-size--1-of-2 mg-p-bottom--large" event={ event } key={ event.id } />)
-        // })
 
         if (!isLoaded) {
             return <Loader />;
         }
 
-        console.log(events)
+        const content = events ? (
+            <div className="mg-grid mg-wrap mg-grid--pull-padded">
+                events
+            </div>
+        ) : (
+            <div className="mg-text-align--center">
+                <button onClick={this.showEventCreationModal.bind(this)} className="mg-button mg-button--brand">Create your Event</button>
+            </div>
+        );
 
         return (
             <div className="site-content">
@@ -80,9 +58,7 @@ class EventsListPage extends React.Component {
                             <h3 className="">Share it by participating to life events</h3>
                         </div>
 
-                        <div className="mg-grid mg-wrap mg-grid--pull-padded">
-                            { events && <EventCreation />}
-                        </div>
+                        {content}
                     </div>
 
                     <div className="mg-p-horizontal--small mg-size--1-of-2 mg-medium-size--1-of-6 mg-large-size--4-of-12">

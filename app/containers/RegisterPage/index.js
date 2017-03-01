@@ -46,7 +46,6 @@ class RegisterPage extends React.Component {
         if (isAuthenticated) changeRoute('/');
     }
 
-
     render() {
         return (
             <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">

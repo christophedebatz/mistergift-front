@@ -7,7 +7,7 @@ class ProfileCard extends React.Component {
 
         return (
             <div className={ className }>
-                { user.email }
+                { user.name }
             </div>
         )
     }
