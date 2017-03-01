@@ -6,12 +6,12 @@
 * contain code that should be seen on all pages. (e.g. navigation bar)
 */
 
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import Metas from 'components/Metas';
-import Auth from '../../auth';
+import Auth from '../../auth'
 
-import Header from '../../components/Header';
+import Metas from 'components/Metas'
+import Header from '../../components/Header'
 
 class App extends React.Component {
     constructor(props) {
@@ -27,10 +27,6 @@ class App extends React.Component {
         this.setState({ ...this.state, isLoggedIn: isLoggedIn })
     }
 
-    componentWillMount = () => {
-        if (Auth.hasToken()) Auth.login()
-    }
-
     componentWillReceiveProps = () => {
         this.setState({ ...this.state })
     }
@@ -40,7 +36,7 @@ class App extends React.Component {
         this.state.isHome = (this.props.location.pathname === '/')
 
         return (
-            <div className={ className }>
+            <div className={`${className} ${this.state.isLoggedIn ? 'is-logged' : ''}`}>
                 <Header isLoggedIn={ this.state.isLoggedIn } isHome={ this.state.isHome } />
 
                 <div className="site-content">

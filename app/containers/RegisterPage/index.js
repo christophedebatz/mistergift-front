@@ -1,8 +1,8 @@
 import React from 'react'
-
+import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { register } from '../App/actions'
-import { selectRegister } from '../App/selectors'
+import { selectLogin, selectRegister } from '../App/selectors'
 
 class RegisterPage extends React.Component {
     constructor(props, context) {
@@ -19,6 +19,35 @@ class RegisterPage extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    componentWillMount() {
+        const { changeRoute } = this.props;
+        let { session } = this.props;
+
+        let isAuthenticated = session.get('loggedIn');
+
+        if (Object.keys(isAuthenticated).length === 0 && isAuthenticated.constructor === Object) {
+            isAuthenticated = null;
+        }
+
+        console.log(this.props);
+
+        if (isAuthenticated) changeRoute('/');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { changeRoute } = nextProps;
+        let { session } = this.props;
+
+        let isAuthenticated = session.get('loggedIn');
+
+        if (Object.keys(isAuthenticated).length === 0 && isAuthenticated.constructor === Object) {
+            isAuthenticated = null;
+        }
+
+        if (isAuthenticated) changeRoute('/');
+    }
+
 
     render() {
         return (
@@ -110,7 +139,8 @@ RegisterPage.contextTypes = {
 
 const mapStateToProps = (state, props) => {
     return {
-        data: selectRegister()(state)
+        data: selectRegister()(state),
+        session: selectLogin()(state)
     }
 }
 
@@ -118,7 +148,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         register: (name, email, password) => {
             dispatch(register(name, email, password));
-        }
+        },
+
+        changeRoute: (url) => dispatch(push(url))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

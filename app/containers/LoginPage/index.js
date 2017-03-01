@@ -1,7 +1,7 @@
 import React from 'react'
-
-import { connect } from 'react-redux';
-import { login } from '../App/actions';
+import { push } from 'react-router-redux'
+import { connect } from 'react-redux'
+import { login } from '../App/actions'
 import { selectLogin } from '../App/selectors'
 
 class LoginContainer extends React.Component {
@@ -14,6 +14,34 @@ class LoginContainer extends React.Component {
         }
 
         this.router = context.router
+    }
+
+    componentWillMount() {
+        const { changeRoute } = this.props;
+        let { session } = this.props;
+
+        let isAuthenticated = session.get('loggedIn');
+
+        if (Object.keys(isAuthenticated).length === 0 && isAuthenticated.constructor === Object) {
+            isAuthenticated = null;
+        }
+
+        console.log(this.props);
+
+        if (isAuthenticated) changeRoute('/');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { changeRoute } = nextProps;
+        let { session } = this.props;
+
+        let isAuthenticated = session.get('loggedIn');
+
+        if (Object.keys(isAuthenticated).length === 0 && isAuthenticated.constructor === Object) {
+            isAuthenticated = null;
+        }
+
+        if (isAuthenticated) changeRoute('/');
     }
 
     handleInputChange = (event) => {
@@ -77,7 +105,7 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(login(email, password));
         },
 
-        changeRoute: (url) => dispatch(push(url)),
+        changeRoute: (url) => dispatch(push(url))
     };
 };
 

@@ -22,7 +22,7 @@ import {
     updateUserError
 } from './actions';
 
-import { get, getNormalized, post, update, postLogin } from '../../utils/contentProvider';
+import { get, post, update, postLogin } from '../../utils/contentProvider';
 
 function* watchFetchLogin() {
     const requestChan = yield actionChannel(LOGIN);
@@ -139,7 +139,7 @@ function* watchFetchUserEvents() {
 
     while (true) {
         const action = yield take(requestChan);
-        const events = yield call(get, '/me/events?filters=admin&page=1');
+        const events = yield call(get, '/me/events?filters=published&page=1');
 
         if (!events) {
             return;
