@@ -18,7 +18,7 @@ class LoginContainer extends React.Component {
 
     componentWillMount() {
         const { changeRoute } = this.props;
-        let { session } = this.props;
+        const { session } = this.props;
 
         let isAuthenticated = session.get('loggedIn');
 
@@ -26,14 +26,12 @@ class LoginContainer extends React.Component {
             isAuthenticated = null;
         }
 
-        console.log(this.props);
-
         if (isAuthenticated) changeRoute('/');
     }
 
     componentWillReceiveProps(nextProps) {
         const { changeRoute } = nextProps;
-        let { session } = this.props;
+        const { session } = this.props;
 
         let isAuthenticated = session.get('loggedIn');
 
