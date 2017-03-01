@@ -148,7 +148,7 @@ function* watchFetchUserEvents() {
             return;
         }
 
-        yield put(userEventsLoaded(events));
+        yield put(userEventsLoaded(events.data));
      }
 };
 
@@ -158,15 +158,9 @@ function* watchFetchEventCreation() {
     while (true) {
         const { name } = yield take(requestChan);
 
-        console.log('name', name)
-
         const response = yield call(post, '/events', {
             name: name
         });
-
-
-        console.log(response);
-
 
         const payload = response.data.payload
 
