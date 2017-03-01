@@ -33,6 +33,7 @@ class App extends React.Component {
 
     render () {
         const className = this.props.isHome ? 'site-home' : '';
+        this.state.isLoggedIn = Auth.loggedIn()
         this.state.isHome = (this.props.location.pathname === '/')
 
         return (
@@ -49,13 +50,16 @@ class App extends React.Component {
 
 App.propTypes = {
     children: React.PropTypes.node,
+    isLoggedIn: React.PropTypes.bool,
     isHome: React.PropTypes.bool,
 };
 
 const mapStateToProps = (state, props) => {
+    const isLoggedIn = Auth.loggedIn();
     const isHome = (props.location.pathname === '/');
 
     return {
+        isLoggedIn: isLoggedIn,
         isHome: isHome
     }
 }

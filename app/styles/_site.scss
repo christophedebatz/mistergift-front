@@ -28,21 +28,23 @@ a {
 .site-home {
     @include gradient-vertical(#4b6cb7, #203661);
 
-    .site-banner {
-        background: none;
-        box-shadow: none;
+    &:not(.is-logged) {
+        .site-banner {
+            background: none;
+            box-shadow: none;
 
-        > .mg-grid {
-            border-bottom: 1px solid #fff;
+            > .mg-grid {
+                border-bottom: 1px solid #fff;
+            }
         }
-    }
 
-    .site-logo {
-        color: #fff;
-    }
+        .site-logo {
+            color: #fff;
+        }
 
-    .mg-button--neutral {
-        border-color: #fff;
+        .mg-button--neutral {
+            border-color: #fff;
+        }
     }
 }
 
