@@ -7,7 +7,7 @@
   "license": "ISC",
   "scripts": {
     "build:clean": "rm -rf ./build/*",
-    "build": "NODE_ENV=production webpack --config ./webpack/webpack.prod.babel.js --color --progress",
+    "build": "NODE_ENV=production webpack --config ./webpack/webpack.prod.babel.js --color",
     "start": "NODE_ENV=development node server",
     "start:prod": "NODE_ENV=production node server"
   },
