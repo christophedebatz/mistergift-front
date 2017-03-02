@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
+const ChunksPlugin = require('./plugins/ChunksPlugin');
 
 // PostCSS plugins
 const postcssReporter = require('postcss-reporter');
@@ -65,5 +66,7 @@ module.exports = require('./webpack.base.babel')({
 
         // Extract the CSS into a seperate file
         new ExtractTextPlugin('[name].[contenthash].css'),
+
+        new ChunksPlugin(),
     ],
 });
