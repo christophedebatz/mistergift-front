@@ -103,7 +103,7 @@ class UserSettingsPage extends React.Component {
         );
     }
 
-    handleInputChange = (event) => {
+    handleInputChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -113,7 +113,7 @@ class UserSettingsPage extends React.Component {
         });
     }
 
-    handleSubmit = (event) => {
+    handleSubmit(event) {
         event.preventDefault()
         this.props.updateUser(this.state.name, this.state.email, this.state.password)
     }

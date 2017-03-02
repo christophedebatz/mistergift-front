@@ -105,7 +105,7 @@ class EventsCreationPage extends React.Component {
         )
     }
 
-    handleInputChange = (event) => {
+    handleInputChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -115,7 +115,7 @@ class EventsCreationPage extends React.Component {
         });
     }
 
-    handleSubmit = (event) => {
+    handleSubmit(event) {
         event.preventDefault()
         this.props.eventCreation(this.state.name)
     }

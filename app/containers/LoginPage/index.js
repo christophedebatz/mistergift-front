@@ -42,7 +42,7 @@ class LoginContainer extends React.Component {
         if (isAuthenticated) changeRoute('/');
     }
 
-    handleInputChange = (event) => {
+    handleInputChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -52,7 +52,7 @@ class LoginContainer extends React.Component {
         });
     }
 
-    handleSubmit = (event) => {
+    handleSubmit(event) {
         event.preventDefault()
 
         this.props.login(this.state.email, this.state.password);

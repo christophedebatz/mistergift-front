@@ -24,11 +24,11 @@ class App extends React.Component {
         }
     }
 
-    updateAuth = (isLoggedIn) => {
+    updateAuth(isLoggedIn) {
         this.setState({ ...this.state, isLoggedIn: isLoggedIn })
     }
 
-    componentWillReceiveProps = () => {
+    componentWillReceiveProps() {
         this.setState({ ...this.state })
     }
 

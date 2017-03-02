@@ -114,7 +114,7 @@ class RegisterPage extends React.Component {
         )
     }
 
-    handleInputChange = (event) => {
+    handleInputChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -124,7 +124,7 @@ class RegisterPage extends React.Component {
         });
     }
 
-    handleSubmit = (event) => {
+    handleSubmit(event) {
         event.preventDefault()
         this.props.register(this.state.name, this.state.email, this.state.password)
     }
