@@ -56,12 +56,12 @@ module.exports = require('./webpack.base.babel')({
         // See http://mxs.is/googmv
         new webpack.optimize.OccurrenceOrderPlugin(true),
 
-        // Minify and optimize the JavaScript
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-            },
-        }),
+        // // Minify and optimize the JavaScript
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false,
+        //     },
+        // }),
 
         // Extract the CSS into a seperate file
         new ExtractTextPlugin('[name].[contenthash].css'),
