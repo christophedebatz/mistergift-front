@@ -135,6 +135,10 @@ a {
     background: #333;
     color: #fff;
     line-height: 60px;
+
+    &:after {
+        height: 60px;
+    }
 }
 
 //
@@ -198,8 +202,16 @@ a {
 //
 
 .site-content {
+    margin-bottom: -60px;
+    min-height: calc(100vh - 60px);
     padding-bottom: 60px;
     padding-top: 60px;
+
+    &:after {
+        content: "";
+        display: block;
+        height: 60px;
+    }
 }
 
 //
