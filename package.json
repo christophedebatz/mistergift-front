@@ -14,9 +14,11 @@
   "babel": {
     "presets": [
       [
-        "es2015",
+        "latest",
         {
-          "modules": false
+          "es2015": {
+            "modules": false
+          }
         }
       ],
       "react",
@@ -28,7 +30,9 @@
           "app"
         ],
         "plugins": [
-          "transform-react-remove-prop-types"
+          "transform-react-remove-prop-types",
+          "transform-react-constant-elements",
+          "transform-react-inline-elements"
         ]
       }
     }
