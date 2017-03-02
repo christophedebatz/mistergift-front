@@ -48,9 +48,6 @@ module.exports = require('./webpack.base.babel')({
         // See http://mxs.is/googmv
         new webpack.optimize.OccurrenceOrderPlugin(true),
 
-        // Merge all duplicate modules
-        new webpack.optimize.DedupePlugin(),
-
         // Minify and optimize the JavaScript
         new webpack.optimize.UglifyJsPlugin({
             compress: {
