@@ -1,8 +1,7 @@
-image: node:latest
-
-deploy:
-  image: node:latest
+production:
+  type: deploy
   script:
-  - git push heroku master
+  - gem install dpl
+  - dpl --provider=heroku --app=beta-mistergift --api-key=$HEROKU_PRODUCTION_API_KEY
   only:
   - master
