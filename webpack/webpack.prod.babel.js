@@ -26,7 +26,7 @@ module.exports = require('./webpack.base.babel')({
         // locally linked packages. This is an issue with babel and webpack.
         // See https://github.com/babel/babel-loader/issues/149 and
         // https://github.com/webpack/webpack/issues/1866
-        presets: ['babel-preset-es2015'].map(require.resolve),
+        presets: ['babel-preset-es2015', 'babel-preset-react', 'babel-preset-stage-0'].map(require.resolve),
     },
 
     // We use ExtractTextPlugin so we get a seperate CSS file instead
