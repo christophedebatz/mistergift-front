@@ -20,11 +20,10 @@ import {
     EVENT_CREATION_ERROR,
 } from './constants';
 
-export function register(firstName, lastName, email, password) {
+export function register(name, email, password) {
     return {
         type: REGISTER,
-        firstName,
-        lastName,
+        name,
         email,
         password
     }

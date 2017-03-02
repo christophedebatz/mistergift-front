@@ -13,7 +13,8 @@ class LoginContainer extends React.Component {
             password: ''
         }
 
-        this.router = context.router
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentWillMount() {
@@ -88,7 +89,6 @@ class LoginContainer extends React.Component {
 }
 
 LoginContainer.contextTypes = {
-    router: React.PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, props) => {

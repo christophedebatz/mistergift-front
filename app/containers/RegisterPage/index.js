@@ -10,8 +10,7 @@ class RegisterPage extends React.Component {
 
         this.state = {
             currentlySending: false,
-            firstName: '',
-            lastName: '',
+            name: '',
             email: '',
             password: ''
         }
@@ -51,28 +50,14 @@ class RegisterPage extends React.Component {
             <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
                 <form className="mg-form--stacked" onSubmit={ this.handleSubmit }>
                     <div className="mg-form-element">
-                        <label className="mg-form-element__label">First Name</label>
+                        <label className="mg-form-element__label">Name</label>
 
                         <div className="mg-form-element__control">
                             <input
                                 className="mg-input"
                                 type="text"
-                                name="firstName"
-                                value={ this.state.firstName }
-                                onChange={ this.handleInputChange }
-                            />
-                        </div>
-                    </div>
-
-                    <div className="mg-form-element">
-                        <label className="mg-form-element__label">Last Name</label>
-
-                        <div className="mg-form-element__control">
-                            <input
-                                className="mg-input"
-                                type="text"
-                                name="lastName"
-                                value={ this.state.lastName }
+                                name="name"
+                                value={ this.state.name }
                                 onChange={ this.handleInputChange }
                             />
                         </div>
@@ -131,7 +116,6 @@ class RegisterPage extends React.Component {
 }
 
 RegisterPage.contextTypes = {
-    router: React.PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state, props) => {

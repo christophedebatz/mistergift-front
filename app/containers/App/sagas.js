@@ -57,26 +57,29 @@ function* watchFetchRegister() {
     const requestChan = yield actionChannel(REGISTER);
 
     while (true) {
-        const { firstName, lastName, email, password } = yield take(requestChan);
+        try {
+            const { name, email, password } = yield take(requestChan);
 
-        const response = yield call(post, '/users', {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
-        });
+            const response = yield call(post, '/users', {
+                name: name,
+                email: email,
+                password: password
+            });
 
-        const payload = response.data.payload
+            const payload = response.data.payload
 
-        if (response.err) {
-            yield put(registerError('error'));
-        } else {
-            localStorage.setItem('token', payload.session.token);
-            localStorage.setItem('expireAt', payload.session.expireAt);
+            if (response.err) {
+                yield put(registerError('error'));
+            } else {
+                localStorage.setItem('token', payload.session.token);
+                localStorage.setItem('expireAt', payload.session.expireAt);
 
-            forwardTo('/' + payload.id);
+                forwardTo('/' + payload.id);
 
-            yield put(registerSuccess(payload.session.token));
+                yield put(registerSuccess(payload.session.token));
+            }
+        } catch(error) {
+            yield put(registerError(error));
         }
     }
 }
