@@ -4,6 +4,7 @@ import { take, actionChannel, call, put, select } from 'redux-saga/effects';
 import {
     REGISTER,
     LOGIN,
+    LOAD_CURRENT_USER,
     LOAD_USER,
     LOAD_USER_SETTINGS,
     UPDATE_USER,
@@ -16,6 +17,7 @@ import {
     registerError,
     loginSuccess,
     loginError,
+    currentUserLoaded,
     userLoaded,
     userSettingsLoaded,
     updateUserSuccess,
@@ -83,6 +85,22 @@ function* watchFetchRegister() {
         }
     }
 }
+
+function* watchFetchCurrentUser() {
+    const requestChan = yield actionChannel(LOAD_CURRENT_USER);
+
+    while (true) {
+        const action = yield take(requestChan);
+
+        const currentUser = yield call(get, '/me/');
+
+        if (!currentUser) {
+            return;
+        }
+
+        yield put(currentUserLoaded(currentUser.data));
+     }
+};
 
 function* watchFetchUser() {
     const requestChan = yield actionChannel(LOAD_USER);
@@ -180,6 +198,7 @@ function* watchFetchEventCreation() {
 export default [
     watchFetchLogin,
     watchFetchRegister,
+    watchFetchCurrentUser,
     watchFetchUser,
     watchFetchUserSettings,
     watchUpdateUser,

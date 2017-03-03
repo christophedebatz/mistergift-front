@@ -5,6 +5,9 @@ import {
     LOGIN,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
+    LOAD_CURRENT_USER,
+    LOAD_CURRENT_USER_SUCCESS,
+    LOAD_CURRENT_USER_ERROR,
     LOAD_USER,
     LOAD_USER_SUCCESS,
     LOAD_USER_ERROR,
@@ -64,6 +67,20 @@ export function loginError(message) {
         message
     }
 }
+
+export function loadCurrentUser() {
+    return {
+        type: LOAD_CURRENT_USER
+    }
+}
+
+export function currentUserLoaded(data) {
+    return {
+        type: LOAD_CURRENT_USER_SUCCESS,
+        data
+    }
+}
+
 
 export function loadUser(userId) {
     return {
