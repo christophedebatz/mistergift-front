@@ -22,6 +22,7 @@ class App extends React.Component {
         super(props)
 
         this.state = {
+            currentUser: '',
             isLoggedIn: Auth.loggedIn(),
             isHome: this.props.isHome
         }
@@ -31,27 +32,23 @@ class App extends React.Component {
         this.props.onLoad();
     }
 
-    updateAuth(isLoggedIn) {
-        this.setState({ ...this.state, isLoggedIn: isLoggedIn })
-    }
-
     componentWillReceiveProps() {
         this.setState({ ...this.state })
     }
 
     render () {
         const className = this.props.isHome ? 'site-home' : '';
-        const currentUser = this.props.currentUser.get('data');
 
+        this.state.currentUser = this.props.currentUser.get('data');
         this.state.isLoggedIn = Auth.loggedIn();
         this.state.isHome = (this.props.location.pathname === '/');
 
         return (
             <div className={`${className} ${this.state.isLoggedIn ? 'is-logged' : ''}`}>
-                <Header currentUser={currentUser} isLoggedIn={this.state.isLoggedIn} isHome={this.state.isHome} />
+                <Header currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} isHome={this.state.isHome} />
 
                 <div className="site-content">
-                     { React.cloneElement(this.props.children, {isLoggedIn: this.state.isLoggedIn}) }
+                     { React.cloneElement(this.props.children, {currentUser: this.state.currentUser, isLoggedIn: this.state.isLoggedIn}) }
                 </div>
 
                 <Footer />

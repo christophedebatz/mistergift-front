@@ -108,7 +108,7 @@ a {
 
     // @TODO SPACING HELPERS
     .mg-list--horizontal {
-        padding-top: 10px;
+        padding-top: 15px;
 
         > li {
             margin-left: 10px;
@@ -118,6 +118,13 @@ a {
             text-transform: uppercase;
         }
     }
+
+    .is-logged & {
+        .mg-list--horizontal {
+            padding-top: 10px;
+        }
+    }
+
 }
 
 .site-logo {

@@ -34,7 +34,7 @@ module.exports = (options) => ({
             include: /node_modules/,
             loaders: ['style-loader', 'css-loader'],
         }, {
-            test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
+            test: /\.jpe?g$|\.gif$|\.png$/i,
             exclude: /icons/,
             loader: 'file-loader?name=img/[name].[ext]',
         }, {
@@ -57,11 +57,12 @@ module.exports = (options) => ({
             loader: 'json-loader',
         }, {
             test: /\.svg$/,
-            include: /icons/,
-            loader: 'svg-sprite?' + JSON.stringify({
+            loader: 'svg-sprite-loader',
+            options: {
                 name: '[name]_[hash]',
-                prefixize: true
-            })
+                prefixize: true,
+                spriteModule: 'components/ClientSprite'
+            }
         }],
     },
 

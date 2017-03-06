@@ -1,25 +1,73 @@
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
 
+import Icon, { GLYPHS } from '../Icon'
+
 class Header extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            dropdownIsVisible: false
+        };
+
+        this.toggleDropdown = this.toggleDropdown.bind(this)
+    }
+
+    toggleDropdown(e) {
+        e.preventDefault();
+
+        this.setState(prevState => ({
+            dropdownIsVisible: !prevState.dropdownIsVisible
+        }));
     }
 
     render() {
-        const loginButton = this.props.isHome ? (
+        let isHome = this.props.isHome;
+        let isLoggedIn = this.props.isLoggedIn;
+        let currentUser = this.props.currentUser;
+
+        let loginButton = isHome ? (
             <li><Link to="/login" className="mg-button mg-button--neutral">Login</Link></li>
         ) : (
             <li><Link to="/login" className="mg-button">Login</Link></li>
         );
 
-        const headerNavigation = this.props.isLoggedIn ? (
+        let headerNavigation = isLoggedIn && currentUser ? (
             <nav role="navigation">
                 <ul className="mg-list--horizontal mg-has-block-links--space">
-                    <li><IndexLink to="/" activeClassName="is-active">Home</IndexLink></li>
-                    <li><IndexLink to="/events" activeClassName="is-active">Events</IndexLink></li>
+                    <li><Link to="/events" activeClassName="is-active">Events</Link></li>
                     <li><Link to="/wishlist" activeClassName="is-active">Wishlist</Link></li>
-                    <li><Link to="/settings" activeClassName="is-active">Settings</Link></li>
+                    <li>
+                        <div className={`mg-dropdown-trigger mg-dropdown-trigger--click ${this.state.dropdownIsVisible ? 'mg-is-open' : ''}`}>
+                            <a aria-haspopup="true" title="Show More" onClick={this.toggleDropdown}>
+                                {currentUser.name}
+                                <Icon glyph={GLYPHS.CARET_DOWN} />
+                                <span className="mg-assistive-text">Show More</span>
+                            </a>
+
+                            <div className="mg-dropdown mg-dropdown--left">
+                                <ul className="mg-dropdown__list" role="menu">
+                                    <li className="mg-dropdown__item" role="presentation">
+                                        <Link to={`/${currentUser.id}`}>My Profile</Link>
+                                    </li>
+
+                                    <li className="mg-has-divider--top-space" role="separator"></li>
+
+                                    <li className="mg-dropdown__item" role="presentation">
+                                        <Link to="/settings">Settings</Link>
+                                    </li>
+
+                                    <li className="mg-has-divider--top-space" role="separator"></li>
+
+                                    <li className="mg-dropdown__item" role="presentation">
+                                        <Link to="/logout">Logout</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </li>
                 </ul>
             </nav>
         ) : (
