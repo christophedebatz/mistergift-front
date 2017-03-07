@@ -1,0 +1,124 @@
+//
+//
+// Menus - Dropdown
+//
+//
+
+.#{$css-prefix}dropdown {
+    background: $color-background-alt;
+    border-radius: $border-radius-medium;
+    border: $border-width-thin solid $color-border;
+    box-shadow: $shadow-drop-down;
+    float: left;
+    font-size: $font-size-small;
+    left: 50%;
+    margin-top: $spacing-xxx-small;
+    max-width: $size-medium;
+    min-width: $size-xx-small;
+    padding: $spacing-xx-small 0;
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: $z-index-dropdown;
+
+    &--left {
+        left: 0;
+        transform: translateX(0);
+    }
+
+    &--right {
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+
+    &--bottom {
+        bottom: 100%;
+    }
+
+    &--small {
+        min-width: $size-small;
+    }
+
+    &--medium {
+        min-width: $size-medium;
+    }
+
+    &--large {
+        max-width: $max-width-action-overflow-menu;
+        min-width: $size-large;
+    }
+
+    &__header {
+        padding: $spacing-x-small $spacing-small;
+    }
+
+    &__item {
+        line-height: $line-height-text;
+
+        > a {
+            color: $color-text-default;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            padding: $spacing-x-small $spacing-small;
+            position: relative;
+            white-space: nowrap;
+
+            &:hover,
+            &:focus {
+                background-color: $color-background-row-hover;
+                outline: 0;
+                text-decoration: none;
+            }
+
+            &:active {
+                background-color: $color-background-row-active;
+                text-decoration: none;
+        }
+
+        &[aria-disabled="true"] {
+            color: $color-text-button-default-disabled;
+            cursor: default;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+
+        .#{$css-prefix}icon--selected {
+            opacity: 0;
+            transition: opacity $duration-immediately ease;
+        }
+
+        &.#{$css-prefix}is-selected .#{$css-prefix}icon--selected {
+            opacity: 1;
+        }
+    }
+}
+
+.#{$css-prefix}dropdown-trigger {
+    display: inline-block;
+    position: relative;
+
+    .#{$css-prefix}dropdown {
+        top: 100%;
+    }
+
+    .#{$css-prefix}dropdown--bottom {
+        top: auto;
+    }
+
+    // If someone is using javascript for click to toggle - this modifier will help
+    &--click {
+        .#{$css-prefix}dropdown {
+            display: none;
+        }
+
+        &.#{$css-prefix}is-open .#{$css-prefix}dropdown {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
