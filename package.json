@@ -9,7 +9,8 @@
     "build:clean": "rm -rf ./build/*",
     "build": "NODE_ENV=production webpack --config ./webpack/webpack.prod.babel.js --color",
     "start": "NODE_ENV=development node server",
-    "start:prod": "NODE_ENV=production node server"
+    "start:prod": "NODE_ENV=production node server",
+    "deploy:preprod": "git push origin master:prod"
   },
   "babel": {
     "presets": [
