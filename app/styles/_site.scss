@@ -225,16 +225,6 @@ a {
     }
 }
 
-//
-// Gifts List
-//
-
-.site-gifts-list {
-    background: #edf0f5;
-    padding-bottom: 70px;
-    padding-top: 60px;
-}
-
 // Spacing @todo
 
 .mg-p-horizontal--small {
@@ -256,6 +246,27 @@ a {
 
 .mg-m-bottom--x-large {
     margin-bottom: 3rem;
+}
+
+// Profile
+
+.mg-profile {
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    margin-top: 60px;
+    padding: 60px 20px 20px;
+    position: relative;
+    width: 100%;
+}
+
+.mg-profile__avatar {
+    border-radius: 100%;
+    left: 50%;
+    max-height: 120px;
+    max-width: 120px;
+    position: absolute;
+    top: -50%;
+    transform: translateX(-50%);
 }
 
 // Event Card

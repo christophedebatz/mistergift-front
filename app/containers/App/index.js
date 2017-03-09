@@ -43,8 +43,6 @@ class App extends React.Component {
         this.state.isLoggedIn = this.props.isLoggedIn;
         this.state.isHome = this.props.isHome;
 
-        console.log(this.state.currentUser);
-
         return (
             <div className={`${className} ${this.state.isLoggedIn ? 'is-logged' : ''}`}>
                 <Header currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} isHome={this.state.isHome} />

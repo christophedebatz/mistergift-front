@@ -7,8 +7,8 @@ import Metas from 'components/Metas'
 import Loader from '../../components/Loader'
 import UserCard from '../../components/UserCard'
 
-import { selectUser, selectCurrentUser } from '../App/selectors'
-import { loadUser, loadCurrentUser } from '../App/actions'
+import { selectUser } from '../App/selectors'
+import { loadUser } from '../App/actions'
 
 class UserViewPage extends React.Component {
     componentDidMount() {
@@ -16,6 +16,7 @@ class UserViewPage extends React.Component {
     }
 
     render() {
+        const currentUser = this.props.currentUser;
         const user = this.props.user.get('data');
         const isLoaded = this.props.user.get('isLoaded');
         const errorMessage = this.props.user.get('errorMessage');
@@ -25,7 +26,7 @@ class UserViewPage extends React.Component {
         }
 
         return (
-            <div>
+            <div className="mg-grid mg-container--center mg-container--small ">
                 <Metas
                     type="user"
                     data={{
@@ -35,9 +36,7 @@ class UserViewPage extends React.Component {
                     }}
                 />
 
-                <div className="mg-grid mg-container--center mg-container--small">
-                    <UserCard user={ user } key={ user.id } />
-                </div>
+                <UserCard currentUser={currentUser} user={user} key={user.id} classes="mg-text-align--center" />
             </div>
         );
     }
@@ -49,7 +48,6 @@ UserViewPage.propTypes = {
 const mapStateToProps = (state, props) => {
     return {
         user: selectUser()(state),
-        currentUser: selectCurrentUser()(state)
     }
 };
 
@@ -58,7 +56,6 @@ const mapDispatchToProps = (dispatch, props) => {
         onLoad: () => {
             const userId = props.params.userId;
             dispatch(loadUser(userId));
-            dispatch(loadCurrentUser());
         },
     };
 };

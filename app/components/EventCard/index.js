@@ -7,23 +7,23 @@ class EventCard extends React.Component {
     }
 
     render () {
-        let className = props.className ? props.className : null;
+        let classes = props.classes ? props.classes : null;
         let event = this.props.event;
 
-        const eventCardStyle = {
+        const eventCardBackground = {
             backgroundImage: 'url(https://placeholdit.imgix.net/~text?txtsize=35&txt=375%C3%97270&w=375&h=270)',
         }
 
         return (
-            <div className={ className }>
+            <div className={`${classes}`}>
                 <Link to={`/events/${event.id}`} className="event-card__item">
-                    <span className="event-card__header" style={ eventCardStyle }>
-                        <time className="event-card__date" dateTime={ event.startDate }>{ event.startDate }</time>
+                    <span className="event-card__header" style={eventCardBackground}>
+                        <time className="event-card__date" dateTime={event.startDate}>{event.startDate}</time>
                     </span>
 
                     <span className="event-card__content">
                         <span className="event-card__title">
-                            { event.name }
+                            {event.name}
                         </span>
                     </span>
                 </Link>
