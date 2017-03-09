@@ -111,7 +111,7 @@ class RegisterPage extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.props.register(this.state.name, this.state.email, this.state.password)
+        this.props.register(this.state.firstName, this.state.lastName, this.state.email, this.state.password)
     }
 }
 
@@ -127,8 +127,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        register: (name, email, password) => {
-            dispatch(register(name, email, password));
+        register: (firstName, lastName, email, password) => {
+            dispatch(register(firstName, lastName, email, password));
         },
 
         changeRoute: (url) => dispatch(push(url))
