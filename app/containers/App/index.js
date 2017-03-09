@@ -22,8 +22,8 @@ class App extends React.Component {
         super(props)
 
         this.state = {
-            currentUser: '',
-            isLoggedIn: Auth.loggedIn(),
+            currentUser: this.props.currentUser.get('data'),
+            isLoggedIn: this.props.isLoggedIn,
             isHome: this.props.isHome
         }
     }
@@ -40,8 +40,10 @@ class App extends React.Component {
         const className = this.props.isHome ? 'site-home' : '';
 
         this.state.currentUser = this.props.currentUser.get('data');
-        this.state.isLoggedIn = Auth.loggedIn();
-        this.state.isHome = (this.props.location.pathname === '/');
+        this.state.isLoggedIn = this.props.isLoggedIn;
+        this.state.isHome = this.props.isHome;
+
+        console.log(this.state.currentUser);
 
         return (
             <div className={`${className} ${this.state.isLoggedIn ? 'is-logged' : ''}`}>

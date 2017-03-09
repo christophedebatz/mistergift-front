@@ -7,8 +7,8 @@ import Metas from 'components/Metas'
 import Loader from '../../components/Loader'
 import UserCard from '../../components/UserCard'
 
-import { selectCurrentUser } from '../App/selectors'
-import { loadUser } from '../App/actions'
+import { selectUser, selectCurrentUser } from '../App/selectors'
+import { loadUser, loadCurrentUser } from '../App/actions'
 
 class UserViewPage extends React.Component {
     componentDidMount() {
@@ -48,7 +48,8 @@ UserViewPage.propTypes = {
 
 const mapStateToProps = (state, props) => {
     return {
-        user: selectCurrentUser()(state)
+        user: selectUser()(state),
+        currentUser: selectCurrentUser()(state)
     }
 };
 
@@ -57,6 +58,7 @@ const mapDispatchToProps = (dispatch, props) => {
         onLoad: () => {
             const userId = props.params.userId;
             dispatch(loadUser(userId));
+            dispatch(loadCurrentUser());
         },
     };
 };

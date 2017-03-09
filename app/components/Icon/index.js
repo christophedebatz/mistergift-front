@@ -10,7 +10,7 @@ class Icon extends React.Component {
         var classes = this.props.classes ? this.props.classes : '';
 
         return (
-            <svg className={`mg-icon mg-icon--x-small ${classes}`} dangerouslySetInnerHTML={{__html: '<use xlink:href="' + glyph + '"></use>'}}/>
+            <svg className={`mg-icon mg-icon--small ${classes}`} dangerouslySetInnerHTML={{__html: '<use xlink:href="' + glyph + '"></use>'}}/>
         )
     }
 }

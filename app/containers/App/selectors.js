@@ -20,6 +20,11 @@ const selectLogin = () => createSelector(
 
 const selectCurrentUser = () => createSelector(
     selectGlobal(),
+    (globalState) => globalState.get('currentUser')
+);
+
+const selectUser = () => createSelector(
+    selectGlobal(),
     (globalState) => globalState.get('user')
 );
 
@@ -59,6 +64,7 @@ export {
     selectRegister,
     selectLogin,
     selectCurrentUser,
+    selectUser,
     selectUserEvents,
     selectUserSettings,
     selectEventCreation,

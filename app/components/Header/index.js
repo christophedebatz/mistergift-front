@@ -41,7 +41,7 @@ class Header extends React.Component {
                     <li>
                         <div className={`mg-dropdown-trigger mg-dropdown-trigger--click ${this.state.dropdownIsVisible ? 'mg-is-open' : ''}`}>
                             <a aria-haspopup="true" title="Show More" onClick={this.toggleDropdown}>
-                                {currentUser.name}
+                                {currentUser.firstName}
                                 <Icon glyph={GLYPHS.CARET_DOWN} />
                                 <span className="mg-assistive-text">Show More</span>
                             </a>

@@ -46,7 +46,7 @@ class UserSettingsPage extends React.Component {
                                     className="mg-input"
                                     type="text"
                                     name="firstName"
-                                    value={ user.name }
+                                    value={ user.firstName }
                                     onChange={ this.handleInputChange }
                                 />
                             </div>
@@ -60,7 +60,7 @@ class UserSettingsPage extends React.Component {
                                     className="mg-input"
                                     type="text"
                                     name="lastName"
-                                    value={ user.name }
+                                    value={ user.lastName }
                                     onChange={ this.handleInputChange }
                                 />
                             </div>

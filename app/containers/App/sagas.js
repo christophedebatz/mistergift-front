@@ -33,24 +33,28 @@ function* watchFetchLogin() {
     const requestChan = yield actionChannel(LOGIN);
 
     while (true) {
-        const { email, password } = yield take(requestChan);
+        try {
+            const { email, password } = yield take(requestChan);
 
-        const data = yield call(postLogin, '/authenticate', {
-            email: email,
-            password: password
-        });
+            const response = yield call(postLogin, '/authenticate', {
+                email: email,
+                password: password
+            });
 
-        if (data.err) {
-            yield put(loginError('error'));
-        } else {
-            const payload = data.data.payload;
+            if (response.err) {
+                yield put(loginError(response.err));
+            } else {
+                const payload = response.data.payload;
 
-            localStorage.setItem('token', payload.session.token);
-            localStorage.setItem('expireAt', payload.session.expireAt);
+                localStorage.setItem('token', payload.session.token);
+                localStorage.setItem('expireAt', payload.session.expireAt);
 
-            forwardTo('/' + payload.id);
+                forwardTo('/' + payload.id);
 
-            yield put(loginSuccess(payload.session.token));
+                yield put(loginSuccess(payload.session.token));
+            }
+        } catch(error) {
+            yield put(loginError(error));
         }
     }
 };
@@ -60,19 +64,20 @@ function* watchFetchRegister() {
 
     while (true) {
         try {
-            const { name, email, password } = yield take(requestChan);
+            const { firstName, lastName, email, password } = yield take(requestChan);
 
             const response = yield call(post, '/users', {
-                name: name,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: password
             });
 
-            const payload = response.data.payload
-
             if (response.err) {
-                yield put(registerError('error'));
+                yield put(registerError(data.err));
             } else {
+                const payload = response.data.payload;
+
                 localStorage.setItem('token', payload.session.token);
                 localStorage.setItem('expireAt', payload.session.expireAt);
 

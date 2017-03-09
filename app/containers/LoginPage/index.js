@@ -71,7 +71,7 @@ class LoginContainer extends React.Component {
                         </div>
                     </div>
 
-                    <div className="mg-form-element">
+                    <div className="mg-form-element mg-m-bottom--large">
                         <label className="mg-form-element__label" htmlFor="password">Password</label>
 
                         <div className="mg-form-element__control">
@@ -79,7 +79,7 @@ class LoginContainer extends React.Component {
                         </div>
                     </div>
 
-                    <div className="mg-form-element">
+                    <div className="mg-form-element mg-text-align--right">
                         <button className="mg-button mg-button--brand">Login</button>
                     </div>
                 </form>
