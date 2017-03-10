@@ -1,5 +1,5 @@
-import { browserHistory } from 'react-router';
-import { take, actionChannel, call, put, select } from 'redux-saga/effects';
+import { browserHistory } from 'react-router'
+import { take, actionChannel, call, put, select } from 'redux-saga/effects'
 
 import {
     REGISTER,
@@ -9,7 +9,8 @@ import {
     LOAD_USER_SETTINGS,
     UPDATE_USER,
     LOAD_USER_EVENTS,
-    EVENT_CREATION
+    EVENT_CREATION,
+    START_USER_SESSION
 } from './constants';
 
 import {
@@ -17,6 +18,7 @@ import {
     registerError,
     loginSuccess,
     loginError,
+    loadCurrentUser,
     currentUserLoaded,
     userLoaded,
     userSettingsLoaded,
@@ -51,6 +53,7 @@ function* watchFetchLogin() {
 
                 forwardTo('/' + payload.id);
 
+                yield put(loadCurrentUser());
                 yield put(loginSuccess(payload.session.token));
             }
         } catch(error) {
@@ -90,6 +93,18 @@ function* watchFetchRegister() {
         }
     }
 }
+
+function* watchStartUserSession() {
+    const requestChan = yield actionChannel(START_USER_SESSION);
+
+    while (true) {
+        const { token } = yield take(requestChan);
+
+        if (token) {
+            yield put(loadCurrentUser());
+        }
+    }
+};
 
 function* watchFetchCurrentUser() {
     const requestChan = yield actionChannel(LOAD_CURRENT_USER);
@@ -203,6 +218,7 @@ function* watchFetchEventCreation() {
 export default [
     watchFetchLogin,
     watchFetchRegister,
+    watchStartUserSession,
     watchFetchCurrentUser,
     watchFetchUser,
     watchFetchUserSettings,

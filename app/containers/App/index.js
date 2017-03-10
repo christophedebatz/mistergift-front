@@ -8,47 +8,32 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import Auth from '../../auth'
 
-import { loadCurrentUser } from './actions'
-import { selectCurrentUser } from './selectors'
+import { startUserSession } from './actions'
+import { selectCurrentUser, selectLoggedInUser, selectLogin } from './selectors'
 
 import Metas from 'components/Metas'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 class App extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            currentUser: this.props.currentUser.get('data'),
-            isLoggedIn: this.props.isLoggedIn,
-            isHome: this.props.isHome
-        }
-    }
-
     componentDidMount() {
-        this.props.onLoad();
-    }
-
-    componentWillReceiveProps() {
-        this.setState({ ...this.state })
+        this.props.startUserSession(this.props.login.get('token'))
     }
 
     render () {
         const className = this.props.isHome ? 'site-home' : '';
 
-        this.state.currentUser = this.props.currentUser.get('data');
-        this.state.isLoggedIn = this.props.isLoggedIn;
-        this.state.isHome = this.props.isHome;
+        const currentUser = this.props.currentUser ? this.props.currentUser.get('data') : '';
+        const isLoggedIn = this.props.isLoggedIn
+        const isHome = this.props.isHome
 
         return (
-            <div className={`${className} ${this.state.isLoggedIn ? 'is-logged' : ''}`}>
-                <Header currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn} isHome={this.state.isHome} />
+            <div className={`${className} ${isLoggedIn ? 'is-logged' : ''}`}>
+                <Header currentUser={currentUser} isLoggedIn={isLoggedIn} isHome={isHome} />
 
                 <div className="site-content">
-                     { React.cloneElement(this.props.children, {currentUser: this.state.currentUser, isLoggedIn: this.state.isLoggedIn}) }
+                     { React.cloneElement(this.props.children, {currentUser: currentUser, isLoggedIn: isLoggedIn}) }
                 </div>
 
                 <Footer />
@@ -65,20 +50,20 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-    const isLoggedIn = Auth.loggedIn();
     const isHome = (props.location.pathname === '/');
 
     return {
-        isLoggedIn: isLoggedIn,
+        isLoggedIn: selectLoggedInUser()(state),
         isHome: isHome,
-        currentUser: selectCurrentUser()(state)
+        currentUser: selectCurrentUser()(state),
+        login: selectLogin()(state)
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onLoad: () => {
-            dispatch(loadCurrentUser())
+        startUserSession: (token) => {
+            dispatch(startUserSession(token))
         }
     };
 };

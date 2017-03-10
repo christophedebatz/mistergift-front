@@ -44,19 +44,15 @@ class LoginContainer extends React.Component {
     }
 
     handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
+        this.setState({[event.target.name]: event.target.value})
     }
 
     handleSubmit(event) {
         event.preventDefault()
 
-        this.props.login(this.state.email, this.state.password);
+        const { email, password } = this.state
+
+        this.props.login(email, password);
     }
 
     render() {

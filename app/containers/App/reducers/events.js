@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import { fromJS } from 'immutable'
 
 import {
     LOAD_USER_EVENTS_SUCCESS,

@@ -21,7 +21,8 @@ import {
     EVENT_CREATION,
     EVENT_CREATION_SUCCESS,
     EVENT_CREATION_ERROR,
-} from './constants';
+    START_USER_SESSION,
+} from './constants'
 
 export function register(name, email, password) {
     return {
@@ -165,5 +166,12 @@ export function eventCreationError(message) {
     return {
         type: EVENT_CREATION_ERROR,
         message
+    }
+}
+
+export function startUserSession(token) {
+    return {
+        type: START_USER_SESSION,
+        token
     }
 }
