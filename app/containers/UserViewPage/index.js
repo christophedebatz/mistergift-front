@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Metas from 'components/Metas'
 import Loader from '../../components/Loader'
 import UserCard from '../../components/UserCard'
+import Wishlist from '../../components/Wishlist'
 
 import { selectUser } from '../App/selectors'
 import { loadUser } from '../App/actions'
@@ -25,8 +26,10 @@ class UserViewPage extends React.Component {
             return <Loader />;
         }
 
+        const wishlistButton = currentUser.id == user.id ? <button className="mg-button mg-button--brand mg-float--right">Add +</button> : '';
+
         return (
-            <div className="mg-grid mg-container--center mg-container--small ">
+            <div className="mg-container--center mg-container--small ">
                 <Metas
                     type="user"
                     data={{
@@ -36,7 +39,16 @@ class UserViewPage extends React.Component {
                     }}
                 />
 
-                <UserCard currentUser={currentUser} user={user} key={user.id} classes="mg-text-align--center" />
+                <UserCard currentUser={currentUser} user={user} key={user.id} classes="mg-text-align--center mg-m-bottom--large" />
+
+                <div>
+                    <h2 className="site-title mg-text-heading--large mg-m-bottom--large">
+                        {wishlistButton}
+                        Wishlist
+                    </h2>
+
+                    <Wishlist />
+                </div>
             </div>
         );
     }

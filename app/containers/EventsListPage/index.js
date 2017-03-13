@@ -39,7 +39,7 @@ class EventsListPage extends React.Component {
             return <Loader />;
         }
 
-        const content = events ? (
+        const content = events[0].published.length ? (
             <div className="mg-grid mg-wrap mg-grid--pull-padded">
                 events
             </div>

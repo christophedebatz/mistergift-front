@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+
 import AvatarPlaceholder from 'styles/images/avatar.png'
 
 class ProfileCard extends React.Component {
@@ -14,8 +15,8 @@ class ProfileCard extends React.Component {
 
         return (
             <div className={`mg-profile ${classes}`}>
-                <img className="mg-profile__avatar" src={AvatarPlaceholder} />
-                <h1 className="mg-text-heading--large mg-m-bottom--large">{ user.firstName + ' ' + user.lastName }</h1>
+                <div className="mg-profile__avatar"><img src={AvatarPlaceholder} alt="{user.firstName + ' ' + user.lastName}" /></div>
+                <h1 className="mg-text-heading--large mg-m-bottom--large">{user.firstName + ' ' + user.lastName}</h1>
 
                 {settingsButton}
             </div>

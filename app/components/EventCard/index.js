@@ -7,7 +7,7 @@ class EventCard extends React.Component {
     }
 
     render () {
-        let classes = props.classes ? props.classes : null;
+        let classes = this.props.classes ? this.props.classes : '';
         let event = this.props.event;
 
         const eventCardBackground = {

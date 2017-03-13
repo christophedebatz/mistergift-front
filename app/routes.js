@@ -1,6 +1,5 @@
 import { routerActions } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
-import Auth from './auth'
 
 const errorLoading = (err) => {
     console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -11,9 +10,11 @@ const loadModule = (cb, hoc = null) => (componentModule) => {
     else cb(null, componentModule.default);
 };
 
+const localStorageToken = localStorage.getItem('token');
+
 const UserIsAuthenticated = UserAuthWrapper({
     authSelector: state => state.get('login'),
-    predicate: authData => Auth.loggedIn(),
+    predicate: authData => localStorageToken !== null,
     redirectAction: routerActions.replace,
     wrapperDisplayName: 'UserIsAuthenticated'
 });

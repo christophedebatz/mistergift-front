@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, IndexLink } from 'react-router'
 
 import Icon, { GLYPHS } from '../Icon'
+import Logo from 'styles/images/logo.png'
 
 class Header extends React.Component {
     constructor(props) {
@@ -82,7 +83,10 @@ class Header extends React.Component {
         return (
             <header className="site-banner" role="banner">
                 <div className="mg-grid mg-grid--align-spread mg-container--center mg-container--x-large mg-p-horizontal--small">
-                    <IndexLink to="/"><span className="site-logo">MisterGift</span></IndexLink>
+                    <IndexLink to="/">
+                        <img className="site-logo__image" src={Logo} alt="MisterGift" />
+                        <span className="site-logo">MisterGift</span>
+                    </IndexLink>
 
                     {headerNavigation}
                 </div>
