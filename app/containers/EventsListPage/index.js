@@ -2,12 +2,13 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
-import { loadUserEvents } from '../App/actions'
-import { selectUserEvents } from '../App/selectors'
+import { loadEvents } from '../App/actions'
+import { selectEvents } from '../App/selectors'
 
 import Loader from '../../components/Loader'
 import EventCreation from '../EventCreationPage'
 import EventCard from '../../components/EventCard'
+import EventNavigation from '../../components/EventNavigation'
 
 class EventsListPage extends React.Component {
     constructor(props) {
@@ -31,17 +32,23 @@ class EventsListPage extends React.Component {
     }
 
     render() {
-        const events = this.props.events.get('data');
-        const isLoaded = this.props.events.get('isLoaded');
-        const errorMessage = this.props.events.get('errorMessage');
+        const events = this.props.events.get('data') || '';
+        const isLoaded = this.props.events.get('isLoaded') || '';
+        const errorMessage = this.props.events.get('errorMessage') || '';
 
         if (!isLoaded) {
             return <Loader />;
         }
 
-        const content = events.published.length ? (
+        const allEvents = events.published.concat(events.invitation, events.admin);
+
+        let eventCards = allEvents.map((allEvent) => {
+            return (<EventCard className="mg-large-size--1-of-2 mg-col mg-col--padded" event={allEvent} key={allEvent.id} />)
+        })
+
+        const content = allEvents.length ? (
             <div className="mg-grid mg-wrap mg-grid--pull-padded">
-                events
+                ${eventCards}
             </div>
         ) : (
             <div className="mg-text-align--center">
@@ -50,24 +57,10 @@ class EventsListPage extends React.Component {
         );
 
         return (
-            <div className="site-content">
+            <div>
                 <div className="mg-grid mg-wrap mg-grid--pull-padded mg-container--center mg-container--x-large">
                     <div className="mg-p-horizontal--small mg-size--1-of-2 mg-medium-size--5-of-6 mg-large-size--8-of-12">
-                        <nav className="mg-page-tab mg-clearfix">
-                            <ul className="mg-page-tab__list">
-                                <li className="mg-page-tab__item">
-                                    <Link to={`/events/`} className="mg-page-tab__link">All</Link>
-                                </li>
-
-                                <li className="mg-page-tab__item">
-                                    <Link to={`/events/`} className="mg-page-tab__link">Invites</Link>
-                                </li>
-
-                                <li className="mg-page-tab__item">
-                                    <Link to={`/events/`} className="mg-page-tab__link">Hosting</Link>
-                                </li>
-                            </ul>
-                        </nav>
+                        <EventNavigation />
 
                         <div className="events-description mg-p-bottom--large">
                             <h2 className="events-description__title">Events</h2>
@@ -95,14 +88,14 @@ EventsListPage.propTypes = {
 
 const mapStateToProps = (state, props) => {
     return {
-        events: selectUserEvents()(state),
+        events: selectEvents()(state),
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onLoad: () => {
-            dispatch(loadUserEvents())
+            dispatch(loadEvents())
         },
     };
 };

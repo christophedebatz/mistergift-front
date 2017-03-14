@@ -9,24 +9,54 @@ class Header extends React.Component {
         super(props)
 
         this.state = {
+            dropdownIsActive: false,
             dropdownIsVisible: false
         };
 
-        this.toggleDropdown = this.toggleDropdown.bind(this)
+        this.toggleDropdown = this.toggleDropdown.bind(this);
+        this.hideDropdown = this.hideDropdown.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
-    toggleDropdown(e) {
-        e.preventDefault();
+    componentDidMount() {
+        window.addEventListener('click', this.hideDropdown, false);
+    }
 
-        this.setState(prevState => ({
-            dropdownIsVisible: !prevState.dropdownIsVisible
-        }));
+    componentWillUnmount() {
+        window.removeEventListener('click', this.hideDropdown, false);
+    }
+
+    toggleDropdown() {
+        const { dropdownIsVisible } = this.state;
+
+        this.setState({ dropdownIsVisible: !dropdownIsVisible });
+    }
+
+    hideDropdown() {
+        const { dropdownIsActive } = this.state;
+
+        if (!dropdownIsActive) {
+            this.setState({dropdownIsVisible: false});
+        }
+    }
+
+    handleFocus() {
+        this.setState({ dropdownIsActive: true });
+    }
+
+    handleBlur() {
+        this.setState({
+            dropdownIsVisible: false,
+            dropdownIsActive: false,
+        });
     }
 
     render() {
         let isHome = this.props.isHome;
         let isLoggedIn = this.props.isLoggedIn;
         let currentUser = this.props.currentUser;
+        const { dropdownIsVisible } = this.state;
 
         let loginButton = isHome ? (
             <li><Link to="/login" className="mg-button mg-button--neutral">Login</Link></li>
@@ -38,10 +68,13 @@ class Header extends React.Component {
             <nav role="navigation">
                 <ul className="mg-list--horizontal mg-has-block-links--space">
                     <li><Link to="/events" activeClassName="is-active">Events</Link></li>
-                    <li><Link to="/wishlist" activeClassName="is-active">Wishlist</Link></li>
                     <li>
-                        <div className={`mg-dropdown-trigger mg-dropdown-trigger--click ${this.state.dropdownIsVisible ? 'mg-is-open' : ''}`}>
-                            <a aria-haspopup="true" title="Show More" onClick={this.toggleDropdown}>
+                        <div className={`mg-dropdown-trigger mg-dropdown-trigger--click ${dropdownIsVisible ? 'mg-is-open' : ''}`}>
+                            <a aria-haspopup="true" title="Show More"
+                                tabIndex="-1"
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                                onClick={this.toggleDropdown}>
                                 {currentUser.firstName}
                                 <Icon glyph={GLYPHS.CARET_DOWN} />
                                 <span className="mg-assistive-text">Show More</span>
@@ -81,7 +114,7 @@ class Header extends React.Component {
         );
 
         return (
-            <header className="site-banner" role="banner">
+            <header className="site-banner" role="banner" onClick={this.handleBodyClick}>
                 <div className="mg-grid mg-grid--align-spread mg-container--center mg-container--x-large mg-p-horizontal--small">
                     <IndexLink to="/">
                         <img className="site-logo__image" src={Logo} alt="MisterGift" />

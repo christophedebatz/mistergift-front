@@ -13,8 +13,8 @@ import {
     LOAD_USER_ERROR,
     LOAD_USER_SETTINGS,
     LOAD_USER_SETTINGS_SUCCESS,
-    LOAD_USER_EVENTS,
-    LOAD_USER_EVENTS_SUCCESS,
+    LOAD_EVENTS,
+    LOAD_EVENTS_SUCCESS,
     UPDATE_USER,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
@@ -135,16 +135,16 @@ export function updateUserError(message) {
     }
 }
 
-export function loadUserEvents(data) {
+export function loadEvents(data) {
     return {
-        type: LOAD_USER_EVENTS,
+        type: LOAD_EVENTS,
         data
     }
 }
 
-export function userEventsLoaded(data) {
+export function eventsLoaded(data) {
     return {
-        type: LOAD_USER_EVENTS_SUCCESS,
+        type: LOAD_EVENTS_SUCCESS,
         data
     }
 }

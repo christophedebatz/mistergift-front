@@ -8,7 +8,7 @@ import {
     LOAD_USER,
     LOAD_USER_SETTINGS,
     UPDATE_USER,
-    LOAD_USER_EVENTS,
+    LOAD_EVENTS,
     EVENT_CREATION,
     START_USER_SESSION
 } from './constants';
@@ -24,7 +24,7 @@ import {
     userSettingsLoaded,
     updateUserSuccess,
     updateUserError,
-    userEventsLoaded,
+    eventsLoaded,
     eventCreationSuccess,
     eventCreationError
 } from './actions';
@@ -178,8 +178,8 @@ function* watchUpdateUser() {
      }
 };
 
-function* watchFetchUserEvents() {
-    const requestChan = yield actionChannel(LOAD_USER_EVENTS);
+function* watchFetchEvents() {
+    const requestChan = yield actionChannel(LOAD_EVENTS);
 
     while (true) {
         const action = yield take(requestChan);
@@ -189,7 +189,7 @@ function* watchFetchUserEvents() {
             return;
         }
 
-        yield put(userEventsLoaded(events.data));
+        yield put(eventsLoaded(events.data));
      }
 };
 
@@ -223,7 +223,7 @@ export default [
     watchFetchUser,
     watchFetchUserSettings,
     watchUpdateUser,
-    watchFetchUserEvents,
+    watchFetchEvents,
     watchFetchEventCreation
 ];
 

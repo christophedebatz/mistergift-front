@@ -11,11 +11,9 @@ const loadModule = (cb, hoc = null) => (componentModule) => {
     else cb(null, componentModule.default);
 };
 
-const localStorageToken = localStorage.getItem('token');
-
 const UserIsAuthenticated = UserAuthWrapper({
     authSelector: state => state.get('login'),
-    predicate: authData => localStorageToken,
+    predicate: authData => localStorage.getItem('token'),
     redirectAction: routerActions.replace,
     wrapperDisplayName: 'UserIsAuthenticated'
 });
@@ -113,7 +111,7 @@ export default function createRoutes(store) {
             name: 'events_invites',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/EventsListPage'),
+                    System.import('containers/EventsListPage/invites'),
                 ]);
 
                 const renderRoute = loadModule(cb, UserIsAuthenticated);
@@ -129,7 +127,7 @@ export default function createRoutes(store) {
             name: 'events_hosting',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
-                    System.import('containers/EventsListPage'),
+                    System.import('containers/EventsListPage/hosting'),
                 ]);
 
                 const renderRoute = loadModule(cb, UserIsAuthenticated);

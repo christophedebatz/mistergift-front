@@ -29,7 +29,7 @@ class UserViewPage extends React.Component {
         const wishlistButton = currentUser.id == user.id ? <button className="mg-button mg-button--brand mg-float--right">Add +</button> : '';
 
         return (
-            <div className="mg-container--center mg-container--small ">
+            <div className="mg-container--center mg-container--small">
                 <Metas
                     type="user"
                     data={{

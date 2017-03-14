@@ -1,8 +1,10 @@
 import React from 'react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
+
 import { eventCreation } from '../App/actions'
 import { selectEventCreation } from '../App/selectors'
+
 import Modal from 'react-modal'
 
 class EventsCreationPage extends React.Component {

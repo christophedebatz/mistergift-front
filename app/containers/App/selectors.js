@@ -38,14 +38,19 @@ const selectUserSettings = () => createSelector(
     (globalState) => globalState.get('settings')
 );
 
-const selectUserEvents = () => createSelector(
+const selectEvents = () => createSelector(
     selectGlobal(),
     (globalState) => globalState.get('events')
 );
 
+const selectEventInvitations = () => createSelector(
+    selectEvents(),
+    (eventState) => eventState.getIn(['data', 'invitation'])
+);
+
 const selectEventCreation = () => createSelector(
     selectGlobal(),
-    (globalState) => globalState.get('eventCreation')
+    (globalState) => globalState.get('events')
 );
 
 const selectLocationState = () => {
@@ -71,8 +76,9 @@ export {
     selectLogin,
     selectCurrentUser,
     selectUser,
-    selectUserEvents,
     selectUserSettings,
+    selectEvents,
+    selectEventInvitations,
     selectEventCreation,
     selectLocationState,
 };
