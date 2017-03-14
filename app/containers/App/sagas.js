@@ -51,10 +51,10 @@ function* watchFetchLogin() {
                 localStorage.setItem('token', payload.session.token);
                 localStorage.setItem('expireAt', payload.session.expireAt);
 
-                forwardTo('/' + payload.id);
-
                 yield put(loadCurrentUser());
                 yield put(loginSuccess(payload.session.token));
+
+                forwardTo('/' + payload.id);
             }
         } catch(error) {
             yield put(loginError(error));
@@ -84,9 +84,9 @@ function* watchFetchRegister() {
                 localStorage.setItem('token', payload.session.token);
                 localStorage.setItem('expireAt', payload.session.expireAt);
 
-                forwardTo('/' + payload.id);
-
                 yield put(registerSuccess(payload.session.token));
+
+                forwardTo('/' + payload.id);
             }
         } catch(error) {
             yield put(registerError(error));
@@ -183,7 +183,7 @@ function* watchFetchUserEvents() {
 
     while (true) {
         const action = yield take(requestChan);
-        const events = yield call(get, '/me/events?filters=published&page=1');
+        const events = yield call(get, '/me/events?&page=1');
 
         if (!events) {
             return;
@@ -208,9 +208,9 @@ function* watchFetchEventCreation() {
         if (response.err) {
             yield put(eventCreationError('error'));
         } else {
-            forwardTo('/' + payload.id);
-
             yield put(eventCreationSuccess());
+
+            forwardTo('/' + payload.id);
         }
     }
 }

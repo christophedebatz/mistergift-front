@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case LOAD_USER_EVENTS_SUCCESS:
             return state
-                .set('data', action.data.content)
+                .set('data', action.data)
                 .set('isLoaded', true)
                 .set('errorMessage', null);
         case LOAD_USER_EVENTS_ERROR:

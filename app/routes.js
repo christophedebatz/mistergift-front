@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router'
 import { routerActions } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 
@@ -14,7 +15,7 @@ const localStorageToken = localStorage.getItem('token');
 
 const UserIsAuthenticated = UserAuthWrapper({
     authSelector: state => state.get('login'),
-    predicate: authData => localStorageToken !== null,
+    predicate: authData => localStorageToken,
     redirectAction: routerActions.replace,
     wrapperDisplayName: 'UserIsAuthenticated'
 });
@@ -88,6 +89,44 @@ export default function createRoutes(store) {
         }, {
             path: '/events',
             name: 'events',
+            getComponent(nextState, cb) {
+                browserHistory.push('/events/upcoming')
+            }
+        }, {
+            path: '/events/upcoming',
+            name: 'events_upcoming',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    System.import('containers/EventsListPage'),
+                ]);
+
+                const renderRoute = loadModule(cb, UserIsAuthenticated);
+
+                importModules.then(([component]) => {
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            }
+        }, {
+            path: '/events/invites',
+            name: 'events_invites',
+            getComponent(nextState, cb) {
+                const importModules = Promise.all([
+                    System.import('containers/EventsListPage'),
+                ]);
+
+                const renderRoute = loadModule(cb, UserIsAuthenticated);
+
+                importModules.then(([component]) => {
+                    renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
+            }
+        }, {
+            path: '/events/hosting',
+            name: 'events_hosting',
             getComponent(nextState, cb) {
                 const importModules = Promise.all([
                     System.import('containers/EventsListPage'),

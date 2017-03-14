@@ -261,11 +261,43 @@ a {
     margin-bottom: 3rem;
 }
 
+// Page Tab
+
+.mg-page-tab {
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+    margin-bottom: 20px;
+}
+
+.mg-page-tab__item {
+    float: left;
+    height: 46px;
+    text-align: center;
+}
+
+.mg-page-tab__link {
+    color: #212529;
+    display: block;
+    line-height: 46px;
+    overflow: hidden;
+    padding: 0 20px;
+    text-overflow: ellipsis;
+    transition: all 0.15s ease-in-out;
+    white-space: nowrap;
+    width: 100%;
+
+    &.is-active {
+        border-bottom: 4px solid #1a8cc9;
+        height: 46px;
+    }
+}
+
+
 // Profile
 
 .mg-profile {
     background: #fff;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
     margin-top: 60px;
     padding: 60px 20px 20px;
     position: relative;
@@ -274,7 +306,7 @@ a {
 
 .mg-profile__avatar {
     background: #fff;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
     border-radius: 100%;
     height: 120px;
     left: 50%;

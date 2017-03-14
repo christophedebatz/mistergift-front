@@ -39,7 +39,7 @@ class EventsListPage extends React.Component {
             return <Loader />;
         }
 
-        const content = events[0].published.length ? (
+        const content = events.published.length ? (
             <div className="mg-grid mg-wrap mg-grid--pull-padded">
                 events
             </div>
@@ -53,6 +53,22 @@ class EventsListPage extends React.Component {
             <div className="site-content">
                 <div className="mg-grid mg-wrap mg-grid--pull-padded mg-container--center mg-container--x-large">
                     <div className="mg-p-horizontal--small mg-size--1-of-2 mg-medium-size--5-of-6 mg-large-size--8-of-12">
+                        <nav className="mg-page-tab mg-clearfix">
+                            <ul className="mg-page-tab__list">
+                                <li className="mg-page-tab__item">
+                                    <Link to={`/events/`} className="mg-page-tab__link">All</Link>
+                                </li>
+
+                                <li className="mg-page-tab__item">
+                                    <Link to={`/events/`} className="mg-page-tab__link">Invites</Link>
+                                </li>
+
+                                <li className="mg-page-tab__item">
+                                    <Link to={`/events/`} className="mg-page-tab__link">Hosting</Link>
+                                </li>
+                            </ul>
+                        </nav>
+
                         <div className="events-description mg-p-bottom--large">
                             <h2 className="events-description__title">Events</h2>
                             <h3 className="">Share it by participating to life events</h3>
