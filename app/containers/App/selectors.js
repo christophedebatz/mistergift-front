@@ -45,7 +45,7 @@ const selectEvents = () => createSelector(
 
 const selectEventInvitations = () => createSelector(
     selectEvents(),
-    (eventState) => eventState.getIn(['data', 'invitation'])
+    (eventState) => eventState.get('data')
 );
 
 const selectEventCreation = () => createSelector(

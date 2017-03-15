@@ -20,7 +20,7 @@ class EventsListPage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.onLoad();
+        // this.props.onLoad();
     }
 
     showEventCreationModal(e) {
@@ -32,20 +32,20 @@ class EventsListPage extends React.Component {
     }
 
     render() {
-        console.log(this.props);
-        const events = this.props.events.get('data') || '';
-        const isLoaded = this.props.events.get('isLoaded') || '';
-        const errorMessage = this.props.events.get('errorMessage') || '';
+        const events = this.props.events.invitation || '';
+        // const events = this.props.events.get('data') || '';
+        // const isLoaded = this.props.events.get('isLoaded') || '';
+        // const errorMessage = this.props.events.get('errorMessage') || '';
 
-        if (!isLoaded) {
-            return <Loader />;
-        }
+        // if (!isLoaded) {
+        //     return <Loader />;
+        // }
 
-        let eventCards = events.invitation.map((invitationEvent) => {
-            return (<EventCard className="mg-large-size--1-of-2 mg-col mg-col--padded" event={invitationEvent} key={invitationEvent.id} />)
+        let eventCards = events.map((event) => {
+            return (<EventCard className="mg-large-size--1-of-2 mg-col mg-col--padded" event={event} key={event.id} />)
         })
 
-        const content = events.invitation.length ? (
+        const content = events.length ? (
             <div className="mg-grid mg-wrap mg-grid--pull-padded">
                 ${eventCards}
             </div>
