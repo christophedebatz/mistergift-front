@@ -51,8 +51,8 @@ function* watchFetchLogin() {
                 localStorage.setItem('token', payload.session.token);
                 localStorage.setItem('expireAt', payload.session.expireAt);
 
-                yield put(loadCurrentUser());
                 yield put(loginSuccess(payload.session.token));
+                yield put(loadCurrentUser());
 
                 forwardTo('/' + payload.id);
             }

@@ -135,10 +135,9 @@ export function updateUserError(message) {
     }
 }
 
-export function loadEvents(data) {
+export function loadEvents() {
     return {
-        type: LOAD_EVENTS,
-        data
+        type: LOAD_EVENTS
     }
 }
 

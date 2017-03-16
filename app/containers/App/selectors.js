@@ -43,11 +43,6 @@ const selectEvents = () => createSelector(
     (globalState) => globalState.get('events')
 );
 
-const selectEventInvitations = () => createSelector(
-    selectEvents(),
-    (eventState) => eventState.get('data')
-);
-
 const selectEventCreation = () => createSelector(
     selectGlobal(),
     (globalState) => globalState.get('events')

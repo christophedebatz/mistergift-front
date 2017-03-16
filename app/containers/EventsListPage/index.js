@@ -42,11 +42,11 @@ class EventsListPage extends React.Component {
 
         const allEvents = events.published.concat(events.invitation, events.admin);
 
-        let eventCards = allEvents.map((allEvent) => {
+        let eventCards = typeof allEvents !== 'undefined' && allEvents.length ? allEvents.map((allEvent) => {
             return (<EventCard className="mg-large-size--1-of-2 mg-col mg-col--padded" event={allEvent} key={allEvent.id} />)
-        })
+        }) : null
 
-        const content = allEvents.length ? (
+        const content = typeof allEvents !== 'undefined' && allEvents.length ? (
             <div className="mg-grid mg-wrap mg-grid--pull-padded">
                 ${eventCards}
             </div>

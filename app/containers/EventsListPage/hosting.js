@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 import { loadEvents } from '../App/actions'
-import { selectEventInvitations } from '../App/selectors'
+import { selectEvents } from '../App/selectors'
 
 import Loader from '../../components/Loader'
 import EventCreation from '../EventCreationPage'
@@ -40,11 +40,11 @@ class EventsListPage extends React.Component {
             return <Loader />;
         }
 
-        let eventCards = events.admin.map((adminEvent) => {
-            return (<EventCard className="mg-large-size--1-of-2 mg-col mg-col--padded" event={adminEvent} key={adminEvent.id} />)
-        })
+        let eventCards = typeof events.admin !== 'undefined' && events.admin.length ? events.admin.map((event) => {
+            return (<EventCard className="mg-large-size--1-of-2 mg-col mg-col--padded" event={event} key={event.id} />)
+        }) : null;
 
-        const content = events.admin.length ? (
+        const content = typeof events.admin !== 'undefined' && events.admin.length ? (
             <div className="mg-grid mg-wrap mg-grid--pull-padded">
                 ${eventCards}
             </div>
@@ -86,7 +86,7 @@ EventsListPage.propTypes = {
 
 const mapStateToProps = (state, props) => {
     return {
-        events: selectEventInvitations()(state),
+        events: selectEvents()(state),
     }
 }
 

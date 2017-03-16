@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 import { loadEvents } from '../App/actions'
-import { selectEventInvitations } from '../App/selectors'
+import { selectEvents } from '../App/selectors'
 
 import Loader from '../../components/Loader'
 import EventCreation from '../EventCreationPage'
@@ -20,7 +20,7 @@ class EventsListPage extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.onLoad();
+        this.props.onLoad();
     }
 
     showEventCreationModal(e) {
@@ -32,20 +32,19 @@ class EventsListPage extends React.Component {
     }
 
     render() {
-        const events = this.props.events.invitation || '';
-        // const events = this.props.events.get('data') || '';
-        // const isLoaded = this.props.events.get('isLoaded') || '';
-        // const errorMessage = this.props.events.get('errorMessage') || '';
+        const events = this.props.events.get('data') || '';
+        const isLoaded = this.props.events.get('isLoaded') || '';
+        const errorMessage = this.props.events.get('errorMessage') || '';
 
-        // if (!isLoaded) {
-        //     return <Loader />;
-        // }
+        if (!isLoaded) {
+            return <Loader />;
+        }
 
-        let eventCards = events.map((event) => {
+        let eventCards = typeof events.invitation !== 'undefined' && events.invitation.length ? events.invitation.map((event) => {
             return (<EventCard className="mg-large-size--1-of-2 mg-col mg-col--padded" event={event} key={event.id} />)
-        })
+        }) : null
 
-        const content = events.length ? (
+        const content = typeof events.invitation !== 'undefined' && events.invitation.length ? (
             <div className="mg-grid mg-wrap mg-grid--pull-padded">
                 ${eventCards}
             </div>
@@ -87,7 +86,7 @@ EventsListPage.propTypes = {
 
 const mapStateToProps = (state, props) => {
     return {
-        events: selectEventInvitations()(state),
+        events: selectEvents()(state),
     }
 }
 
