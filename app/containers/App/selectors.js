@@ -73,7 +73,6 @@ export {
     selectUser,
     selectUserSettings,
     selectEvents,
-    selectEventInvitations,
     selectEventCreation,
     selectLocationState,
 };
