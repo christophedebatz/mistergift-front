@@ -46,6 +46,18 @@ class RegisterPage extends React.Component {
         if (isAuthenticated) changeRoute('/');
     }
 
+    handleInputChange(event) {
+        this.setState({[event.target.name]: event.target.value})
+    }
+
+    handleSubmit(event) {
+        event.preventDefault()
+
+        const { firstName, lastName, email, password } = this.state
+
+        this.props.login(firstName, lastName, email, password);
+    }
+
     render() {
         return (
             <div className="mg-grid mg-grid--align-center mg-container--center mg-container--small">
@@ -112,21 +124,6 @@ class RegisterPage extends React.Component {
                 </form>
             </div>
         )
-    }
-
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
-        event.preventDefault()
-        this.props.register(this.state.firstName, this.state.lastName, this.state.email, this.state.password)
     }
 }
 

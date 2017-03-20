@@ -17,10 +17,10 @@ class UserViewPage extends React.Component {
     }
 
     render() {
-        const currentUser = this.props.currentUser ? this.props.currentUser : '';
-        const user = this.props.user.get('data') ? this.props.user.get('data') : '';
-        const isLoaded = this.props.user.get('isLoaded') ? this.props.user.get('isLoaded') : '';
-        const errorMessage = this.props.user.get('errorMessage') ? this.props.user.get('errorMessage') : '';
+        const currentUser = this.props.currentUser || '';
+        const user = this.props.user.get('data') || '';
+        const isLoaded = this.props.user.get('isLoaded') || '';
+        const errorMessage = this.props.user.get('errorMessage') || '';
 
         if (!isLoaded || typeof user == 'undefined') {
             return <Loader />;
