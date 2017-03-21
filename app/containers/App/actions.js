@@ -34,10 +34,9 @@ export function register(firstName, lastName, email, password) {
     }
 }
 
-export function registerSuccess(token) {
+export function registerSuccess() {
     return {
-        type: REGISTER_SUCCESS,
-        token
+        type: REGISTER_SUCCESS
     }
 }
 

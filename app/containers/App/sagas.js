@@ -43,8 +43,8 @@ function* watchFetchLogin() {
                 password: password
             });
 
-            if (response.err) {
-                yield put(loginError(response.err));
+            if (response.error) {
+                yield put(loginError(response.error));
             } else {
                 const payload = response.data.payload;
 
@@ -76,17 +76,12 @@ function* watchFetchRegister() {
                 password: password
             });
 
-            if (response.err) {
-                yield put(registerError(data.err));
+            if (response.error) {
+                yield put(registerError(response.error));
             } else {
-                const payload = response.data.payload;
+                yield put(registerSuccess());
 
-                localStorage.setItem('token', payload.session.token);
-                localStorage.setItem('expireAt', payload.session.expireAt);
-
-                yield put(registerSuccess(payload.session.token));
-
-                forwardTo('/' + payload.id);
+                forwardTo('/login');
             }
         } catch(error) {
             yield put(registerError(error));
