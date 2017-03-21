@@ -24,19 +24,20 @@ import {
     START_USER_SESSION,
 } from './constants'
 
-export function register(name, email, password) {
+export function register(firstName, lastName, email, password) {
     return {
         type: REGISTER,
-        name,
+        firstName,
+        lastName,
         email,
         password
     }
 }
 
-export function registerSuccess(data) {
+export function registerSuccess(token) {
     return {
         type: REGISTER_SUCCESS,
-        data
+        token
     }
 }
 

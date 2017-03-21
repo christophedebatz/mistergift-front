@@ -1,13 +1,15 @@
-import { fromJS } from 'immutable'
+import Immutable from 'immutable'
 
 import {
     REGISTER_SUCCESS,
     REGISTER_ERROR
 } from '../constants';
 
-const initialState = fromJS({
+const localStorageToken = localStorage.getItem('token');
+
+const initialState = Immutable.fromJS({
     isRegistering: false,
-    token: null,
+    token: localStorageToken,
     errorMessage: null
 });
 
@@ -16,10 +18,12 @@ export default (state = initialState, action) => {
         case REGISTER_SUCCESS:
             return state
                 .set('isRegistering', true)
+                .set('token', action.token)
                 .set('errorMessage', null);
         case REGISTER_ERROR:
             return state
                 .set('isRegistering', false)
+                .set('token', null)
                 .set('errorMessage', action.message);
         default:
             return state;

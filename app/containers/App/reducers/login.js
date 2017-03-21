@@ -1,11 +1,9 @@
-import { combineReducers } from 'redux-immutable'
+import Immutable from 'immutable'
 
 import {
     LOGIN_SUCCESS,
     LOGIN_ERROR
 } from '../constants';
-
-import Immutable from 'immutable';
 
 const localStorageToken = localStorage.getItem('token');
 
