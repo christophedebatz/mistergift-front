@@ -148,10 +148,15 @@ export function eventsLoaded(data) {
     }
 }
 
-export function eventCreation(name) {
+export function eventCreation(name, status, description, start_date, end_date, address) {
     return {
         type: EVENT_CREATION,
-        name
+        name,
+        status,
+        description,
+        start_date,
+        end_date,
+        address
     }
 }
 

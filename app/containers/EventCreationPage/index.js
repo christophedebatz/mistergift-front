@@ -16,6 +16,9 @@ class EventsCreationPage extends React.Component {
             description: '',
             modalIsOpen: false
         };
+
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentWillMount() {
@@ -119,7 +122,10 @@ class EventsCreationPage extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.props.eventCreation(this.state.name)
+
+        const { name, description } = this.state
+
+        this.props.eventCreation(name, description)
     }
 
 }
@@ -136,8 +142,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        eventCreation: (name) => {
-            dispatch(eventCreation(name));
+        eventCreation: (name, description) => {
+            dispatch(eventCreation('name test', 'PUBLISHED', 'description test', '10/04/2017', '11/04/2017', 'Paris'));
         },
 
         changeRoute: (url) => dispatch(push(url))

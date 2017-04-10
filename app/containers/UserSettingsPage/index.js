@@ -114,8 +114,11 @@ class UserSettingsPage extends React.Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault()
-        this.props.updateUser(this.state.name, this.state.email, this.state.password)
+        event.preventDefault();
+
+        const { name, email, password } = this.state
+
+        this.props.updateUser(name, email, password);
     }
 }
 

@@ -66,7 +66,7 @@ class RegisterPage extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        const {firstName, lastName, email, password} = this.state
+        const { firstName, lastName, email, password } = this.state
 
         this.props.register(firstName, lastName, email, password);
     }

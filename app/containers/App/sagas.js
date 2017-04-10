@@ -192,20 +192,29 @@ function* watchFetchEventCreation() {
     const requestChan = yield actionChannel(EVENT_CREATION);
 
     while (true) {
-        const { name } = yield take(requestChan);
+        try {
+            const { name, status, description, start_date, end_date, address } = yield take(requestChan);
 
-        const response = yield call(post, '/events', {
-            name: name
-        });
+            const response = yield call(post, '/events', {
+                name: name,
+                status: status,
+                description: description,
+                start_date: start_date,
+                end_date: end_date,
+                address: address
+            });
 
-        const payload = response.data.payload
+            const payload = response.data.payload
 
-        if (response.err) {
-            yield put(eventCreationError('error'));
-        } else {
-            yield put(eventCreationSuccess());
+            if (response.error) {
+                yield put(eventCreationError(response.error));
+            } else {
+                yield put(eventCreationSuccess());
 
-            forwardTo('/' + payload.id);
+                forwardTo('/events/' + payload.id);
+            }
+        } catch(error) {
+            yield put(eventCreationError(error));
         }
     }
 }
