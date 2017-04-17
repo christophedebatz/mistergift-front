@@ -6,6 +6,12 @@ import { eventCreation } from '../App/actions'
 import { selectEventCreation } from '../App/selectors'
 
 import Modal from 'react-modal'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
+
+import 'react-datepicker/dist/react-datepicker.css'
+
+const m = moment();
 
 class EventsCreationPage extends React.Component {
     constructor(props) {
@@ -14,11 +20,17 @@ class EventsCreationPage extends React.Component {
         this.state = {
             name: '',
             description: '',
+            startDate: m,
+            endDate: m.add(1, 'd'),
+            status: '',
             modalIsOpen: false
         };
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleCloseModal = this.handleCloseModal.bind(this)
+        this.handleStartDateChange = this.handleStartDateChange.bind(this)
+        this.handleEndDateChange = this.handleEndDateChange.bind(this)
     }
 
     componentWillMount() {
@@ -39,6 +51,43 @@ class EventsCreationPage extends React.Component {
         });
     }
 
+    handleStartDateChange(date) {
+        this.setState({
+            startDate: date
+        });
+    }
+
+    handleEndDateChange(date) {
+        this.setState({
+            endDate: date
+        });
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit(event) {
+        event.preventDefault()
+
+        const { name, description, startDate, endDate, status } = this.state
+        let start, end, s;
+
+        start = startDate.toISOString();
+        end = endDate.toISOString();
+
+        if (status) s = 'published';
+        else s = null;
+
+        this.props.eventCreation(name, description, start, end, s)
+    }
+
     render() {
         const modalStyles = {
             content: {
@@ -57,7 +106,7 @@ class EventsCreationPage extends React.Component {
                 <Modal
                     contentLabel="Event Creation"
                     isOpen={this.state.modalIsOpen}
-                    onRequestClose={this.handleCloseModal.bind(this)}
+                    onRequestClose={ this.handleCloseModal }
                     portalClassName="mg-modal"
                     style={modalStyles}>
 
@@ -79,19 +128,45 @@ class EventsCreationPage extends React.Component {
                         </div>
 
                         <div className="mg-form-element">
-                            <label className="mg-form-element__label" htmlFor="description">Date</label>
+                            <label className="mg-form-element__label" htmlFor="description">Start</label>
 
                             <div className="mg-form-element__control">
-                                <input className="mg-input" id="name" type="date" name="date" value={ this.state.date } placeholder="08/02/2017" onChange={ this.handleInputChange }/>
+                                <DatePicker
+                                    className="mg-input"
+                                    selected={ this.state.startDate }
+                                    selectsStart
+                                    dateFormat="DD/MM/YYYY"
+                                    startDate={ this.state.startDate }
+                                    endDate={ this.state.endDate }
+                                    onChange={ this.handleStartDateChange }
+                                    excludeDates={[moment(), moment().subtract(1, "days")]}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="mg-form-element">
+                            <label className="mg-form-element__label" htmlFor="description">End</label>
+
+                            <div className="mg-form-element__control">
+                                <DatePicker
+                                    className="mg-input"
+                                    selected={ this.state.endDate }
+                                    selectsEnd
+                                    dateFormat="DD/MM/YYYY"
+                                    startDate={ this.state.startDate }
+                                    endDate={ this.state.endDate }
+                                    onChange={ this.handleEndDateChange }
+                                    excludeDates={[moment(), moment().subtract(1, "days")]}
+                                />
                             </div>
                         </div>
 
                         <div className="mg-form-element">
                             <div className="mg-form-element__control">
                                 <span className="mg-checkbox">
-                                    <input type="checkbox" name="publish" id="publish" checked="" />
+                                    <input type="checkbox" name="status" id="status" checked={ this.state.status } onChange={ this.handleInputChange } />
 
-                                    <label className="mg-checkbox__label" htmlFor="publish">
+                                    <label className="mg-checkbox__label" htmlFor="status">
                                         <span className="mg-checkbox--faux"></span>
                                         <span className="mg-form-element__label">Publish</span>
                                     </label>
@@ -100,7 +175,7 @@ class EventsCreationPage extends React.Component {
                         </div>
 
                         <div className="mg-form-element mg-p-top--large mg-float--right">
-                            <button onClick={this.handleCloseModal.bind(this)} className="mg-button mg-button--brand" type="button">Close</button>
+                            <button onClick={ this.handleCloseModal } className="mg-button" type="button">Close</button>
 
                             <button className="mg-button mg-button--brand">Create Event</button>
                         </div>
@@ -109,25 +184,6 @@ class EventsCreationPage extends React.Component {
             </div>
         )
     }
-
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
-        event.preventDefault()
-
-        const { name, description } = this.state
-
-        this.props.eventCreation(name, description)
-    }
-
 }
 
 EventsCreationPage.contextTypes = {
@@ -142,8 +198,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        eventCreation: (name, description) => {
-            dispatch(eventCreation('name test', 'PUBLISHED', 'description test', '10/04/2017', '11/04/2017', 'Paris'));
+        eventCreation: (name, description, start, end, status) => {
+            dispatch(eventCreation(name, description, start, end, status));
         },
 
         changeRoute: (url) => dispatch(push(url))

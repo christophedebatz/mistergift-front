@@ -123,8 +123,7 @@ export function updateUser(firstName, lastName, email, password) {
 
 export function updateUserSuccess() {
     return {
-        type: UPDATE_USER_SUCCESS,
-        data
+        type: UPDATE_USER_SUCCESS
     }
 }
 
@@ -148,15 +147,14 @@ export function eventsLoaded(data) {
     }
 }
 
-export function eventCreation(name, status, description, start_date, end_date, address) {
+export function eventCreation(name, description, start, end, status) {
     return {
         type: EVENT_CREATION,
         name,
-        status,
         description,
-        start_date,
-        end_date,
-        address
+        start,
+        end,
+        status
     }
 }
 

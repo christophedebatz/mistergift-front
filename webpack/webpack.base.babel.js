@@ -80,6 +80,15 @@ module.exports = (options) => ({
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV),
             }
         }),
+
+        new webpack.ContextReplacementPlugin(/^\.\/locale$/, context => {
+            if (!/\/moment\//.test(context.context)) { return }
+
+            Object.assign(context, {
+                regExp: /^\.\/(en-gb|fr)/,
+                request: '../../locale'
+            })
+        }),
     ]),
 
     resolve: {

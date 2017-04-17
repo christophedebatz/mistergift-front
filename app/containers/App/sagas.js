@@ -193,18 +193,19 @@ function* watchFetchEventCreation() {
 
     while (true) {
         try {
-            const { name, status, description, start_date, end_date, address } = yield take(requestChan);
+            const { name, description, start, end, status } = yield take(requestChan);
 
             const response = yield call(post, '/events', {
                 name: name,
-                status: status,
                 description: description,
-                start_date: start_date,
-                end_date: end_date,
-                address: address
+                startDate: start,
+                endDate: end,
+                status: status
             });
 
             const payload = response.data.payload
+
+            console.log('payload', payload);
 
             if (response.error) {
                 yield put(eventCreationError(response.error));
