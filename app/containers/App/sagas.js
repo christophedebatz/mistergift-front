@@ -6,6 +6,7 @@ import {
     LOGIN,
     LOAD_CURRENT_USER,
     LOAD_USER,
+    LOAD_USER_WISHLIST,
     LOAD_USER_SETTINGS,
     UPDATE_USER,
     LOAD_EVENTS,
@@ -18,6 +19,8 @@ import {
     registerError,
     loginSuccess,
     loginError,
+    loadUserWishlist,
+    userWishlistLoaded,
     loadCurrentUser,
     currentUserLoaded,
     userLoaded,
@@ -133,6 +136,22 @@ function* watchFetchUser() {
      }
 };
 
+function* watchFetchUserWishlist() {
+    const requestChan = yield actionChannel(LOAD_USER_WISHLIST);
+
+    while (true) {
+        const { userId } = yield take(requestChan);
+
+        const user = yield call(get, '/users/' + userId + '/gifts');
+
+        if (!user) {
+            return;
+        }
+
+        yield put(userWishlistLoaded(user.data.content));
+     }
+};
+
 function* watchFetchUserSettings() {
     const requestChan = yield actionChannel(LOAD_USER_SETTINGS);
 
@@ -193,15 +212,9 @@ function* watchFetchEventCreation() {
 
     while (true) {
         try {
-            const { name, description, start, end, status } = yield take(requestChan);
+            const { request } = yield take(requestChan);
 
-            const response = yield call(post, '/events', {
-                name: name,
-                description: description,
-                startDate: start,
-                endDate: end,
-                status: status
-            });
+            const response = yield call(post, '/events', request);
 
             const payload = response.data.payload
 
@@ -226,6 +239,7 @@ export default [
     watchStartUserSession,
     watchFetchCurrentUser,
     watchFetchUser,
+    watchFetchUserWishlist,
     watchFetchUserSettings,
     watchUpdateUser,
     watchFetchEvents,

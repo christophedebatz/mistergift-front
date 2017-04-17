@@ -11,6 +11,9 @@ import {
     LOAD_USER,
     LOAD_USER_SUCCESS,
     LOAD_USER_ERROR,
+    LOAD_USER_WISHLIST,
+    LOAD_USER_WISHLIST_SUCCESS,
+    LOAD_USER_WISHLIST_ERROR,
     LOAD_USER_SETTINGS,
     LOAD_USER_SETTINGS_SUCCESS,
     LOAD_EVENTS,
@@ -82,7 +85,6 @@ export function currentUserLoaded(data) {
     }
 }
 
-
 export function loadUser(userId) {
     return {
         type: LOAD_USER,
@@ -97,10 +99,23 @@ export function userLoaded(data) {
     }
 }
 
-export function loadUserSettings(data) {
+export function loadUserWishlist(userId) {
     return {
-        type: LOAD_USER_SETTINGS,
+        type: LOAD_USER_WISHLIST,
+        userId
+    }
+}
+
+export function userWishlistLoaded(data) {
+    return {
+        type: LOAD_USER_WISHLIST_SUCCESS,
         data
+    }
+}
+
+export function loadUserSettings() {
+    return {
+        type: LOAD_USER_SETTINGS
     }
 }
 
@@ -147,14 +162,10 @@ export function eventsLoaded(data) {
     }
 }
 
-export function eventCreation(name, description, start, end, status) {
+export function eventCreation(request) {
     return {
         type: EVENT_CREATION,
-        name,
-        description,
-        start,
-        end,
-        status
+        request
     }
 }
 

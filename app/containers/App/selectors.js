@@ -33,6 +33,11 @@ const selectUser = () => createSelector(
     (globalState) => globalState.get('user')
 );
 
+const selectUserWishlist = () => createSelector(
+    selectUser(),
+    (userState) => userState.get('wishlist')
+);
+
 const selectUserSettings = () => createSelector(
     selectGlobal(),
     (globalState) => globalState.get('settings')
@@ -71,6 +76,7 @@ export {
     selectLogin,
     selectCurrentUser,
     selectUser,
+    selectUserWishlist,
     selectUserSettings,
     selectEvents,
     selectEventCreation,

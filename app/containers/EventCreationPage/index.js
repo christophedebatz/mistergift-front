@@ -76,16 +76,16 @@ class EventsCreationPage extends React.Component {
     handleSubmit(event) {
         event.preventDefault()
 
-        const { name, description, startDate, endDate, status } = this.state
-        let start, end, s;
+        const request = {
+            name: this.state.name,
+            description: this.state.description,
+            startDate: this.state.startDate.toISOString(),
+            endDate: this.state.endDate.toISOString()
+        };
 
-        start = startDate.toISOString();
-        end = endDate.toISOString();
+        if (status) request.status = 'PUBLISHED';
 
-        if (status) s = 'published';
-        else s = null;
-
-        this.props.eventCreation(name, description, start, end, s)
+        this.props.eventCreation(request)
     }
 
     render() {
@@ -139,7 +139,6 @@ class EventsCreationPage extends React.Component {
                                     startDate={ this.state.startDate }
                                     endDate={ this.state.endDate }
                                     onChange={ this.handleStartDateChange }
-                                    excludeDates={[moment(), moment().subtract(1, "days")]}
                                 />
                             </div>
                         </div>
@@ -156,7 +155,6 @@ class EventsCreationPage extends React.Component {
                                     startDate={ this.state.startDate }
                                     endDate={ this.state.endDate }
                                     onChange={ this.handleEndDateChange }
-                                    excludeDates={[moment(), moment().subtract(1, "days")]}
                                 />
                             </div>
                         </div>
@@ -198,8 +196,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        eventCreation: (name, description, start, end, status) => {
-            dispatch(eventCreation(name, description, start, end, status));
+        eventCreation: (request) => {
+            dispatch(eventCreation(request));
         },
 
         changeRoute: (url) => dispatch(push(url))
