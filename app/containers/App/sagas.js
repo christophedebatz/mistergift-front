@@ -21,9 +21,11 @@ import {
     loginError,
     loadUserWishlist,
     userWishlistLoaded,
+    userWishlistError,
     loadCurrentUser,
     currentUserLoaded,
     userLoaded,
+    userError,
     userSettingsLoaded,
     updateUserSuccess,
     updateUserError,
@@ -51,13 +53,13 @@ function* watchFetchLogin() {
             } else {
                 const payload = response.data.payload;
 
-                localStorage.setItem('token', payload.session.token);
-                localStorage.setItem('expireAt', payload.session.expireAt);
+                localStorage.setItem('session', JSON.stringify(payload.session));
+                localStorage.setItem('user', JSON.stringify({data: payload.user}));
 
                 yield put(loginSuccess(payload.session.token));
-                yield put(loadCurrentUser());
+                yield put(currentUserLoaded(payload.user));
 
-                forwardTo('/' + payload.id);
+                forwardTo('/' + payload.user.id);
             }
         } catch(error) {
             yield put(loginError(error));
@@ -110,7 +112,8 @@ function* watchFetchCurrentUser() {
     while (true) {
         const action = yield take(requestChan);
 
-        const currentUser = yield call(get, '/me/');
+        // const currentUser = yield call(get, '/me/');
+        const currentUser = JSON.parse(localStorage.getItem('user'));
 
         if (!currentUser) {
             return;
@@ -124,15 +127,19 @@ function* watchFetchUser() {
     const requestChan = yield actionChannel(LOAD_USER);
 
     while (true) {
-        const { userId } = yield take(requestChan);
+        try {
+            const { userId } = yield take(requestChan);
 
-        const user = yield call(get, '/users/' + userId);
+            const user = yield call(get, '/users/' + userId);
 
-        if (!user) {
-            return;
+            if (!user) {
+                return;
+            }
+
+            yield put(userLoaded(user.data));
+        } catch(error) {
+            yield put(userError('error'));
         }
-
-        yield put(userLoaded(user.data));
      }
 };
 
@@ -140,15 +147,19 @@ function* watchFetchUserWishlist() {
     const requestChan = yield actionChannel(LOAD_USER_WISHLIST);
 
     while (true) {
-        const { userId } = yield take(requestChan);
+        try {
+            const { userId } = yield take(requestChan);
 
-        const user = yield call(get, '/users/' + userId + '/gifts');
+            const user = yield call(get, '/users/' + userId + '/gifts');
 
-        if (!user) {
-            return;
+            if (!user) {
+                return;
+            }
+
+            yield put(userWishlistLoaded(user.data.content));
+        } catch(error) {
+            yield put(userWishlistError('error'));
         }
-
-        yield put(userWishlistLoaded(user.data.content));
      }
 };
 
@@ -216,9 +227,7 @@ function* watchFetchEventCreation() {
 
             const response = yield call(post, '/events', request);
 
-            const payload = response.data.payload
-
-            console.log('payload', payload);
+            const payload = response.data.payload;
 
             if (response.error) {
                 yield put(eventCreationError(response.error));

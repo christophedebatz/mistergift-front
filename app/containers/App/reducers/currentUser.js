@@ -5,8 +5,10 @@ import {
     LOAD_CURRENT_USER_ERROR
 } from '../constants';
 
+const localStorageUser = JSON.parse(localStorage.getItem('user')) || null;
+
 const initialState = fromJS({
-    data: null,
+    data: localStorageUser,
     isLoaded: false,
     errorMessage: null
 });

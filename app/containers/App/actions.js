@@ -58,10 +58,11 @@ export function login(email, password) {
     }
 }
 
-export function loginSuccess(token) {
+export function loginSuccess(session, user) {
     return {
         type: LOGIN_SUCCESS,
-        token
+        session,
+        user
     }
 }
 
@@ -99,6 +100,12 @@ export function userLoaded(data) {
     }
 }
 
+export function userError() {
+    return {
+        type: LOAD_USER_ERROR
+    }
+}
+
 export function loadUserWishlist(userId) {
     return {
         type: LOAD_USER_WISHLIST,
@@ -110,6 +117,12 @@ export function userWishlistLoaded(data) {
     return {
         type: LOAD_USER_WISHLIST_SUCCESS,
         data
+    }
+}
+
+export function userWishlistError() {
+    return {
+        type: LOAD_USER_WISHLIST_ERROR
     }
 }
 

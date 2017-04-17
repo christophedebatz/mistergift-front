@@ -5,11 +5,11 @@ import {
     LOGIN_ERROR
 } from '../constants';
 
-const localStorageToken = localStorage.getItem('token');
+const localStorageSession = JSON.parse(localStorage.getItem('session')) || {};
 
 const initialState = Immutable.fromJS({
-    loggedIn: localStorageToken !== null,
-    token: localStorageToken,
+    loggedIn: !!localStorageSession.token,
+    token: localStorageSession.token,
     errorMessage: null
 });
 

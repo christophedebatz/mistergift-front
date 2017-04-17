@@ -14,7 +14,7 @@ export function get(url, query = {}) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'X-MG-AUTH': localStorage.getItem('token')
+            'X-MG-AUTH': JSON.parse(localStorage.getItem('session') || {}).token
         }
     });
 }
@@ -26,7 +26,7 @@ export function post(url, params = {}) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-MG-AUTH': localStorage.getItem('token')
+            'X-MG-AUTH': JSON.parse(localStorage.getItem('session') || {}).token
         },
         body: JSON.stringify(params)
     });

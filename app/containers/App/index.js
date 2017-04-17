@@ -24,9 +24,9 @@ class App extends React.Component {
     render () {
         const className = this.props.isHome ? 'site-home' : '';
 
-        const currentUser = this.props.currentUser ? this.props.currentUser.get('data') : '';
-        const isLoggedIn = this.props.isLoggedIn
-        const isHome = this.props.isHome
+        const currentUser = this.props.currentUser ? this.props.currentUser.get('data') : {};
+        const isLoggedIn = this.props.isLoggedIn;
+        const isHome = this.props.isHome;
 
         return (
             <div className={`${className} ${isLoggedIn ? 'is-logged' : ''}`}>
