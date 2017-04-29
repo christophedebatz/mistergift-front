@@ -10,6 +10,7 @@ import Loader from '../../components/Loader'
 import ErrorMessage from '../../components/ErrorMessage'
 import UserCard from '../../components/UserCard'
 import Wishlist from '../../components/Wishlist'
+import Icon, { GLYPHS } from '../../components/Icon'
 
 import { selectUser, selectUserWishlist } from '../App/selectors'
 import { loadUser, loadUserWishlist } from '../App/actions'
@@ -30,7 +31,7 @@ class UserViewPage extends React.Component {
             return <Loader />;
         }
 
-        let wishlistButton = currentUser.id == user.id ? <button className="mg-button mg-button--brand mg-float--right">Add +</button> : '';
+        let wishlistButton = currentUser.id == user.id ? <button className="mg-button mg-button--brand mg-float--right">Add <Icon glyph={GLYPHS.PLUS} /></button> : '';
 
         let wishlistItems = !_.isEmpty(wishlist) ? <Wishlist items={wishlist} /> : <ErrorMessage type="empty" />;
 

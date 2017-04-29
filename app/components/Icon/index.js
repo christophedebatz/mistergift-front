@@ -2,6 +2,7 @@ import React from 'react'
 
 export const GLYPHS = {
     CARET_DOWN: require('styles/images/caret-down.svg'),
+    PLUS: require('styles/images/plus.svg')
 };
 
 class Icon extends React.Component {

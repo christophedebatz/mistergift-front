@@ -7,6 +7,8 @@ import { getConfig } from './config';
 
 const apiBaseUrl = getConfig('apiBaseUrl');
 
+const localStorageSession = JSON.parse(localStorage.getItem('session')) || {};
+
 export function get(url, query = {}) {
     let fullUrl = apiBaseUrl + url;
 
@@ -14,7 +16,7 @@ export function get(url, query = {}) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'X-MG-AUTH': JSON.parse(localStorage.getItem('session') || {}).token
+            'X-MG-AUTH': localStorageSession.token
         }
     });
 }
@@ -26,7 +28,19 @@ export function post(url, params = {}) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-MG-AUTH': JSON.parse(localStorage.getItem('session') || {}).token
+            'X-MG-AUTH': localStorageSession.token
+        },
+        body: JSON.stringify(params)
+    });
+}
+
+export function postRegister(url, params = {}) {
+    let fullUrl = apiBaseUrl + url;
+
+    return request(fullUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(params)
     });

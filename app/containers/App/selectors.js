@@ -53,6 +53,11 @@ const selectEventCreation = () => createSelector(
     (globalState) => globalState.get('events')
 );
 
+const selectProductCreation = () => createSelector(
+    selectGlobal(),
+    (globalState) => globalState.get('products')
+);
+
 const selectLocationState = () => {
     let prevRoutingState;
     let prevRoutingStateJS;
@@ -80,5 +85,6 @@ export {
     selectUserSettings,
     selectEvents,
     selectEventCreation,
+    selectProductCreation,
     selectLocationState,
 };

@@ -24,6 +24,12 @@ import {
     EVENT_CREATION,
     EVENT_CREATION_SUCCESS,
     EVENT_CREATION_ERROR,
+    PRODUCT_CREATION,
+    PRODUCT_CREATION_SUCCESS,
+    PRODUCT_CREATION_ERROR,
+    USER_GIFT_CREATION,
+    USER_GIFT_CREATION_SUCCESS,
+    USER_GIFT_CREATION_ERROR,
     START_USER_SESSION,
 } from './constants'
 
@@ -191,6 +197,46 @@ export function eventCreationSuccess() {
 export function eventCreationError(message) {
     return {
         type: EVENT_CREATION_ERROR,
+        message
+    }
+}
+
+export function productCreation(request) {
+    return {
+        type: PRODUCT_CREATION,
+        request
+    }
+}
+
+export function productCreationSuccess() {
+    return {
+        type: PRODUCT_CREATION_SUCCESS
+    }
+}
+
+export function productCreationError(message) {
+    return {
+        type: PRODUCT_CREATION_ERROR,
+        message
+    }
+}
+
+export function userGiftCreation(request) {
+    return {
+        type: USER_GIFT_CREATION,
+        request
+    }
+}
+
+export function userGiftCreationSuccess() {
+    return {
+        type: USER_GIFT_CREATION_SUCCESS
+    }
+}
+
+export function userGiftCreationError(message) {
+    return {
+        type: USER_GIFT_CREATION_ERROR,
         message
     }
 }

@@ -106,7 +106,7 @@ class EventsCreationPage extends React.Component {
                 <Modal
                     contentLabel="Event Creation"
                     isOpen={this.state.modalIsOpen}
-                    onRequestClose={ this.handleCloseModal }
+                    onRequestClose={this.handleCloseModal}
                     portalClassName="mg-modal"
                     style={modalStyles}>
 
@@ -133,12 +133,12 @@ class EventsCreationPage extends React.Component {
                             <div className="mg-form-element__control">
                                 <DatePicker
                                     className="mg-input"
-                                    selected={ this.state.startDate }
+                                    selected={ this.state.startDate}
                                     selectsStart
                                     dateFormat="DD/MM/YYYY"
-                                    startDate={ this.state.startDate }
-                                    endDate={ this.state.endDate }
-                                    onChange={ this.handleStartDateChange }
+                                    startDate={ this.state.startDate}
+                                    endDate={ this.state.endDate}
+                                    onChange={ this.handleStartDateChange}
                                 />
                             </div>
                         </div>
@@ -149,12 +149,12 @@ class EventsCreationPage extends React.Component {
                             <div className="mg-form-element__control">
                                 <DatePicker
                                     className="mg-input"
-                                    selected={ this.state.endDate }
+                                    selected={this.state.endDate}
                                     selectsEnd
                                     dateFormat="DD/MM/YYYY"
-                                    startDate={ this.state.startDate }
-                                    endDate={ this.state.endDate }
-                                    onChange={ this.handleEndDateChange }
+                                    startDate={this.state.startDate}
+                                    endDate={this.state.endDate}
+                                    onChange={this.handleEndDateChange}
                                 />
                             </div>
                         </div>

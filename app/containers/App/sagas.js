@@ -31,10 +31,16 @@ import {
     updateUserError,
     eventsLoaded,
     eventCreationSuccess,
-    eventCreationError
+    eventCreationError,
+    productCreation,
+    productCreationSuccess,
+    productCreationError,
+    userGiftCreation,
+    userGiftCreationSuccess,
+    userGiftCreationError
 } from './actions';
 
-import { get, post, update, postLogin } from '../../utils/contentProvider';
+import { get, post, update, postLogin, postRegister } from '../../utils/contentProvider';
 
 function* watchFetchLogin() {
     const requestChan = yield actionChannel(LOGIN);
@@ -71,25 +77,21 @@ function* watchFetchRegister() {
     const requestChan = yield actionChannel(REGISTER);
 
     while (true) {
-        try {
-            const { firstName, lastName, email, password } = yield take(requestChan);
+        const { firstName, lastName, email, password } = yield take(requestChan);
 
-            const response = yield call(post, '/users', {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                password: password
-            });
+        const response = yield call(postRegister, '/users', {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        });
 
-            if (response.error) {
-                yield put(registerError(response.error));
-            } else {
-                yield put(registerSuccess());
+        if (response.error) {
+            yield put(registerError(response.error));
+        } else {
+            yield put(registerSuccess());
 
-                forwardTo('/login');
-            }
-        } catch(error) {
-            yield put(registerError(error));
+            forwardTo('/login');
         }
     }
 }
@@ -227,7 +229,7 @@ function* watchFetchEventCreation() {
 
             const response = yield call(post, '/events', request);
 
-            const payload = response.data.payload;
+            const payload = response.data;
 
             if (response.error) {
                 yield put(eventCreationError(response.error));
@@ -238,6 +240,29 @@ function* watchFetchEventCreation() {
             }
         } catch(error) {
             yield put(eventCreationError(error));
+        }
+    }
+}
+
+function* watchFetchProductCreation() {
+    const requestChan = yield actionChannel(EVENT_CREATION);
+
+    while (true) {
+        try {
+            const { request } = yield take(requestChan);
+
+            const response = yield call(post, '/products', request);
+
+            const payload = response.data;
+
+            if (response.error) {
+                yield put(productCreationError(response.error));
+            } else {
+                yield put(productCreationSuccess());
+                yield put(userGiftCreationSuccess());
+            }
+        } catch(error) {
+            yield put(productCreationError(error));
         }
     }
 }

@@ -11,9 +11,11 @@ const loadModule = (cb, hoc = null) => (componentModule) => {
     else cb(null, componentModule.default);
 };
 
+const localStorageSession = JSON.parse(localStorage.getItem('session')) || {};
+
 const UserIsAuthenticated = UserAuthWrapper({
     authSelector: state => state.get('login'),
-    predicate: authData => JSON.parse(localStorage.getItem('session') || {}).token,
+    predicate: authData => localStorageSession.token,
     redirectAction: routerActions.replace,
     wrapperDisplayName: 'UserIsAuthenticated'
 });

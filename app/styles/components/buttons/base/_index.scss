@@ -70,6 +70,15 @@
             margin-left: $spacing-xx-small;
         }
     }
+
+    .#{$css-prefix}icon {
+        display: inline-block;
+        fill: #fff;
+        height: .75rem;
+        margin-top: 8px;
+        vertical-align: top;
+        width: .75rem;
+    }
 }
 
 .#{$css-prefix}button-space-left {
