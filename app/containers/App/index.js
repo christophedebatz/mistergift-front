@@ -13,8 +13,8 @@ import { startUserSession } from './actions'
 import { selectCurrentUser, selectLoggedInUser, selectLogin } from './selectors'
 
 import Metas from 'components/Metas'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+import Header from 'components/Header'
+import Footer from 'components/Footer'
 
 class App extends React.Component {
     componentDidMount() {

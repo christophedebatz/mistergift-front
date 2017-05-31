@@ -5,7 +5,7 @@ import { updateUser } from '../App/actions'
 import { loadUserSettings } from '../App/actions'
 import { selectUserSettings } from '../App/selectors'
 
-import Loader from '../../components/Loader'
+import Loader from 'components/Loader'
 
 class UserSettingsPage extends React.Component {
     constructor(props, context) {

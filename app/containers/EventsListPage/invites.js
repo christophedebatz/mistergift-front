@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import { loadEvents } from '../App/actions'
 import { selectEvents } from '../App/selectors'
 
-import Loader from '../../components/Loader'
+import Loader from 'components/Loader'
 import EventCreation from '../EventCreationPage'
-import EventCard from '../../components/EventCard'
-import EventNavigation from '../../components/EventNavigation'
+import EventCard from 'components/EventCard'
+import EventNavigation from 'components/EventNavigation'
 
 class EventsListPage extends React.Component {
     constructor(props) {

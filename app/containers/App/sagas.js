@@ -11,6 +11,7 @@ import {
     UPDATE_USER,
     LOAD_EVENTS,
     EVENT_CREATION,
+    PRODUCT_CREATION,
     START_USER_SESSION
 } from './constants';
 
@@ -245,13 +246,17 @@ function* watchFetchEventCreation() {
 }
 
 function* watchFetchProductCreation() {
-    const requestChan = yield actionChannel(EVENT_CREATION);
+    const requestChan = yield actionChannel(PRODUCT_CREATION);
 
     while (true) {
         try {
             const { request } = yield take(requestChan);
 
+            console.log(request);
+
             const response = yield call(post, '/products', request);
+
+            console.log(response);
 
             const payload = response.data;
 
@@ -277,7 +282,8 @@ export default [
     watchFetchUserSettings,
     watchUpdateUser,
     watchFetchEvents,
-    watchFetchEventCreation
+    watchFetchEventCreation,
+    watchFetchProductCreation
 ];
 
 function forwardTo(location) {
